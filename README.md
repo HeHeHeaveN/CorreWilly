@@ -1,1 +1,28 @@
 # Corre Willy, corre
+Introducción:
+Este documento especifica el diseño y mecánicas del videojuego “Corre Willy, corre”. En él están recogidos todos sus requisitos y especificaciones, así como su funcionamiento. El documento esta orientado para servir de guía a los desarrolladores del videojuego.
+
+Concepto:
+Varios jugadores compiten por llegar antes a la bandera en un videojuego de plataformas 2d. Estos pueden interactuar entre ellos durante la partida mediante físicas y otras mecánicas que serán especificadas más adelante.
+
+Gameplay:
+Para iniciar el juego se ha de buscar partida con otro jugador. Una vez pardo este proceso los jugadores aparecerán en la línea de salida, con los controles desactivados. Aparecerá una cuenta a atrás en la que sonará una musiquita que indicará el comienzo de la carrera. Ambos jugadores tendrán que llegar hasta la bandera del nivel, con lo que para ello tendrán que cruzar saltando por las diferentes plataformas. El primero que llega a la bandera gana. Después de esto los jugadores podrán elegir tener una revancha o abandonar la partida y jugar contra otro contrincante. Cada ver que un jugador gane aumentara su puntuación para así llevar un recuento de las victorias en la partida.
+Mecánicas de juego:
+En cuanto a los controles el jugador pobra moverse a izquierda y derecha y saltar. Por otro lado, el jugador podrá recoger diferentes objetos que tendrán efectos diversos en los jugadores.
+Objetos:
+Estrella: multiplica la velocidad del jugador *2 durante 2segundos.
+Caracol: divide la velocidad del contrario /2 durante 2segundos.
+Muelle: multiplica la altura de salto *2 2 durante 4 segundos.
+Tele rota: Deja la pantalla del contrincante en negro durante 1 segundo.
+Interrogación: Aplica un efecto aleatorio sobre cualquiera de los jugadores.
+
+Gráficos:
+
+El juego es 2d, con una estética de dibujos animados.
+Controles:
+
+Plataforma de desarrollo software:
+Java…
+
+Plataforma de destino:
+Ordenador…
