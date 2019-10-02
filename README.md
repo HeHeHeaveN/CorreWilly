@@ -27,7 +27,7 @@ d/->: Movimiento a la derecha.
 w/espacio: salto.
 
 Plataforma de desarrollo software:
-Java…
+Visual Studio
 
 Plataforma de destino:
 Navegador web.
