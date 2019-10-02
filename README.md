@@ -26,7 +26,7 @@ d/->: Movimiento a la derecha.
 w/espacio: salto.
 
 # Plataforma de desarrollo software:
-Visual Studio code
+Visual Studio code utilizando el Framework Phaser 3.
 
 # Plataforma de destino:
 Navegador web.
