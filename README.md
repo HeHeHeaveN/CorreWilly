@@ -19,6 +19,7 @@ Interrogación: Aplica un efecto aleatorio sobre cualquiera de los jugadores.
 Gráficos:
 
 El juego es 2d, con una estética de dibujos animados.
+
 Controles:
 
 Plataforma de desarrollo software:
