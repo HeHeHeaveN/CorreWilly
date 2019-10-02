@@ -17,7 +17,7 @@ Tele rota: Deja la pantalla del contrincante en negro durante 1 segundo.
 Interrogación: Aplica un efecto aleatorio sobre cualquiera de los jugadores.
 
 # Gráficos:
-El juego es 2d, que presenta una mezcla entre animación clásica y gráficos generados por ordenador prerrenderizados. . Según el nivel la estética cambia de forma aleatoria entre un mundo estilo pradera y un segundo mundo estilo mundo robótico.
+El juego es 2d, que presenta una mezcla entre animación clásica y gráficos generados por ordenador prerrenderizados. Según el nivel la estética cambia de forma aleatoria entre un mundo estilo pradera y un segundo mundo estilo mundo robótico.
 
 # Controles:
 El juego se controla por teclado con las siguientes teclas:
