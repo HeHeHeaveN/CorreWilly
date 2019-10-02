@@ -21,9 +21,13 @@ Gráficos:
 El juego es 2d, con una estética de dibujos animados.
 
 Controles:
+El juego se controla por teclado con las siguientes teclas:
+a/<-: Movimiento a la izquierda.
+d/->: Movimiento a la derecha.
+w/espacio: salto.
 
 Plataforma de desarrollo software:
 Java…
 
 Plataforma de destino:
-Ordenador…
+Navegador web.
