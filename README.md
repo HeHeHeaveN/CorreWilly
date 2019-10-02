@@ -12,7 +12,7 @@ En cuanto a los controles el jugador podrá moverse a izquierda y derecha y salt
 Objetos:
 Estrella: multiplica la velocidad del jugador *2 durante 2segundos.
 Caracol: divide la velocidad del contrario /2 durante 2segundos.
-Muelle: multiplica la altura de salto *2 2 durante 4 segundos.
+Muelle: multiplica la altura de salto *2 durante 4 segundos.
 Tele rota: Deja la pantalla del contrincante en negro durante 1 segundo.
 Interrogación: Aplica un efecto aleatorio sobre cualquiera de los jugadores.
 
