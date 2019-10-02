@@ -5,6 +5,9 @@ Este documento especifica el diseño y mecánicas del videojuego “Corre Willy,
 # Concepto:
 Varios jugadores compiten por llegar antes a la bandera en un videojuego de plataformas 2d. Estos pueden interactuar entre ellos durante la partida mediante físicas y otras mecánicas que serán especificadas más adelante.
 
+# Público objetivo
+Este juego esta orientado al publico general, ya que sus mecánicas son sencillas y se requiere de poco tiempo para jugar una partida.
+
 # Gameplay:
 Para iniciar el juego se ha de buscar partida con otro jugador. Una vez pasado este proceso los jugadores aparecerán en la línea de salida, con los controles desactivados. Aparecerá una cuenta a atrás en la que sonará una musiquita que indicará el comienzo de la carrera. Ambos jugadores tendrán que llegar hasta la bandera del nivel, para ello tendrán que cruzar saltando por las diferentes plataformas. El primero que llega a la bandera gana. Después de esto los jugadores podrán elegir tener una revancha o abandonar la partida y jugar contra otro contrincante. Cada vez que un jugador gane aumentará su puntuación para así llevar un recuento de las victorias en la partida.
 Mecánicas de juego:
