@@ -10,8 +10,8 @@ Para iniciar el juego se ha de buscar partida con otro jugador. Una vez pasado e
 Mecánicas de juego:
 En cuanto a los controles el jugador podrá moverse a izquierda y derecha y saltar. Por otro lado, el jugador podrá recoger diferentes objetos que tendrán efectos diversos en los jugadores.
 Objetos:
-Estrella: multiplica la velocidad del jugador *2 durante 2segundos.
-Caracol: divide la velocidad del contrario /2 durante 2segundos.
+Estrella: multiplica la velocidad del jugador *2 durante 2 segundos.
+Caracol: divide la velocidad del contrario /2 durante 2 segundos.
 Muelle: multiplica la altura de salto *2 durante 4 segundos.
 Tele rota: Deja la pantalla del contrincante en negro durante 1 segundo.
 Interrogación: Aplica un efecto aleatorio sobre cualquiera de los jugadores.
