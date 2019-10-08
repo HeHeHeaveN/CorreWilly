@@ -22,6 +22,15 @@ En cuanto a los controles el jugador podrá moverse a izquierda y derecha y salt
 # Gráficos:
 El juego es 2d, que presenta una mezcla entre animación clásica y gráficos generados por ordenador prerrenderizados. Según el nivel la estética cambia de forma aleatoria entre un mundo estilo pradera y un segundo mundo estilo mundo robótico.
 
+<img src="Imágenes prototipo/Prototipo gráficos.png">
+<img src="Imágenes prototipo/Prototipo personaje.png">
+<p><img src="Imágenes prototipo/Caracola.png" width = "300"> 
+<img src="Imágenes prototipo/Interrogación.png" width = "300">
+<img src="Imágenes prototipo/estrella.png" width = "300">
+<img src="Imágenes prototipo/muelle.png" width = "300">
+<img src="Imágenes prototipo/x.png" width = "300"><p>
+
+
 # Controles:
 El juego se controla por teclado con las siguientes teclas:
 a/<-: Movimiento a la izquierda.
