@@ -33,9 +33,9 @@ El juego es 2d, que presenta una mezcla entre animación clásica y gráficos ge
 
 # Controles:
 El juego se controla por teclado con las siguientes teclas:
-a/<-: Movimiento a la izquierda.
-d/->: Movimiento a la derecha.
-w/espacio: salto.
+- a/<-: Movimiento a la izquierda.
+- d/->: Movimiento a la derecha.
+- w/espacio: salto.
 
 # Plataforma de desarrollo software:
 Visual Studio code utilizando el Framework Phaser 3.
@@ -44,7 +44,7 @@ Visual Studio code utilizando el Framework Phaser 3.
 Navegador web.
 
 # Integrantes del grupo:
-Enrique Corrochano Pardo. Correo: e.corrochano.2017@alumnos.urjc.es Github: https://github.com/enriqueyr12
-Andrés González Pérez. Correo: Github: https://github.com/HeHeHeaveN
-Darío Muñoz Rostami. Correo: d.munozr.2017@alumnos.urjc.es Github: https://github.com/dario-bit
-Víctor Sanz Valenzuela. Correo: v.sanzv.2017@alumnos.urjc.es Github: https://github.com/VictorSanzV
+- Enrique Corrochano Pardo. Correo: e.corrochano.2017@alumnos.urjc.es Github: https://github.com/enriqueyr12
+- Andrés González Pérez. Correo: Github: https://github.com/HeHeHeaveN
+- Darío Muñoz Rostami. Correo: d.munozr.2017@alumnos.urjc.es Github: https://github.com/dario-bit
+- Víctor Sanz Valenzuela. Correo: v.sanzv.2017@alumnos.urjc.es Github: https://github.com/VictorSanzV
