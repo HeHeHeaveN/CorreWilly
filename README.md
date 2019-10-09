@@ -42,3 +42,9 @@ Visual Studio code utilizando el Framework Phaser 3.
 
 # Plataforma de destino:
 Navegador web.
+
+# Integrantes del grupo:
+Enrique Corrochano Pardo. Correo: e.corrochano.2017@alumnos.urjc.es Github: https://github.com/enriqueyr12
+Andrés González Pérez. Correo: Github: https://github.com/HeHeHeaveN
+Darío Muñoz Rostami. Correo: d.munozr.2017@alumnos.urjc.es Github: https://github.com/dario-bit
+Víctor Sanz Valenzuela. Correo: v.sanzv.2017@alumnos.urjc.es Github: https://github.com/VictorSanzV
