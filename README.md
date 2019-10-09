@@ -38,7 +38,7 @@ El juego se controla por teclado con las siguientes teclas:
 - w/espacio: salto.
 
 # Plataforma de desarrollo software:
-Visual Studio code utilizando el Framework Phaser 3. Además, un tablero de Trello para la organización de las tareas del equipo https://trello.com/b/343sUw52/corre-willy-corre.
+Visual Studio code utilizando el Framework Phaser 3. Además, un tablero de Trello para la organización de las tareas del equipo https://trello.com/b/343sUw52/corre-willy-corre, y un proyecto de Github https://github.com/HeHeHeaveN/CorreWilly.
 
 # Plataforma de destino:
 Navegador web.
