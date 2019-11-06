@@ -8,10 +8,10 @@ var config = {
     },
 
     physics: {
-        default: 'matter',
-        matter: {
-            gravity: { y: 1 },
-            enableSleep: false
+        default: 'impact',
+        impact: {
+            gravity: 1500,
+            debug: false
         }
     },
 
