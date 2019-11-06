@@ -8,10 +8,10 @@ var config = {
     },
 
     physics: {
-        default: 'matter',
-        matter: {
-            gravity: { y: 1 },
-            enableSleep: false
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
         }
     },
 

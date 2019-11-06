@@ -14,6 +14,8 @@ class juego extends Phaser.Scene {
         this.jugador = new Jugador(this);
         this.jugador.crearJugador(this, 100, 100);
 
+        this.jugador.actualizarBounce(this.jugador);
+
 
         //Jugador 2
         this.jugador2 = new Jugador(this);
@@ -23,6 +25,8 @@ class juego extends Phaser.Scene {
         this.jugador2.setInteractive();
         this.jugador2.setTint(0xfc8987);
         
+
+
 
     }
 
