@@ -8,7 +8,14 @@ class juego extends Phaser.Scene {
     }
 
     create() {
-        this.add.image(800, 450, 'fondo');
+
+        this.add.image(800, 450, 'fondo')
+
+        this.plataforma = new Plataforma(this);
+
+        //var plataformas = scene.physics.add.staticGroup();
+
+        this.plataforma.crearPlataforma(this, 200, 200);
 
         //Jugador 1
         this.jugador = new Jugador(this);
@@ -22,6 +29,7 @@ class juego extends Phaser.Scene {
         this.jugador2.crearJugador(this, 200, 200);
         this.jugador2.setInteractive();
         this.jugador2.setTint(0xfc8987);
+
         
 
     }
