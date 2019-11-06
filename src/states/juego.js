@@ -1,6 +1,7 @@
 class juego extends Phaser.Scene {
     constructor() {
         super("juegoScene");
+
     }
 
     preload() {
@@ -11,26 +12,21 @@ class juego extends Phaser.Scene {
         this.add.image(800, 450, 'fondo');
 
         //Jugador 1
-        this.jugador = new Jugador(this);
-        this.jugador.crearJugador(this, 100, 100);
-
-        this.jugador.actualizarBounce(this.jugador);
+        jugador = new Jugador(this, 100, 100);
+        jugador.sprite.setBounce(1);
 
 
         //Jugador 2
-        this.jugador2 = new Jugador(this);
-
-    
-        this.jugador2.crearJugador(this, 200, 200);
-        this.jugador2.setInteractive();
-        this.jugador2.setTint(0xfc8987);
-        
-
-
+        jugador2 = new Jugador(this, 300, 300);       
 
     }
 
     update() {
 
+
+
     }
 }
+
+var jugador;
+var jugador2;
