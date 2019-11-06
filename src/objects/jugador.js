@@ -1,10 +1,11 @@
-class jugador extends Phaser.GameObjects.Sprite {
+class Jugador extends Phaser.GameObjects.Sprite {
     constructor(scene) {
-        super(scene);
-        
+        super(scene);        
     }
 
-    create() {
-        matterSprite: this.matter.add.sprite(100, 100, 'spriteSheerJugador', 1);
+    crearJugador(escena, x, y){
+        escena.matter.add.sprite(x, y, 'spriteSheerJugador', 30);
     }
+
+        
 }
