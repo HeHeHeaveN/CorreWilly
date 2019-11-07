@@ -8,12 +8,13 @@ var cursors2;
 class juego extends Phaser.Scene {
     constructor() {
         super("juegoScene");
-
     }
 
+    
     preload() {
 
     }
+    
 
     create() {
 
@@ -57,8 +58,7 @@ class juego extends Phaser.Scene {
         });
 
         this.add.image(800, 450, 'fondo');
-
-
+      
         
         //Creacion del Jugador 1
         jugador = new Jugador(this, 100, 100);
