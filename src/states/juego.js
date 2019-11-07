@@ -12,24 +12,39 @@ class juego extends Phaser.Scene {
 
         cursors = this.input.keyboard.createCursorKeys();
 
+        w = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        a = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        d = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+
+        /*
+        this.cursors = this.input.keyboard.addKeys(
+            {
+                up: Phaser.Input.Keyboard.KeyCodes.W,
+                down: Phaser.Input.Keyboard.KeyCodes.S,
+                left: Phaser.Input.Keyboard.KeyCodes.A,
+                right: Phaser.Input.Keyboard.KeyCodes.D
+            });
+            */
+
         //animaciones
         this.anims.create({
             key: 'left',
-            frames: this.anims.generateFrameNumbers('spriteSheerJugador', { start: 1, end: 10 }),
-            frameRate: 10,
+            frames: this.anims.generateFrameNumbers('spriteSheerJugador', { start: 10, end: 19 }),
+            frameRate: 12,
             repeat: -1
         });
 
         this.anims.create({
             key: 'turn',
-            frames: [{ key: 'spriteSheerJugador', frame: 0 }],
-            frameRate: 20
+            frames: this.anims.generateFrameNumbers('spriteSheerJugador', { start: 0, end: 9 }),
+            frameRate: 24,
+            repeat: 1
         });
 
         this.anims.create({
             key: 'right',
-            frames: this.anims.generateFrameNumbers('spriteSheerJugador', { start: 20, end: 30 }),
-            frameRate: 10,
+            frames: this.anims.generateFrameNumbers('spriteSheerJugador', { start: 20, end: 29 }),
+            frameRate: 12,
             repeat: -1
         });
 
@@ -47,7 +62,7 @@ class juego extends Phaser.Scene {
 
     update() {
 
-        //controles
+        //controles jugador 1
 
         if (cursors.left.isDown) {
             jugador.sprite.setVelocityX(-400);
@@ -62,17 +77,42 @@ class juego extends Phaser.Scene {
         else {
             jugador.sprite.setVelocityX(0);
 
-            jugador.sprite.anims.play('turn');
+            jugador.sprite.anims.play('turn', true);
         }
 
-        if (cursors.up.isDown && jugador.sprite.body.touching.down)
-        {
+        if (cursors.up.isDown && jugador.sprite.body.touching.down) {
             jugador.sprite.setVelocityY(-500);
+
+            jugador.sprite.anims.play('turn', true); //Implementarlo para que solo ocurra una vez
         }
 
+        //contrloes jugador 2
+
+        if (Phaser.Input.Keyboard.JustDown(a)) {
+            jugador2.sprite.setVelocityX(-400);
+
+            jugador2.sprite.anims.play('left', true);
+        }
+        else if (Phaser.Input.Keyboard.JustDown(d)) {
+            jugador2.sprite.setVelocityX(400);
+
+            jugador2.sprite.anims.play('right', true);
+        }
+        else {
+            //jugador2.sprite.setVelocityX(0);
+
+            //jugador2.sprite.anims.play('turn', true);
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(w) && jugador.sprite.body.touching.down) {
+            jugador2.sprite.setVelocityY(-500);
+
+            jugador2.sprite.anims.play('turn', true); //Implementarlo para que solo ocurra una vez
+        }
     }
 }
 
 var jugador;
 var jugador2;
 var cursors;
+var a, d, w;
