@@ -1,4 +1,3 @@
-
 //Declaracion de variables de la escena
 var jugador;
 var jugador2;
@@ -21,13 +20,19 @@ class juego extends Phaser.Scene {
     
 
     create() {
-      
+        
+        //Fondo
         this.add.image(800, 450, 'fondo')
+        
 
         plataforma = new Plataforma(this);
+        //plataforma.depth = 1;
       
-        plataforma.crearPlataforma(this, 300, 700);
+        
+        plataforma.crearPlataforma(this, 350, 700);
         plataforma.crearPlataforma(this, 800, 800);
+        //plataforma.depth = -1;
+        
 
 
         //Controles del jugador 1
