@@ -1,9 +1,13 @@
+
 //Declaracion de variables de la escena
 var jugador;
 var jugador2;
 
 var cursors;
 var cursors2;
+
+var plataforma;
+
 
 class juego extends Phaser.Scene {
     constructor() {
@@ -17,6 +21,14 @@ class juego extends Phaser.Scene {
     
 
     create() {
+      
+        this.add.image(800, 450, 'fondo')
+
+        plataforma = new Plataforma(this);
+      
+        plataforma.crearPlataforma(this, 300, 700);
+        plataforma.crearPlataforma(this, 800, 800);
+
 
         //Controles del jugador 1
         cursors = this.input.keyboard.createCursorKeys();
@@ -66,7 +78,6 @@ class juego extends Phaser.Scene {
 
         //Creacion del Jugador 2
         jugador2 = new Jugador(this, 300, 300);
-
 
     }
 
