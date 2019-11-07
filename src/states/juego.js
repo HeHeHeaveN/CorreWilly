@@ -37,8 +37,15 @@ class juego extends Phaser.Scene {
         this.anims.create({
             key: 'turn',
             frames: this.anims.generateFrameNumbers('spriteSheerJugador', { start: 0, end: 9 }),
-            frameRate: 24,
-            repeat: 1
+            frameRate: 12,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'salto',
+            frames: this.anims.generateFrameNumbers('spriteSheerJugador', { start: 0, end: 9 }),
+            frameRate: 12,
+            repeat: 0
         });
 
         this.anims.create({
@@ -58,6 +65,8 @@ class juego extends Phaser.Scene {
         //Jugador 2
         jugador2 = new Jugador(this, 300, 300);
 
+        jugador.sprite.anims.play('turn', true);
+
     }
 
     update() {
@@ -73,6 +82,8 @@ class juego extends Phaser.Scene {
             jugador.sprite.setVelocityX(400);
 
             jugador.sprite.anims.play('right', true);
+            //en caso de usar sprites de un solo sentido
+            //jugador.sprite.flipX= true;
         }
         else {
             jugador.sprite.setVelocityX(0);
@@ -83,7 +94,7 @@ class juego extends Phaser.Scene {
         if (cursors.up.isDown && jugador.sprite.body.touching.down) {
             jugador.sprite.setVelocityY(-500);
 
-            jugador.sprite.anims.play('turn', true); //Implementarlo para que solo ocurra una vez
+            jugador.sprite.anims.play('salto', true); //Ajustar con los sprites
         }
 
         //contrloes jugador 2
@@ -99,15 +110,15 @@ class juego extends Phaser.Scene {
             jugador2.sprite.anims.play('right', true);
         }
         else {
-            //jugador2.sprite.setVelocityX(0);
+            jugador2.sprite.setVelocityX(0);
 
-            //jugador2.sprite.anims.play('turn', true);
+            jugador2.sprite.anims.play('turn', true);
         }
 
         if (Phaser.Input.Keyboard.JustDown(w) && jugador.sprite.body.touching.down) {
             jugador2.sprite.setVelocityY(-500);
 
-            jugador2.sprite.anims.play('turn', true); //Implementarlo para que solo ocurra una vez
+            jugador2.sprite.anims.play('salto', true); //Ajustar con los sprites
         }
     }
 }
