@@ -8,10 +8,10 @@ var config = {
     },
 
     physics: {
-        default: 'impact',
-        impact: {
-            gravity: 1500,
-            debug: false
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: true
         }
     },
 
