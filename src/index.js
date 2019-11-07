@@ -10,8 +10,8 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 1 },
-            debug: false
+            gravity: { y: 300 },
+            debug: true
         }
     },
 

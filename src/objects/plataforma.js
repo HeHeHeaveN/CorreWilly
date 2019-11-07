@@ -3,8 +3,8 @@ class Plataforma extends Phaser.GameObjects.Sprite {
         super(scene)
     }
 
-    crearPlataforma(escena, x, y){
-        escena.add.image(x, y, 'plataforma')
+    crearPlataforma(platforms, x, y){
+        platforms.create(x, y, 'plataforma')
     }
 
 }
