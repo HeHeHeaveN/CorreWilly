@@ -9,6 +9,13 @@ var plataforma;
 
 var camera;
 
+var posx; 
+var posy;
+var posC;
+var posB;
+
+var cof1;
+var cof2;
 
 class juego extends Phaser.Scene {
     constructor() {
@@ -22,6 +29,9 @@ class juego extends Phaser.Scene {
     
 
     create() {
+        cof1=10;
+        cof2=190;
+        
         //Fondo
         this.add.image(800, 450, 'fondo')
 
@@ -84,10 +94,8 @@ class juego extends Phaser.Scene {
 
         camera = this.cameras.main;
         this.cameras.main.setBounds(0, 0, 1600, 900);
-        camera.setZoom(2);
-        camera.startFollow(jugador.sprite);
 
-
+       
         
 
     }
@@ -144,6 +152,44 @@ class juego extends Phaser.Scene {
             jugador2.sprite.anims.play('salto', true); //Ajustar con los sprites
         }
 
+        if(jugador.getX()>jugador2.getX()){
+            camera.startFollow(jugador2.sprite);
+        }else{
+            camera.startFollow(jugador.sprite);
+        }
+
+       
+
+
+        posx=jugador.getX()-jugador2.getX(); 
+        posy=jugador.getY()-jugador2.getY(); 
+        posC=posx/cof1; 
+        posB=posx/cof2;
+        
+        /*if(Math.abs(posx)<200){
+            camera.setZoom(2);
+        }else if(Math.abs(posx)>200 && Math.abs(posx)<700){
+            
+            camera.setZoom((Math.abs(1/posB)+1));
+        }else{
+            camera.setZoom((Math.abs(1/posC)+1));
+        }*/
+        if(Math.abs(posx)<150){
+            camera.setZoom(2.60);
+        }else{
+            camera.setZoom((Math.abs(1/(posB*posB))+1));
+        }
+        
+     
+
+        /*if(posC<-10 || posC>10){
+            camera.setZoom(2);
+        }else{
+           
+            camera.setZoom(Math.abs(posC));
+        }*/
+        
+        
         
     }
 }
