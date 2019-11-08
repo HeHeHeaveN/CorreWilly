@@ -13,6 +13,7 @@ var posx;
 var posy;
 var posC;
 var posB;
+var posA;
 
 var cof1;
 var cof2;
@@ -53,7 +54,7 @@ class juego extends Phaser.Scene {
             d: 'D',
         });
 
-        //animaciones
+        //animaciones jugador 1
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('spriteSheetJugador', { start: 10, end: 19 }),
@@ -82,17 +83,50 @@ class juego extends Phaser.Scene {
             repeat: -1
         });
 
+        
+        //animaciones jugador 2
+        this.anims.create({
+            key: 'lefta',
+            frames: this.anims.generateFrameNumbers('spriteSheetJugador2', { start: 10, end: 19 }),
+            frameRate: 12,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'turna',
+            frames: this.anims.generateFrameNumbers('spriteSheetJugador2', { start: 0, end: 9 }),
+            frameRate: 12,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'saltoa',
+            frames: this.anims.generateFrameNumbers('spriteSheetJugador2', { start: 0, end: 9 }),
+            frameRate: 12,
+            repeat: 0
+        });
+
+        this.anims.create({
+            key: 'righta',
+            frames: this.anims.generateFrameNumbers('spriteSheetJugador2', { start: 20, end: 29 }),
+            frameRate: 12,
+            repeat: -1
+        });
+        
+
         this.add.image(800, 450, 'fondo');
       
         
         //Creacion del Jugador 1
-        jugador = new Jugador(this, 100, 100);
+        jugador = new Jugador(this, 100, 100, 1);
 
 
         //Creacion del Jugador 2
-        jugador2 = new Jugador(this, 300, 300);
+        jugador2 = new Jugador(this, 300, 300, 2);
 
         camera = this.cameras.main;
+
+        //Creacion de la camara
         this.cameras.main.setBounds(0, 0, 1600, 900);
 
        
@@ -131,25 +165,25 @@ class juego extends Phaser.Scene {
         //contrloes jugador 2
 
         if (cursors2.a.isDown) {
-            jugador2.sprite.setVelocityX(-(jugador.getVelocidadHorizontal()));
+            jugador2.sprite.setVelocityX(-(jugador2.getVelocidadHorizontal()));
 
-            jugador2.sprite.anims.play('left', true);
+            jugador2.sprite.anims.play('lefta', true);
         }
         else if (cursors2.d.isDown) {
-            jugador2.sprite.setVelocityX(jugador.getVelocidadHorizontal());
+            jugador2.sprite.setVelocityX(jugador2.getVelocidadHorizontal());
 
-            jugador2.sprite.anims.play('right', true);
+            jugador2.sprite.anims.play('righta', true);
         }
         else {
             jugador2.sprite.setVelocityX(0);
 
-            jugador2.sprite.anims.play('turn', true);
+            jugador2.sprite.anims.play('turna', true);
         }
 
         if (cursors2.w.isDown && jugador2.sprite.body.touching.down) {
-            jugador2.sprite.setVelocityY(-(jugador.getVelocidadSalto()));
+            jugador2.sprite.setVelocityY(-(jugador2.getVelocidadSalto()));
 
-            jugador2.sprite.anims.play('salto', true); //Ajustar con los sprites
+            jugador2.sprite.anims.play('saltoa', true); //Ajustar con los sprites
         }
 
         if(jugador.getX()>jugador2.getX()){
@@ -160,37 +194,26 @@ class juego extends Phaser.Scene {
 
        
 
-
+        //Update de la camara
         posx=jugador.getX()-jugador2.getX(); 
         posy=jugador.getY()-jugador2.getY(); 
         posC=posx/cof1; 
         posB=posx/cof2;
+        posA=posy/cof2;
         
-        /*if(Math.abs(posx)<200){
-            camera.setZoom(2);
-        }else if(Math.abs(posx)>200 && Math.abs(posx)<700){
-            
-            camera.setZoom((Math.abs(1/posB)+1));
-        }else{
-            camera.setZoom((Math.abs(1/posC)+1));
-        }*/
+        //Funcion para el zoom
         if(Math.abs(posx)<150){
             camera.setZoom(2.60);
         }else{
             camera.setZoom((Math.abs(1/(posB*posB))+1));
         }
-        
-     
 
-        /*if(posC<-10 || posC>10){
-            camera.setZoom(2);
+        /*
+        if(Math.abs(posy)<150){
+            camera.setZoom(2.60);
         }else{
-           
-            camera.setZoom(Math.abs(posC));
-        }*/
-        
-        
-        
+            camera.setZoom((Math.abs(1/(posA*posA))+1));
+        }*/        
     }
 }
 
