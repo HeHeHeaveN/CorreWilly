@@ -7,6 +7,8 @@ var cursors2;
 
 var plataforma;
 
+var camera;
+
 
 class juego extends Phaser.Scene {
     constructor() {
@@ -20,15 +22,11 @@ class juego extends Phaser.Scene {
     
 
     create() {
-        
         //Fondo
         this.add.image(800, 450, 'fondo')
-        
 
-        plataforma = new Plataforma(this);
-        //plataforma.depth = 1;
-      
-        
+        //plataforma
+        plataforma = new Plataforma(this);        
         plataforma.crearPlataforma(this, 350, 700);
         plataforma.crearPlataforma(this, 800, 800);
         //plataforma.depth = -1;
@@ -84,6 +82,14 @@ class juego extends Phaser.Scene {
         //Creacion del Jugador 2
         jugador2 = new Jugador(this, 300, 300);
 
+        camera = this.cameras.main;
+        this.cameras.main.setBounds(0, 0, 1600, 900);
+        camera.setZoom(2);
+        camera.startFollow(jugador.sprite);
+
+
+        
+
     }
 
     update() {
@@ -137,6 +143,8 @@ class juego extends Phaser.Scene {
 
             jugador2.sprite.anims.play('salto', true); //Ajustar con los sprites
         }
+
+        
     }
 }
 
