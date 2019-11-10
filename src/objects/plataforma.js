@@ -3,14 +3,16 @@ class Plataforma extends Phaser.GameObjects.Sprite {
         super(scene)
 
         this.plataformas = this.scene.physics.add.staticGroup();
-
     }
 
-    crearPlataforma(platforms, x, y) {
-        //var imagen = platforms.add.image(x, y, 'plataformaNormal')
-        //imagen.depth = 1;
+    crearPlataforma(plat ,x, y) {
+    
+        this.plataformas.create(x, y, 'plataformaVacia').refreshBody();
+        this.plataformas.depth = 1;
 
-        this.plataformas.create(x, y, 'plataformaNormal');
+        var imagen = plat.add.image(x, y, 'plataformaNormal')
+        imagen.depth = 1;
+
     }
 
 }

@@ -34,13 +34,14 @@ class juego extends Phaser.Scene {
         cof2=190;
         
         //Fondo
-        this.add.image(800, 450, 'fondo')
+        var fondo = this.add.image(800, 450, 'fondo')
+        fondo.depth = -2;
 
         //plataforma
         plataforma = new Plataforma(this);
         
-        plataforma.crearPlataforma(200, 200);
-        plataforma.crearPlataforma(400, 400);
+        plataforma.crearPlataforma(this,100, 500);
+        plataforma.crearPlataforma(this,200, 400);
 
         /*
         plataforma.crearPlataforma(this, 350, 700);
@@ -135,7 +136,8 @@ class juego extends Phaser.Scene {
         //Creacion de la camara
         this.cameras.main.setBounds(0, 0, 1600, 900);
 
-       
+        this.physics.add.collider(jugador.sprite, plataforma.plataformas);
+        this.physics.add.collider(jugador2.sprite, plataforma.plataformas);
         
 
     }
