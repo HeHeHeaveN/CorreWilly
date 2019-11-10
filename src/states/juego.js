@@ -71,8 +71,8 @@ class juego extends Phaser.Scene {
         posicionInicial2y=300;
 
         //posicion de la bandera
-        posBanderaX=800; 
-        posBanderaY=300;
+        posBanderaX=1500; 
+        posBanderaY=420;
 
         //Fondo
         var fondo = this.add.image(800, 450, 'fondo')
@@ -84,18 +84,19 @@ class juego extends Phaser.Scene {
         bandera.depth = 1;
         
         //Estrella 
+        
         var estrella=this.physics.add.sprite(200,200,'estrella');
         estrella.setScale(0.1);
         estrella.depth=1;
-
         
 
         //plataforma
         plataforma = new Plataforma(this);
 
 
-        idN=Math.floor(Math.random() * (3 - 1) + 1); 
-
+        //idN=Math.floor(Math.random() * (3 - 1) + 1); 
+        idN = 1;
+         
         nivel=new Nivel(this,idN); 
 
         nivel.crearNivel(this,plataforma);
