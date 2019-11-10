@@ -42,26 +42,32 @@ class juego extends Phaser.Scene {
 
 
     create() {
+        //Coeficientes para el zoom de la camara
         cof1 = 10;
         cof2 = 190;
 
+        //posiciones iniciales de la camara
         camaraX = 0;
         camaraY = 0;
 
+        //posiciones de reaparicion
         posicionInicial1x=100; 
         posicionInicial1y=100; 
         posicionInicial2x=300; 
         posicionInicial2y=300;
 
+        //posicion de la bandera
         posBanderaX=800; 
-        posBanderaY=400;
+        posBanderaY=300;
 
         //Fondo
         var fondo = this.add.image(800, 450, 'fondo')
         fondo.depth = -2;
 
         //Bandera 
-        var bandera=this.physics.add.sprite(posBanderaX, posBanderaY, 'bandera');
+        var bandera= this.add.image(posBanderaX, posBanderaY, 'bandera');
+        bandera.setScale(0.5);
+        bandera.depth = 1;
         
 
         //plataforma
@@ -69,13 +75,6 @@ class juego extends Phaser.Scene {
 
         plataforma.crearPlataforma(this, 100, 500);
         plataforma.crearPlataforma(this, 800, 400);
-
-        /*
-        plataforma.crearPlataforma(this, 350, 700);
-        plataforma.crearPlataforma(this, 800, 800);
-        //plataforma.depth = -1;
-        */
-
 
 
         //Controles del jugador 1
@@ -147,7 +146,7 @@ class juego extends Phaser.Scene {
             repeat: -1
         });
 
-
+        //Añadimos el fondo a la escena
         this.add.image(800, 450, 'fondo');
 
 
@@ -160,13 +159,17 @@ class juego extends Phaser.Scene {
 
         jugador3 = new Jugador(this, camaraX, camaraY, 3);
 
-        camera = this.cameras.main;
 
         //Creacion de la camara
+        camera = this.cameras.main;
         this.cameras.main.setBounds(0, 0, 1600, 900);
 
+        //Colisiones entre los jugadores y las plataformas
         this.physics.add.collider(jugador.sprite, plataforma.plataformas);
         this.physics.add.collider(jugador2.sprite, plataforma.plataformas);
+
+        //Colisiones entre los jugadores
+        this.physics.add.collider(jugador.sprite, jugador2.sprite);
 
     }
 
@@ -222,15 +225,11 @@ class juego extends Phaser.Scene {
             jugador2.sprite.anims.play('saltoa', true); //Ajustar con los sprites
         }
 
-        //if (jugador.getX() > jugador2.getX()) {
-        //camera.startFollow(jugador2.sprite);
-        //} else {
-        //camera.startFollow(jugador.sprite);
-        // }
 
+        //CAMARA
+
+        //Seguimos a la posicion intermedia entre los jugadores
         camera.startFollow(jugador3.sprite);
-
-
 
         //Update de la camara
         posx = jugador.getX() - jugador2.getX();
@@ -239,16 +238,11 @@ class juego extends Phaser.Scene {
         posB = posx / cof2;
         posA = posy / cof2;
 
-        //camera.setPosition(Math.abs(posx),Math.abs(posy));
-
 
         camaraX = (jugador.getX() + jugador2.getX()) / 2;
         camaraY = (jugador.getY() + jugador2.getY()) / 2;
         jugador3.setX(camaraX);
         jugador3.setY(camaraY);
-        //console.log(camaraX);
-        //console.log(camaraY);
-
 
 
         //Funcion para el zoom
@@ -269,7 +263,10 @@ class juego extends Phaser.Scene {
                 }
             }
         }
+        //FIN DE LA CAMARA
+
         
+        //Funcion para reaparecer si mueres
         if(jugador.getY()>860){
             jugador.setX(posicionInicial1x);
             jugador.setY(posicionInicial1y);
@@ -279,13 +276,6 @@ class juego extends Phaser.Scene {
             jugador2.setX(posicionInicial2y);
             jugador2.setY(posicionInicial2y);
         }
-        /*
-        if(Math.abs(posy)<150){
-            camera.setZoom(2.60);
-        }else{
-            camera.setZoom((Math.abs(1/(posA*posA))+1));
-        }*/
-
     }
 
     
