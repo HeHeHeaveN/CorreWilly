@@ -34,6 +34,14 @@ var idN;
 
 var nivel;
 
+var estrella;
+
+var cambiar;
+
+var tiempo;
+
+var jug;
+
 class juego extends Phaser.Scene {
     constructor() {
         super("juegoScene");
@@ -46,6 +54,8 @@ class juego extends Phaser.Scene {
 
 
     create() {
+        cambiar=false;
+        tiempo=false;
         //Coeficientes para el zoom de la camara
         cof1 = 10;
         cof2 = 190;
@@ -72,6 +82,12 @@ class juego extends Phaser.Scene {
         var bandera= this.add.image(posBanderaX, posBanderaY, 'bandera');
         bandera.setScale(0.5);
         bandera.depth = 1;
+        
+        //Estrella 
+        var estrella=this.physics.add.sprite(200,200,'estrella');
+        estrella.setScale(0.1);
+        estrella.depth=1;
+
         
 
         //plataforma
@@ -184,9 +200,35 @@ class juego extends Phaser.Scene {
         //Colisiones entre los jugadores
         this.physics.add.collider(jugador.sprite, jugador2.sprite);
 
+        this.physics.add.collider(estrella,plataforma.plataformas);
+        //this.physics.add.collider(jugador.)
+        var vel=this.physics.add.overlap(jugador.sprite, estrella, power, null, this);
+        var vel=this.physics.add.overlap(jugador2.sprite, estrella, power2, null, this);
     }
 
     update() {
+        if(cambiar){
+            if(jug==1){
+                jugador.setVelocidadHorizontal(800);
+            }else{
+                if(jug==2){
+                    jugador2.setVelocidadHorizontal(800);
+                }
+            }          
+            setTimeout(parar,2000);
+            cambiar=false;
+        }
+
+        if(tiempo){
+            if(jug==1){
+                jugador.setVelocidadHorizontal(400);
+            }else{
+                if(jug==2){
+                    jugador2.setVelocidadHorizontal(400);
+                }
+            }        
+            tiempo=false;
+        }
 
         //controles jugador 1
 
@@ -298,6 +340,20 @@ class juego extends Phaser.Scene {
             this.scene.start('victoria2Scene');
         }
     }
+}
 
-    
+function power(jugador,estrella){
+    estrella.disableBody(true,true);
+    cambiar=true;
+    jug=1;
+}
+
+function power2(jugador,estrella){
+    estrella.disableBody(true,true);
+    cambiar=true;
+    jug=2;
+}
+
+function parar(){
+    tiempo=true;
 }
