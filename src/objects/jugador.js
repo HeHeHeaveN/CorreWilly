@@ -19,6 +19,10 @@ class Jugador extends Phaser.GameObjects.Sprite {
             this.sprite = this.scene.physics.add.sprite(x, y, 'spriteSheetJugador2');
             this.sprite.setBounce(this.bounce);
             this.sprite.setCollideWorldBounds(true);
+        }else{
+            if(identificador==3){
+                this.sprite = this.scene.add.sprite(x, y, 'camara');
+            }
         }
 
         this.sprite.x;

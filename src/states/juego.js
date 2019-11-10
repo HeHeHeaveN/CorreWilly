@@ -1,6 +1,7 @@
 //Declaracion de variables de la escena
 var jugador;
 var jugador2;
+var jugador3;
 
 var cursors;
 var cursors2;
@@ -9,11 +10,14 @@ var plataforma;
 
 var camera;
 
-var posx; 
+var posx;
 var posy;
 var posC;
 var posB;
 var posA;
+
+var camaraX;
+var camaraY;
 
 var cof1;
 var cof2;
@@ -23,32 +27,35 @@ class juego extends Phaser.Scene {
         super("juegoScene");
     }
 
-    
+
     preload() {
 
     }
-    
+
 
     create() {
-        cof1=10;
-        cof2=190;
-        
+        cof1 = 10;
+        cof2 = 190;
+
+        camaraX=0;
+        camaraY=0;
+
         //Fondo
         var fondo = this.add.image(800, 450, 'fondo')
         fondo.depth = -2;
 
         //plataforma
         plataforma = new Plataforma(this);
-        
-        plataforma.crearPlataforma(this,100, 500);
-        plataforma.crearPlataforma(this,200, 400);
+
+        plataforma.crearPlataforma(this, 100, 500);
+        plataforma.crearPlataforma(this, 200, 400);
 
         /*
         plataforma.crearPlataforma(this, 350, 700);
         plataforma.crearPlataforma(this, 800, 800);
         //plataforma.depth = -1;
         */
-        
+
 
 
         //Controles del jugador 1
@@ -90,7 +97,7 @@ class juego extends Phaser.Scene {
             repeat: -1
         });
 
-        
+
         //animaciones jugador 2
         this.anims.create({
             key: 'lefta',
@@ -119,17 +126,19 @@ class juego extends Phaser.Scene {
             frameRate: 12,
             repeat: -1
         });
-        
+
 
         this.add.image(800, 450, 'fondo');
-      
-        
+
+
         //Creacion del Jugador 1
         jugador = new Jugador(this, 100, 100, 1);
 
 
         //Creacion del Jugador 2
         jugador2 = new Jugador(this, 300, 300, 2);
+
+        jugador3=new Jugador(this,camaraX,camaraY,3);
 
         camera = this.cameras.main;
 
@@ -138,7 +147,7 @@ class juego extends Phaser.Scene {
 
         this.physics.add.collider(jugador.sprite, plataforma.plataformas);
         this.physics.add.collider(jugador2.sprite, plataforma.plataformas);
-        
+
 
     }
 
@@ -194,34 +203,57 @@ class juego extends Phaser.Scene {
             jugador2.sprite.anims.play('saltoa', true); //Ajustar con los sprites
         }
 
-        if(jugador.getX()>jugador2.getX()){
-            camera.startFollow(jugador2.sprite);
-        }else{
-            camera.startFollow(jugador.sprite);
-        }
+        //if (jugador.getX() > jugador2.getX()) {
+            //camera.startFollow(jugador2.sprite);
+        //} else {
+            //camera.startFollow(jugador.sprite);
+       // }
 
-       
+       camera.startFollow(jugador3.sprite);
+
+
 
         //Update de la camara
-        posx=jugador.getX()-jugador2.getX(); 
-        posy=jugador.getY()-jugador2.getY(); 
-        posC=posx/cof1; 
-        posB=posx/cof2;
-        posA=posy/cof2;
+        posx = jugador.getX() - jugador2.getX();
+        posy = jugador.getY() - jugador2.getY();
+        posx=Math.abs(posx);
+        posy=Math.abs(posy);
+        posC = posx / cof1;
+        posB = posx / cof2;
+        posA = posy / cof2;
+
         
+        //camera.setPosition(Math.abs(posx),Math.abs(posy));
+
+        
+        camaraX=(jugador.getX()+jugador2.getX())/2; 
+        camaraY=(jugador.getY()+jugador2.getY())/2;
+        jugador3.setX(camaraX);
+        jugador3.setY(camaraY);
+        //console.log(camaraX);
+        //console.log(camaraY);
+ 
+
         //Funcion para el zoom
-        if(Math.abs(posx)<150){
+       /* if (Math.abs(posx) < 150 || (Math.abs(posy) < 150 && Math.abs(posy) != 0)) {
             camera.setZoom(2.60);
-        }else{
-            camera.setZoom((Math.abs(1/(posB*posB))+1));
-        }
+        } else {
+            if(Math.abs(posx) > 150){
+                camera.setZoom((Math.abs(1 / (posB * posB)) + 1));
+            }
+            if(Math.abs(posy) > 150){
+                camera.setZoom((Math.abs(1 / (posA * posA)) + 1));
+            }
+            
+        }*/
+
 
         /*
         if(Math.abs(posy)<150){
             camera.setZoom(2.60);
         }else{
             camera.setZoom((Math.abs(1/(posA*posA))+1));
-        }*/        
+        }*/
     }
 }
 
