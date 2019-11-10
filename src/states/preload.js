@@ -18,7 +18,7 @@ class preload extends Phaser.Scene {
 
     create() {
 
-        this.scene.start('juegoScene');
+        this.scene.start('menuPScene');
 
     }
 

@@ -17,7 +17,7 @@ var config = {
 
     autoRound: false,
 
-    scene: [boot, preload, juego]
+    scene: [boot, preload, menuP, juego]
 
 };
 

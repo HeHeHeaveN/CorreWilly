@@ -3,6 +3,11 @@ var jugador;
 var jugador2;
 var jugador3;
 
+var posicionInicial1x; 
+var posicionInicial1y; 
+var posicionInicial2x; 
+var posicionInicial2y;
+
 var cursors;
 var cursors2;
 
@@ -39,6 +44,11 @@ class juego extends Phaser.Scene {
 
         camaraX = 0;
         camaraY = 0;
+
+        posicionInicial1x=100; 
+        posicionInicial1y=100; 
+        posicionInicial2x=300; 
+        posicionInicial2y=300;
 
         //Fondo
         var fondo = this.add.image(800, 450, 'fondo')
@@ -132,11 +142,11 @@ class juego extends Phaser.Scene {
 
 
         //Creacion del Jugador 1
-        jugador = new Jugador(this, 100, 100, 1);
+        jugador = new Jugador(this, posicionInicial1x, posicionInicial1y, 1);
 
 
         //Creacion del Jugador 2
-        jugador2 = new Jugador(this, 300, 300, 2);
+        jugador2 = new Jugador(this, posicionInicial2x, posicionInicial2y, 2);
 
         jugador3 = new Jugador(this, camaraX, camaraY, 3);
 
@@ -220,9 +230,6 @@ class juego extends Phaser.Scene {
         posB = posx / cof2;
         posA = posy / cof2;
 
-        console.log(Math.abs(posx));
-
-
         //camera.setPosition(Math.abs(posx),Math.abs(posy));
 
 
@@ -253,9 +260,16 @@ class juego extends Phaser.Scene {
                 }
             }
         }
+        
+        if(jugador.getY()>860){
+            jugador.setX(posicionInicial1x);
+            jugador.setY(posicionInicial1y);
+        } 
 
-
-
+        if(jugador2.getY()>860){
+            jugador2.setX(posicionInicial2y);
+            jugador2.setY(posicionInicial2y);
+        }
         /*
         if(Math.abs(posy)<150){
             camera.setZoom(2.60);
