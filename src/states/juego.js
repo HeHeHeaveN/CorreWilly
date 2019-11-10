@@ -37,8 +37,8 @@ class juego extends Phaser.Scene {
         cof1 = 10;
         cof2 = 190;
 
-        camaraX=0;
-        camaraY=0;
+        camaraX = 0;
+        camaraY = 0;
 
         //Fondo
         var fondo = this.add.image(800, 450, 'fondo')
@@ -138,7 +138,7 @@ class juego extends Phaser.Scene {
         //Creacion del Jugador 2
         jugador2 = new Jugador(this, 300, 300, 2);
 
-        jugador3=new Jugador(this,camaraX,camaraY,3);
+        jugador3 = new Jugador(this, camaraX, camaraY, 3);
 
         camera = this.cameras.main;
 
@@ -204,12 +204,12 @@ class juego extends Phaser.Scene {
         }
 
         //if (jugador.getX() > jugador2.getX()) {
-            //camera.startFollow(jugador2.sprite);
+        //camera.startFollow(jugador2.sprite);
         //} else {
-            //camera.startFollow(jugador.sprite);
-       // }
+        //camera.startFollow(jugador.sprite);
+        // }
 
-       camera.startFollow(jugador3.sprite);
+        camera.startFollow(jugador3.sprite);
 
 
 
@@ -220,27 +220,40 @@ class juego extends Phaser.Scene {
         posB = posx / cof2;
         posA = posy / cof2;
 
-        
+        console.log(Math.abs(posx));
+
+
         //camera.setPosition(Math.abs(posx),Math.abs(posy));
 
-        
-        camaraX=(jugador.getX()+jugador2.getX())/2; 
-        camaraY=(jugador.getY()+jugador2.getY())/2;
+
+        camaraX = (jugador.getX() + jugador2.getX()) / 2;
+        camaraY = (jugador.getY() + jugador2.getY()) / 2;
         jugador3.setX(camaraX);
         jugador3.setY(camaraY);
         //console.log(camaraX);
         //console.log(camaraY);
-        
- 
+
+
 
         //Funcion para el zoom
-        if (Math.abs(posx) < 150) {
-            camera.setZoom(2.60);
+        if (posx > posy) {
+            if (Math.abs(posx) < 150) {
+                camera.setZoom(2.60);
+            } else {
+                if (Math.abs(posx) > 150) {
+                    camera.setZoom((Math.abs(1 / (posB * posB)) + 1));
+                }
+            }
         } else {
-            if(Math.abs(posx) > 150){
-                camera.setZoom((Math.abs(1 / (posB * posB)) + 1));
-            
+            if (Math.abs(posy) < 150) {
+                camera.setZoom(2.60);
+            } else {
+                if (Math.abs(posy) > 150) {
+                    camera.setZoom((Math.abs(1 / (posA * posA)) + 1));
+                }
+            }
         }
+
 
 
         /*
@@ -249,6 +262,6 @@ class juego extends Phaser.Scene {
         }else{
             camera.setZoom((Math.abs(1/(posA*posA))+1));
         }*/
+
     }
-}
 }
