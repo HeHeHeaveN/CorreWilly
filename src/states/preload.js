@@ -14,6 +14,8 @@ class preload extends Phaser.Scene {
         this.load.spritesheet('spriteSheetJugador', 'assets/sprite-sheet/Personaje-1.1.png', { frameWidth: 64, frameHeight: 56 });
         this.load.spritesheet('spriteSheetJugador2', 'assets/sprite-sheet/Personaje-2.1.png', { frameWidth: 64, frameHeight: 56 });
         this.load.spritesheet('spriteSheetJugador3', 'assets/sprite-sheet/camara', { frameWidth: 64, frameHeight: 56 });
+        //Bandera 
+        this.load.image('bandera', 'assets/bandera.png');
     }
 
     create() {

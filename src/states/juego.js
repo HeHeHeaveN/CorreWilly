@@ -8,6 +8,9 @@ var posicionInicial1y;
 var posicionInicial2x; 
 var posicionInicial2y;
 
+var posBanderaX; 
+var posBanderaY;
+
 var cursors;
 var cursors2;
 
@@ -50,15 +53,22 @@ class juego extends Phaser.Scene {
         posicionInicial2x=300; 
         posicionInicial2y=300;
 
+        posBanderaX=800; 
+        posBanderaY=400;
+
         //Fondo
         var fondo = this.add.image(800, 450, 'fondo')
         fondo.depth = -2;
+
+        //Bandera 
+        var bandera=this.physics.add.sprite(posBanderaX, posBanderaY, 'bandera');
+        
 
         //plataforma
         plataforma = new Plataforma(this);
 
         plataforma.crearPlataforma(this, 100, 500);
-        plataforma.crearPlataforma(this, 200, 400);
+        plataforma.crearPlataforma(this, 800, 400);
 
         /*
         plataforma.crearPlataforma(this, 350, 700);
@@ -158,7 +168,6 @@ class juego extends Phaser.Scene {
         this.physics.add.collider(jugador.sprite, plataforma.plataformas);
         this.physics.add.collider(jugador2.sprite, plataforma.plataformas);
 
-
     }
 
     update() {
@@ -243,7 +252,7 @@ class juego extends Phaser.Scene {
 
 
         //Funcion para el zoom
-        if (posx > posy) {
+        if (Math.abs(posx) > Math.abs(posy)) {
             if (Math.abs(posx) < 150) {
                 camera.setZoom(2.60);
             } else {
@@ -278,4 +287,6 @@ class juego extends Phaser.Scene {
         }*/
 
     }
+
+    
 }

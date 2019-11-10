@@ -22,6 +22,7 @@ class Jugador extends Phaser.GameObjects.Sprite {
         }else{
             if(identificador==3){
                 this.sprite = this.scene.add.sprite(x, y, 'camara');
+                this.sprite.setVisible(false);
             }
         }
 
