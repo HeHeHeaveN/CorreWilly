@@ -30,6 +30,10 @@ var camaraY;
 var cof1;
 var cof2;
 
+var idN;
+
+var nivel;
+
 class juego extends Phaser.Scene {
     constructor() {
         super("juegoScene");
@@ -73,8 +77,17 @@ class juego extends Phaser.Scene {
         //plataforma
         plataforma = new Plataforma(this);
 
-        plataforma.crearPlataforma(this, 100, 500);
-        plataforma.crearPlataforma(this, 800, 400);
+
+        idN=Math.floor(Math.random() * (3 - 1) + 1); 
+
+        nivel=new Nivel(this,idN); 
+
+        nivel.crearNivel(this,plataforma);
+        console.log(idN);
+
+
+        /*plataforma.crearPlataforma2(this, 100, 500);
+        plataforma.crearPlataforma(this, 800, 400);*/
 
 
         //Controles del jugador 1
