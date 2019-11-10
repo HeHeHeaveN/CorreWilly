@@ -37,10 +37,16 @@ class juego extends Phaser.Scene {
         this.add.image(800, 450, 'fondo')
 
         //plataforma
-        plataforma = new Plataforma(this);        
+        plataforma = new Plataforma(this);
+        
+        plataforma.crearPlataforma(200, 200);
+        plataforma.crearPlataforma(400, 400);
+
+        /*
         plataforma.crearPlataforma(this, 350, 700);
         plataforma.crearPlataforma(this, 800, 800);
         //plataforma.depth = -1;
+        */
         
 
 
