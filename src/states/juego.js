@@ -216,8 +216,6 @@ class juego extends Phaser.Scene {
         //Update de la camara
         posx = jugador.getX() - jugador2.getX();
         posy = jugador.getY() - jugador2.getY();
-        posx=Math.abs(posx);
-        posy=Math.abs(posy);
         posC = posx / cof1;
         posB = posx / cof2;
         posA = posy / cof2;
@@ -232,20 +230,17 @@ class juego extends Phaser.Scene {
         jugador3.setY(camaraY);
         //console.log(camaraX);
         //console.log(camaraY);
+        
  
 
         //Funcion para el zoom
-       /* if (Math.abs(posx) < 150 || (Math.abs(posy) < 150 && Math.abs(posy) != 0)) {
+        if (Math.abs(posx) < 150) {
             camera.setZoom(2.60);
         } else {
             if(Math.abs(posx) > 150){
                 camera.setZoom((Math.abs(1 / (posB * posB)) + 1));
-            }
-            if(Math.abs(posy) > 150){
-                camera.setZoom((Math.abs(1 / (posA * posA)) + 1));
-            }
             
-        }*/
+        }
 
 
         /*
@@ -256,5 +251,4 @@ class juego extends Phaser.Scene {
         }*/
     }
 }
-
-
+}
