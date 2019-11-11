@@ -5,7 +5,10 @@ class preload extends Phaser.Scene {
 
     preload() {
         //fondo
-        this.load.image('fondo', 'assets/fondo.jpg');
+        this.load.image('fondo', 'assets/Fondo_setas.png');
+        this.load.image('menu', 'assets/Menu_inicio.png');
+        this.load.image('ganar1', 'assets/Player_1_wins.png');
+        this.load.image('ganar2', 'assets/Player_2_wins.png');
         //plataformas
         this.load.image('plataformaNormal', 'assets/plataformas/plataforma.png')
         this.load.image('plataformaRobotica', 'assets/plataformas/plataforma-robot.png')
@@ -18,6 +21,10 @@ class preload extends Phaser.Scene {
         this.load.image('bandera', 'assets/bandera.png');
         //PowerUps 
         this.load.image('estrella', 'assets/estrella.png');
+        //Musica
+        this.load.audio('theme', [
+            'assets/corre.mp3'
+        ]);
     }
 
     create() {

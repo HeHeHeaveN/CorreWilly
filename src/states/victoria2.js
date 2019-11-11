@@ -1,3 +1,5 @@
+var fondo;
+
 class victoria2 extends Phaser.Scene {
     constructor() {
         super("victoria2Scene");
@@ -5,15 +7,21 @@ class victoria2 extends Phaser.Scene {
 
     preload() {
         //fondo
-        this.load.image('fondo', 'assets/fondo.jpg');
+        this.load.image('ganar2', 'assets/Player_2_wins');
     }
 
     create() {
-        var fondo = this.add.image(1600, 900, 'fondo')
+        var fondo = this.add.image(1600, 900, 'ganar2');
+        fondo.setScale(2);
+        setTimeout(recarga,3000);
 
     }
 
     update() {
 
     }
+}
+
+function recarga(){
+    location.reload();
 }

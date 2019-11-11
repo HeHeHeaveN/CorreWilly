@@ -17,7 +17,7 @@ class Nivel extends Phaser.GameObjects.Sprite {
                     posicion1 += Phaser.Math.Between(400, 800);
                     if(posicion1 < distanciafinal){
                         if (Math.random() < 0.5) {
-                            plataforma.crearPlataforma2(escena, posicion1, posicion2+50);
+                            plataforma.crearPlataforma2(escena, posicion1, posicion2-50);
                         } else {
                             plataforma.crearPlataforma(escena, posicion1, posicion2);
                         }

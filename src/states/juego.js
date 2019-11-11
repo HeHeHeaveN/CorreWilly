@@ -79,6 +79,7 @@ class juego extends Phaser.Scene {
 
         //Fondo
         var fondo = this.add.image(1600, 900, 'fondo')
+        fondo.setScale(2);
         fondo.depth = -2;
 
         //Bandera 
@@ -222,6 +223,10 @@ class juego extends Phaser.Scene {
             var vel=this.physics.add.overlap(jugador.sprite, estrella, power, null, this);
             var vel=this.physics.add.overlap(jugador2.sprite, estrella, power2, null, this);
         }
+
+        //Musica
+        var music = this.sound.add('theme');
+        music.play();
     }
 
     update() {
