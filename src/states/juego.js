@@ -106,7 +106,6 @@ class juego extends Phaser.Scene {
         nivel=new Nivel(this,idN); 
 
         nivel.crearNivel(this,plataforma);
-        console.log(idN);
 
 
         /*plataforma.crearPlataforma2(this, 100, 500);
@@ -332,18 +331,18 @@ class juego extends Phaser.Scene {
 
         //Funcion para el zoom
         if (Math.abs(posx) > Math.abs(posy)) {
-            if (Math.abs(posx) < 150) {
-                camera.setZoom(2.60);
+            if (Math.abs(posx) < 250) {
+                camera.setZoom(1.57);
             } else {
-                if (Math.abs(posx) > 150) {
+                if (Math.abs(posx) > 250) {
                     camera.setZoom((Math.abs(1 / (posB * posB)) + 1));
                 }
             }
         } else {
-            if (Math.abs(posy) < 150) {
-                camera.setZoom(2.60);
+            if (Math.abs(posy) < 250) {
+                camera.setZoom(1.57);
             } else {
-                if (Math.abs(posy) > 150) {
+                if (Math.abs(posy) > 250) {
                     camera.setZoom((Math.abs(1 / (posA * posA)) + 1));
                 }
             }
@@ -358,7 +357,7 @@ class juego extends Phaser.Scene {
         } 
 
         if(jugador2.getY()>1700){
-            jugador2.setX(posicionInicial2y);
+            jugador2.setX(posicionInicial2x);
             jugador2.setY(posicionInicial2y);
         }
 

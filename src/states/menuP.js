@@ -32,10 +32,6 @@ class menuP extends Phaser.Scene {
                 this.scene.start('creditosScene');
             }
 
-
-            console.log(pointer.x); 
-            console.log(pointer.y);
-
     
         }, this);
         
