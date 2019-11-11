@@ -227,6 +227,12 @@ class juego extends Phaser.Scene {
         //Musica
         var music = this.sound.add('theme');
         music.play();
+
+        //Pausa
+        this.input.keyboard.on('keydown-' + 'P', function (event) {
+            this.scene.pause();
+            this.scene.run('pausaScene');
+        }, this);
     }
 
     update() {
@@ -251,12 +257,6 @@ class juego extends Phaser.Scene {
                 }
             }        
             tiempo=false;
-        }
-
-        //Pausa
-        if(cursors2.p.isDown){
-            this.scene.pause();
-            this.scene.launch('menuPScene');
         }
 
         //controles jugador 1

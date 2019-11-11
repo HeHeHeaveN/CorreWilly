@@ -9,6 +9,8 @@ class preload extends Phaser.Scene {
         this.load.image('menu', 'assets/Menu_inicio.png');
         this.load.image('ganar1', 'assets/Player_1_wins.png');
         this.load.image('ganar2', 'assets/Player_2_wins.png');
+        this.load.image('control', 'assets/Como_jugar.png');
+        this.load.image('creditos', 'assets/Creditos.png');
         //plataformas
         this.load.image('plataformaNormal', 'assets/plataformas/plataforma.png')
         this.load.image('plataformaRobotica', 'assets/plataformas/plataforma-robot.png')

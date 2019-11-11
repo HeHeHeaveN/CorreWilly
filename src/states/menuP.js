@@ -24,6 +24,14 @@ class menuP extends Phaser.Scene {
                 this.scene.start('juegoScene');
             }
 
+            if((pointer.x>1144 && pointer.x<2050)&&(pointer.y>1140 && pointer.y<1288)){
+                this.scene.start('controlesScene');
+            }
+
+            if((pointer.x>1280 && pointer.x<1940)&&(pointer.y>1347 && pointer.y<1475)){
+                this.scene.start('creditosScene');
+            }
+
 
             console.log(pointer.x); 
             console.log(pointer.y);
@@ -35,10 +43,6 @@ class menuP extends Phaser.Scene {
 
     update() {
         
-
-        if(cursors.up.isDown){
-            this.scene.resume('juegoScene');
-        }
 
     }
 }
