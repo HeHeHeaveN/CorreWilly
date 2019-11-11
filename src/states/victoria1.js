@@ -9,7 +9,7 @@ class victoria1 extends Phaser.Scene {
     }
 
     create() {
-      this.add.image(800, 450, 'fondo')
+      this.add.image(1600, 900, 'fondo')
 
     }
 

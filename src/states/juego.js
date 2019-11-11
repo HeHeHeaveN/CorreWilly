@@ -42,6 +42,9 @@ var tiempo;
 
 var jug;
 
+var alturaEX; 
+var alturaEY;
+
 class juego extends Phaser.Scene {
     constructor() {
         super("juegoScene");
@@ -65,17 +68,17 @@ class juego extends Phaser.Scene {
         camaraY = 0;
 
         //posiciones de reaparicion
-        posicionInicial1x=100; 
-        posicionInicial1y=100; 
-        posicionInicial2x=300; 
-        posicionInicial2y=300;
+        posicionInicial1x=150; 
+        posicionInicial1y=800; 
+        posicionInicial2x=80; 
+        posicionInicial2y=800;
 
         //posicion de la bandera
-        posBanderaX=1500; 
-        posBanderaY=420;
+        posBanderaX=3000; 
+        posBanderaY=620;
 
         //Fondo
-        var fondo = this.add.image(800, 450, 'fondo')
+        var fondo = this.add.image(1600, 900, 'fondo')
         fondo.depth = -2;
 
         //Bandera 
@@ -85,7 +88,9 @@ class juego extends Phaser.Scene {
         
         //Estrella 
         
-        var estrella=this.physics.add.sprite(200,200,'estrella');
+        
+
+        var estrella=this.physics.add.sprite(4000,4000,'estrella');
         estrella.setScale(0.1);
         estrella.depth=1;
         
@@ -115,6 +120,7 @@ class juego extends Phaser.Scene {
             w: 'W',
             a: 'A',
             d: 'D',
+            p: 'P',
         });
 
         //animaciones jugador 1
@@ -177,7 +183,7 @@ class juego extends Phaser.Scene {
         });
 
         //Añadimos el fondo a la escena
-        this.add.image(800, 450, 'fondo');
+        //this.add.image(1600, 900, 'fondo');
 
 
         //Creacion del Jugador 1
@@ -192,7 +198,7 @@ class juego extends Phaser.Scene {
 
         //Creacion de la camara
         camera = this.cameras.main;
-        this.cameras.main.setBounds(0, 0, 1600, 900);
+        this.cameras.main.setBounds(0, 0, 3200, 1800);
 
         //Colisiones entre los jugadores y las plataformas
         this.physics.add.collider(jugador.sprite, plataforma.plataformas);
@@ -205,6 +211,17 @@ class juego extends Phaser.Scene {
         //this.physics.add.collider(jugador.)
         var vel=this.physics.add.overlap(jugador.sprite, estrella, power, null, this);
         var vel=this.physics.add.overlap(jugador2.sprite, estrella, power2, null, this);
+
+        for(var i=0;i<3;i++){
+            alturaEX=Math.floor(Math.random() * (3000 - 400) + 400); 
+            alturaEY=Math.floor(Math.random() * (1500 - 400) + 400); 
+            var estrella=this.physics.add.sprite(alturaEX,alturaEY,'estrella');
+            estrella.setScale(0.1);
+            estrella.depth=1;
+            this.physics.add.collider(estrella,plataforma.plataformas);
+            var vel=this.physics.add.overlap(jugador.sprite, estrella, power, null, this);
+            var vel=this.physics.add.overlap(jugador2.sprite, estrella, power2, null, this);
+        }
     }
 
     update() {
@@ -231,12 +248,18 @@ class juego extends Phaser.Scene {
             tiempo=false;
         }
 
+        //Pausa
+        if(cursors2.p.isDown){
+            this.scene.pause();
+            this.scene.launch('menuPScene');
+        }
+
         //controles jugador 1
 
         if (cursors.left.isDown) {
             jugador.sprite.setVelocityX(-(jugador.getVelocidadHorizontal()));
 
-            jugador.sprite.anims.play('left', true);
+            jugador.sprite.anims.play('left', true);           
         }
         else if (cursors.right.isDown) {
             jugador.sprite.setVelocityX(jugador.getVelocidadHorizontal());
@@ -244,6 +267,7 @@ class juego extends Phaser.Scene {
             jugador.sprite.anims.play('right', true);
             //en caso de usar sprites de un solo sentido
             //jugador.sprite.flipX= true;
+
         }
         else {
             jugador.sprite.setVelocityX(0);
@@ -323,12 +347,12 @@ class juego extends Phaser.Scene {
 
         
         //Funcion para reaparecer si mueres
-        if(jugador.getY()>860){
+        if(jugador.getY()>1700){
             jugador.setX(posicionInicial1x);
             jugador.setY(posicionInicial1y);
         } 
 
-        if(jugador2.getY()>860){
+        if(jugador2.getY()>1700){
             jugador2.setX(posicionInicial2y);
             jugador2.setY(posicionInicial2y);
         }

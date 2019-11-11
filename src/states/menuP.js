@@ -12,7 +12,7 @@ class menuP extends Phaser.Scene {
     create() {
 
         //Fondo
-        var fondo = this.add.image(800, 450, 'fondo')
+        var fondo = this.add.image(1600, 900, 'fondo')
         fondo.depth = -2;
 
         cursors = this.input.keyboard.createCursorKeys();
@@ -23,6 +23,10 @@ class menuP extends Phaser.Scene {
     update() {
         if (cursors.down.isDown) {
             this.scene.start('juegoScene');
+        }
+
+        if(cursors.up.isDown){
+            this.scene.resume('juegoScene');
         }
 
     }

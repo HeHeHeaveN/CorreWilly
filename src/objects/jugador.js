@@ -4,10 +4,10 @@ class Jugador extends Phaser.GameObjects.Sprite {
 
         //Propiedades del jugador
         this.velocidadHorizontal = 400;
-        this.velocidadSalto = 350;
+        this.velocidadSalto = 380;
 
         //Propiedades de fisicas
-        this.bounce = 0.2;
+        this.bounce = 0;
         //identificador;
 
         if (identificador == 1) {
