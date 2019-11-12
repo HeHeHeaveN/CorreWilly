@@ -212,7 +212,7 @@ class juego extends Phaser.Scene {
         var vel=this.physics.add.overlap(jugador.sprite, estrella, power, null, this);
         var vel=this.physics.add.overlap(jugador2.sprite, estrella, power2, null, this);
 
-        for(var i=0;i<3;i++){
+        for(var i=0;i<5;i++){
             alturaEX=Math.floor(Math.random() * (3000 - 400) + 400); 
             alturaEY=Math.floor(Math.random() * (1500 - 400) + 400); 
             var estrella=this.physics.add.sprite(alturaEX,alturaEY,'estrella');
