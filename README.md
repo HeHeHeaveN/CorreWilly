@@ -58,6 +58,8 @@ Al iniciar el jugo se generan las plataformas y los power ups del nivel de forma
 Nos indica que jugador ha ganado. Pasado unos segundos nos devuelve a la pantalla de inicio.
 <img src="Imágenes prototipo/Victoria.PNG">
 
+## Diagrama de navegación:
+
 # Integrantes del grupo:
 - Enrique Corrochano Pardo. Correo: e.corrochano.2017@alumnos.urjc.es Github: https://github.com/enriqueyr12
 - Andrés González Pérez. Correo: an.gonzalez.2017@alumnos.urjc.es Github: https://github.com/HeHeHeaveN
