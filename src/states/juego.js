@@ -238,11 +238,18 @@ class juego extends Phaser.Scene {
         musicaON=true;
         //Pausa
         this.input.keyboard.on('keydown-' + 'ESC', function (event) {
-            musicaON=false;
             music.pause();
             this.scene.pause();
             this.scene.run('pausaScene');           
         }, this);
+
+        this.input.keyboard.on('keydown-' + 'N', function (event) {
+            if(music.isPlaying){
+                music.pause();
+            }else{
+                music.resume();
+            }
+        }, this)
     }
 
     update() {

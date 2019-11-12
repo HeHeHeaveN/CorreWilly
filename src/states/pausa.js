@@ -31,6 +31,8 @@ class Pausa extends Phaser.Scene {
             this.scene.stop();
             this.scene.run('menuPScene');
         }, this);
+
+    
         
         
     }
