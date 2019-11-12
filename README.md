@@ -59,6 +59,7 @@ Nos indica que jugador ha ganado. Pasado unos segundos nos devuelve a la pantall
 <img src="Imágenes prototipo/Victoria.PNG">
 
 ## Diagrama de navegación:
+<img src="Imágenes prototipo/diagrama navegación.png">
 
 # Integrantes del grupo:
 - Enrique Corrochano Pardo. Correo: e.corrochano.2017@alumnos.urjc.es Github: https://github.com/enriqueyr12
