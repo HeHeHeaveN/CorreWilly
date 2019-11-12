@@ -43,6 +43,16 @@ Visual Studio code utilizando el Framework Phaser 3. Además, un tablero de Trel
 # Plataforma de destino:
 Navegador web.
 
+# Desarrollo:
+Pantalla de inicio:
+<img src="Imágenes prototipo/Inicio.PNG">
+
+Pantalla de juego:
+<img src="Imágenes prototipo/Juego.PNG">
+
+Pantalla de victoria:
+<img src="Imágenes prototipo/Victoria.PNG">
+
 # Integrantes del grupo:
 - Enrique Corrochano Pardo. Correo: e.corrochano.2017@alumnos.urjc.es Github: https://github.com/enriqueyr12
 - Andrés González Pérez. Correo: an.gonzalez.2017@alumnos.urjc.es Github: https://github.com/HeHeHeaveN
