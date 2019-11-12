@@ -11,6 +11,8 @@ class Controles extends Phaser.Scene {
 
     create() {
 
+        
+
         //Fondo
         var fondo = this.add.image(1600, 900, 'control')
         fondo.setScale(2);
@@ -18,16 +20,18 @@ class Controles extends Phaser.Scene {
 
         cursors = this.input.keyboard.createCursorKeys();
 
-       
+        cursors = this.input.keyboard.addKeys({
+            esc: 'ESC',
+        });
         
     }
 
     update() {
         
 
-        if(cursors.left.isDown){
+        if(cursors.esc.isDown){
             this.scene.start('menuPScene');
-            
+
         }
 
     }

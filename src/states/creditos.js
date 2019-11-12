@@ -18,16 +18,18 @@ class Creditos extends Phaser.Scene {
 
         cursors = this.input.keyboard.createCursorKeys();
 
-       
+        cursors = this.input.keyboard.addKeys({
+            esc: 'ESC',
+        });
         
     }
 
     update() {
         
 
-        if(cursors.left.isDown){
+        if(cursors.esc.isDown){
             this.scene.start('menuPScene');
-            
+
         }
 
     }
