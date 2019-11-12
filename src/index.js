@@ -1,7 +1,7 @@
 var config = {
     type: Phaser.WEBGL,
-    width: 1600,
-    height: 900,
+    width: 3200,
+    height: 1800,
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
@@ -11,13 +11,13 @@ var config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 300 },
-            debug: true
+            debug: false
         }
     },
 
     autoRound: false,
 
-    scene: [boot, preload, juego]
+    scene: [boot, preload, menuP, juego, victoria1, victoria2, Controles, Creditos, Pausa]
 
 };
 
