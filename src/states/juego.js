@@ -80,20 +80,12 @@ class juego extends Phaser.Scene {
         posBanderaX = 3000;
         posBanderaY = 620;
 
-        //Fondo
-        var fondo = this.add.image(1600, 900, 'fondo')
-        fondo.setScale(2);
-        fondo.depth = -2;
-
         //Bandera 
         var bandera = this.add.image(posBanderaX, posBanderaY, 'bandera');
         bandera.setScale(0.5);
         bandera.depth = 1;
 
         //Estrella 
-
-
-
         var estrella = this.physics.add.sprite(4000, 4000, 'estrella');
         estrella.setScale(0.1);
         estrella.depth = 1;
@@ -103,9 +95,26 @@ class juego extends Phaser.Scene {
         plataforma = new Plataforma(this);
 
 
-        //idN=Math.floor(Math.random() * (3 - 1) + 1); 
-        idN = 1;
+        idN=Math.floor(Math.random() * (3 - 1) + 1); 
+        //idN = 2;
 
+        console.log(idN);
+
+        if (idN == 1) {
+            //Fondo setas
+            var fondo = this.add.image(1600, 900, 'fondo-setas');
+            fondo.setScale(1.67);
+            fondo.depth = -2;
+            console.log("Fondo setas");
+        } else if(idN == 2) {
+            //Fondo robots
+            var fondo = this.add.image(1600, 900, 'fondo-robots');
+            fondo.setScale(1.67);
+            fondo.depth = -2;
+            console.log("Fondo robot");
+        }
+
+        //Crear plataformas nivel
         nivel = new Nivel(this, idN);
 
         nivel.crearNivel(this, plataforma);
@@ -235,18 +244,18 @@ class juego extends Phaser.Scene {
         game.volume = 0;
         music.play();
 
-        musicaON=true;
+        musicaON = true;
         //Pausa
         this.input.keyboard.on('keydown-' + 'ESC', function (event) {
             music.pause();
             this.scene.pause();
-            this.scene.run('pausaScene');           
+            this.scene.run('pausaScene');
         }, this);
 
         this.input.keyboard.on('keydown-' + 'N', function (event) {
-            if(music.isPlaying){
+            if (music.isPlaying) {
                 music.pause();
-            }else{
+            } else {
                 music.resume();
             }
         }, this)
@@ -254,7 +263,7 @@ class juego extends Phaser.Scene {
 
     update() {
 
-        if(musicaON==false){
+        if (musicaON == false) {
             music.resume();
         }
 

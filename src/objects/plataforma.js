@@ -24,4 +24,23 @@ class Plataforma extends Phaser.GameObjects.Sprite {
         imagen.setScale(0.7);
     }
 
+    crearPlataformaRobot(plat ,x, y) {
+    
+        this.plataformas.create(x, y, 'plataformaRobotica').setScale(0.7).refreshBody();
+        this.plataformas.depth = 1;
+
+        var imagen = plat.add.image(x, y, 'plataformaRobotica')
+        imagen.depth = 1;
+        imagen.setScale(0.7);
+    }
+    crearPlataformaRobot2(plat ,x, y) {
+    
+        this.plataformas.create(x, y, 'plataformaRobotica').setScale(0.4).refreshBody();
+        this.plataformas.depth = 1;
+
+        var imagen = plat.add.image(x, y, 'plataformaRobotica')
+        imagen.depth = 1;
+        imagen.setScale(0.7);
+    }
+
 }

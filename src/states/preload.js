@@ -5,7 +5,8 @@ class preload extends Phaser.Scene {
 
     preload() {
         //fondo
-        this.load.image('fondo', 'assets/Pantallas-Fondos/Fondo-setas.png');
+        this.load.image('fondo-setas', 'assets/Pantallas-Fondos/Fondo-setas.png');
+        this.load.image('fondo-robots', 'assets/Pantallas-Fondos/Fondo-robots.png');
         this.load.image('menu', 'assets/Pantallas-Fondos/Menu-inicio.png');
         this.load.image('ganar1', 'assets/Pantallas-Fondos/Azul-ganador.png');
         this.load.image('ganar2', 'assets/Pantallas-Fondos/Rosa-ganador.png');
