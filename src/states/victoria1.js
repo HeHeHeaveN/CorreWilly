@@ -12,7 +12,7 @@ class victoria1 extends Phaser.Scene {
 
     create() {
       fondo=this.add.image(1600, 900, 'ganar1')
-      fondo.setScale(2);
+      fondo.setScale(1.67);
       setTimeout(recarga,3000);
 
     }
