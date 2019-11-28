@@ -2,6 +2,8 @@ class Jugador extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, identificador) {
         super(scene);
 
+        var puntos = 0;
+
         //Propiedades del jugador
         this.velocidadHorizontal = 400;
         this.velocidadSalto = 380;
@@ -25,6 +27,8 @@ class Jugador extends Phaser.GameObjects.Sprite {
                 this.sprite.setVisible(false);
             }
         }
+
+        this.sprite.setScale(0.5);
 
         this.sprite.x;
         this.sprite.y;
@@ -50,5 +54,8 @@ class Jugador extends Phaser.GameObjects.Sprite {
 
     getIdentificador() { return this.identificador; }
     setIdentificador(a) { this.identificador = a; }
+
+    getPuntos(){return this.puntos;}
+    setPuntos(a){this.puntos = a; }
 
 }

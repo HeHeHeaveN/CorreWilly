@@ -393,13 +393,16 @@ class juego extends Phaser.Scene {
             jugador2.setY(posicionInicial2y);
         }
 
+        //Ganador
         if ((jugador.getX() > posBanderaX - 100 && jugador.getX() < posBanderaX + 100) && (jugador.getY() > posBanderaY - 100 && jugador.getY() < posBanderaY + 100)) {
-            this.scene.start('victoria1Scene');
+            jugador.setPuntos(jugador.setPuntos()+1);
+            this.scene.start('victoriaScene');
+        }
+        if ((jugador2.getX() > posBanderaX - 100 && jugador2.getX() < posBanderaX + 100) && (jugador2.getY() > posBanderaY - 100 && jugador2.getY() < posBanderaY + 100)) {
+            jugador.setPuntos(jugador2.setPuntos()+1);
+            this.scene.start('victoriaScene');
         }
 
-        if ((jugador2.getX() > posBanderaX - 100 && jugador2.getX() < posBanderaX + 100) && (jugador2.getY() > posBanderaY - 100 && jugador2.getY() < posBanderaY + 100)) {
-            this.scene.start('victoria2Scene');
-        }
     }
 }
 

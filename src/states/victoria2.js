@@ -1,13 +1,9 @@
-var fondo;
-
 class victoria2 extends Phaser.Scene {
     constructor() {
         super("victoria2Scene");
     }
 
     preload() {
-        //fondo
-        this.load.image('ganar2', 'assets/Player_2_wins');
     }
 
     create() {
