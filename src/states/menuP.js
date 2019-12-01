@@ -1,3 +1,6 @@
+var puntos1 = 0;
+var puntos2 = 0;
+
 class menuP extends Phaser.Scene {
     constructor() {
         super("menuPScene");

@@ -48,6 +48,10 @@ var jug;
 var alturaEX;
 var alturaEY;
 
+var txt1;
+var txt2;
+
+
 class juego extends Phaser.Scene {
     constructor() {
         super("juegoScene");
@@ -206,6 +210,12 @@ class juego extends Phaser.Scene {
 
         camera2 = this.cameras.add(1600, 0, 1600, 1800);
         camera2.setBounds(0, 0, 3200, 1800);
+
+        camera.startFollow(jugador.sprite);
+        camera2.startFollow(jugador2.sprite);
+
+        
+        this.cameras.main.setVisible(false);        
         
 
         //Colisiones entre los jugadores y las plataformas
@@ -252,6 +262,20 @@ class juego extends Phaser.Scene {
                 music.resume();
             }
         }, this)
+
+        //Mostrar puntuacion
+        txt1 = this.add.text(camera.centerX, camera.centerY - 500, puntos1, { font: '64px Arial' });
+        txt1.setTint(0x20f2f5, 0x20f2f5, 0x20f2f5, 0x20f2f5);
+        txt1.depth = 70;
+        txt1.setScrollFactor(0, 0); 
+        camera2.ignore(txt1);  
+        
+        txt2 = this.add.text(camera.centerX, camera.centerY - 500, puntos2, { font: '64px Arial' });
+        txt2.setTint(0xe643f3, 0xe643f3, 0xe643f3, 0xe643f3);
+        txt2.depth = 70;
+        txt2.setScrollFactor(0, 0); 
+        camera.ignore(txt2);
+
     }
 
     update() {
@@ -335,11 +359,8 @@ class juego extends Phaser.Scene {
         }
 
 
-        //CAMARA (Pantalla Partida)
-        camera.startFollow(jugador.sprite);
-        camera.setZoom(1.5);
-       
-        camera2.startFollow(jugador2.sprite);
+        //CAMARA (Pantalla Partida)        
+        camera.setZoom(1.5);       
         camera2.setZoom(1.5);
 
         //Funcion para reaparecer si mueres
@@ -357,10 +378,14 @@ class juego extends Phaser.Scene {
         if ((jugador.getX() > posBanderaX - 100 && jugador.getX() < posBanderaX + 100) && (jugador.getY() > posBanderaY - 100 && jugador.getY() < posBanderaY + 100)) {
             jugador.setPuntos(jugador.setPuntos()+1);
             this.scene.start('victoriaScene');
+            puntos1++;
+            //console.log(puntos1);
         }
         if ((jugador2.getX() > posBanderaX - 100 && jugador2.getX() < posBanderaX + 100) && (jugador2.getY() > posBanderaY - 100 && jugador2.getY() < posBanderaY + 100)) {
             jugador.setPuntos(jugador2.setPuntos()+1);
             this.scene.start('victoriaScene');
+            puntos2++;
+            //console.log(puntos2);
         }
 
     }
