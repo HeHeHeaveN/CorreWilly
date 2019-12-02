@@ -1,5 +1,5 @@
-var puntos1 = 0;
-var puntos2 = 0;
+var puntos1;
+var puntos2;
 
 class menuP extends Phaser.Scene {
     constructor() {
@@ -37,6 +37,9 @@ class menuP extends Phaser.Scene {
 
     
         }, this);
+
+        puntos1 = 0;
+        puntos2 = 0;
         
     }
 
