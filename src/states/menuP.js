@@ -38,9 +38,9 @@ class menuP extends Phaser.Scene {
     
         }, this);*/
 
-        this.jugar=this.add.text(1350,770,"Jugar",{fill: '#000000', font: '200px Arial'}).setInteractive().on('pointerdown',()=>this.scene.start('juegoScene'));
-        this.comoJugar=this.add.text(1100,970,"Como jugar",{fill: '#000000', font: '200px Arial'}).setInteractive().on('pointerdown',()=>this.scene.start('controlesScene'));
-        this.creditos=this.add.text(1170,1200,"Creditos",{fill: '#000000', font: '200px Arial'}).setInteractive().on('pointerdown',()=>this.scene.start('creditosScene'));
+        this.jugar=this.add.text(1300,900,"Jugar",{fill: '#000000', font: '200px Arial'}).setInteractive().on('pointerdown',()=>this.scene.start('juegoScene'));
+        this.comoJugar=this.add.text(1050,1100,"Como jugar",{fill: '#000000', font: '200px Arial'}).setInteractive().on('pointerdown',()=>this.scene.start('controlesScene'));
+        this.creditos=this.add.text(1200,1300,"Creditos",{fill: '#000000', font: '200px Arial'}).setInteractive().on('pointerdown',()=>this.scene.start('creditosScene'));
         
         this.jugar.on('pointerout',()=>this.fueraJ());
         this.jugar.on('pointerover',()=>this.dentroJ());
