@@ -17,7 +17,7 @@ var config = {
 
     autoRound: false,
 
-    scene: [boot, preload, menuP, juego,victoria, victoria1, victoria2, Controles, Creditos, Pausa]
+    scene: [boot, preload, menuP, juego,victoria, victoriaj2, Controles, Creditos, Pausa]
 
 };
 

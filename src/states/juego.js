@@ -383,7 +383,7 @@ class juego extends Phaser.Scene {
         }
         if ((jugador2.getX() > posBanderaX - 100 && jugador2.getX() < posBanderaX + 100) && (jugador2.getY() > posBanderaY - 100 && jugador2.getY() < posBanderaY + 100)) {
             jugador.setPuntos(jugador2.setPuntos()+1);
-            this.scene.start('victoriaScene');
+            this.scene.start('victoriaj2Scene');
             puntos2++;
             //console.log(puntos2);
         }

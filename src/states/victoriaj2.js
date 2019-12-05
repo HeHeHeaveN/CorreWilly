@@ -1,6 +1,6 @@
-class victoria extends Phaser.Scene {
+class victoriaj2 extends Phaser.Scene {
     constructor() {
-        super("victoriaScene");
+        super("victoriaj2Scene");
     }
 
     preload() {
@@ -11,7 +11,7 @@ class victoria extends Phaser.Scene {
         fondo.setScale(1.67);
         //setTimeout(recarga,3000);
 
-        var ganador = this.add.image(600, 350, 'spriteSheetJugador');
+        var ganador = this.add.image(600, 350, 'spriteSheetJugador2');
         ganador.setScale(4);
 
         /*
