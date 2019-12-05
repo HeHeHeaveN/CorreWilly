@@ -37,7 +37,19 @@ class victoria extends Phaser.Scene {
         rosa.setScale(3);
 
         this.text4 = this.add.text(200, 1500, 'Volver a jugar', { font: '180px Arial' });
+        this.text4.setInteractive();
+
+        this.text4.on('pointerdown', function() {
+            music.stop();
+            setTimeout(this.scene.start("juegoScene"), 1000); 
+        }, this);
+
         this.text5 = this.add.text(1800, 1500, 'Menu principal', { font: '180px Arial' });
+        this.text5.setInteractive();
+        this.text5.on('pointerdown', function() {
+            music.stop();
+            setTimeout(this.scene.start("menuPScene"), 1000); 
+        }, this);
 
     }
 

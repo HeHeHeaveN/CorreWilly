@@ -250,6 +250,11 @@ class juego extends Phaser.Scene {
         musicaON = true;
         //Pausa
         this.input.keyboard.on('keydown-' + 'ESC', function (event) {
+            if (music.isPaused) {
+                musicaON = true;
+            } else {
+                musicaON = false;
+            }
             music.pause();
             this.scene.pause();
             this.scene.run('pausaScene');
@@ -258,8 +263,10 @@ class juego extends Phaser.Scene {
         this.input.keyboard.on('keydown-' + 'N', function (event) {
             if (music.isPlaying) {
                 music.pause();
+                musicaON = true;
             } else {
                 music.resume();
+                musicaON = true;
             }
         }, this)
 
@@ -379,7 +386,7 @@ class juego extends Phaser.Scene {
             jugador.setPuntos(jugador.setPuntos()+1);
             this.scene.start('victoriaScene');
             puntos1++;
-            console.log(puntos1);
+            //console.log(puntos1);
         }
         if ((jugador2.getX() > posBanderaX - 100 && jugador2.getX() < posBanderaX + 100) && (jugador2.getY() > posBanderaY - 100 && jugador2.getY() < posBanderaY + 100)) {
             jugador.setPuntos(jugador2.setPuntos()+1);
