@@ -1,3 +1,6 @@
+var puntos1;
+var puntos2;
+
 class menuP extends Phaser.Scene {
     constructor() {
         super("menuPScene");
@@ -13,12 +16,12 @@ class menuP extends Phaser.Scene {
 
         //Fondo
         var fondo = this.add.image(1600, 900, 'menu')
-        fondo.setScale(2);
+        fondo.setScale(1.67);
         fondo.depth = -2;
 
         cursors = this.input.keyboard.createCursorKeys();
 
-        this.input.on('pointerdown', function (pointer) {
+        /*this.input.on('pointerdown', function (pointer) {
 
             if((pointer.x>1381 && pointer.x<1848)&&(pointer.y>913 && pointer.y<1058)){
                 this.scene.start('juegoScene');
@@ -33,12 +36,50 @@ class menuP extends Phaser.Scene {
             }
 
     
-        }, this);
+        }, this);*/
+
+        this.jugar=this.add.text(1300,900,"Jugar",{fill: '#000000', font: '200px Arial'}).setInteractive().on('pointerdown',()=>this.scene.start('juegoScene'));
+        this.comoJugar=this.add.text(1050,1100,"Como jugar",{fill: '#000000', font: '200px Arial'}).setInteractive().on('pointerdown',()=>this.scene.start('controlesScene'));
+        this.creditos=this.add.text(1200,1300,"Creditos",{fill: '#000000', font: '200px Arial'}).setInteractive().on('pointerdown',()=>this.scene.start('creditosScene'));
+        
+        this.jugar.on('pointerout',()=>this.fueraJ());
+        this.jugar.on('pointerover',()=>this.dentroJ());
+        this.comoJugar.on('pointerout',()=>this.fueraCJ());
+        this.comoJugar.on('pointerover',()=>this.dentroCJ());
+        this.creditos.on('pointerout',()=>this.fueraC());
+        this.creditos.on('pointerover',()=>this.dentroC());
+
+        puntos1 = 0;
+        puntos2 = 0;
         
     }
 
     update() {
         
 
+    }
+
+    fueraJ(){
+        this.jugar.setStyle({ fill: '#000000' });
+    }
+
+    dentroJ(){
+        this.jugar.setStyle({ fill: '#FFFFFF'});
+    }
+
+    fueraCJ(){
+        this.comoJugar.setStyle({ fill: '#000000' });
+    }
+
+    dentroCJ(){
+        this.comoJugar.setStyle({ fill: '#FFFFFF'});
+    }
+
+    fueraC(){
+        this.creditos.setStyle({ fill: '#000000' });
+    }
+
+    dentroC(){
+        this.creditos.setStyle({ fill: '#FFFFFF'});
     }
 }

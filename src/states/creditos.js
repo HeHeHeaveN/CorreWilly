@@ -13,7 +13,7 @@ class Creditos extends Phaser.Scene {
 
         //Fondo
         var fondo = this.add.image(1600, 900, 'creditos')
-        fondo.setScale(2);
+        fondo.setScale(1.67);
         fondo.depth = -2;
 
         cursors = this.input.keyboard.createCursorKeys();

@@ -1,7 +1,6 @@
 //Declaracion de variables de la escena
 var jugador;
 var jugador2;
-var jugador3;
 
 var posicionInicial1x;
 var posicionInicial1y;
@@ -17,6 +16,7 @@ var cursors2;
 var plataforma;
 
 var camera;
+var camera2;
 
 var posx;
 var posy;
@@ -47,6 +47,10 @@ var jug;
 
 var alturaEX;
 var alturaEY;
+
+var txt1;
+var txt2;
+
 
 class juego extends Phaser.Scene {
     constructor() {
@@ -80,20 +84,12 @@ class juego extends Phaser.Scene {
         posBanderaX = 3000;
         posBanderaY = 620;
 
-        //Fondo
-        var fondo = this.add.image(1600, 900, 'fondo')
-        fondo.setScale(2);
-        fondo.depth = -2;
-
         //Bandera 
         var bandera = this.add.image(posBanderaX, posBanderaY, 'bandera');
         bandera.setScale(0.5);
         bandera.depth = 1;
 
         //Estrella 
-
-
-
         var estrella = this.physics.add.sprite(4000, 4000, 'estrella');
         estrella.setScale(0.1);
         estrella.depth = 1;
@@ -103,17 +99,28 @@ class juego extends Phaser.Scene {
         plataforma = new Plataforma(this);
 
 
-        //idN=Math.floor(Math.random() * (3 - 1) + 1); 
-        idN = 1;
+        //Variable para que se elija el nivel de manera aleatoria
+        idN=Math.floor(Math.random() * (3 - 1) + 1); 
 
+
+        if (idN == 1) {
+            //Fondo setas
+            var fondo = this.add.image(1600, 900, 'fondo-setas');
+            fondo.setScale(1.67);
+            fondo.depth = -2;
+            //console.log("Fondo setas");
+        } else if(idN == 2) {
+            //Fondo robots
+            var fondo = this.add.image(1600, 900, 'fondo-robots');
+            fondo.setScale(1.67);
+            fondo.depth = -2;
+            //console.log("Fondo robot");
+        }
+
+        //Crear plataformas nivel
         nivel = new Nivel(this, idN);
 
         nivel.crearNivel(this, plataforma);
-
-
-        /*plataforma.crearPlataforma2(this, 100, 500);
-        plataforma.crearPlataforma(this, 800, 400);*/
-
 
         //Controles del jugador 1
         cursors = this.input.keyboard.createCursorKeys();
@@ -196,12 +203,20 @@ class juego extends Phaser.Scene {
         //Creacion del Jugador 2
         jugador2 = new Jugador(this, posicionInicial2x, posicionInicial2y, 2);
 
-        jugador3 = new Jugador(this, camaraX, camaraY, 3);
-
 
         //Creacion de la camara
-        camera = this.cameras.main;
-        this.cameras.main.setBounds(0, 0, 3200, 1800);
+        camera = this.cameras.add(0, 0, 1600, 1800);
+        camera.setBounds(0, 0, 3200, 1800);
+
+        camera2 = this.cameras.add(1600, 0, 1600, 1800);
+        camera2.setBounds(0, 0, 3200, 1800);
+
+        camera.startFollow(jugador.sprite);
+        camera2.startFollow(jugador2.sprite);
+
+        
+        this.cameras.main.setVisible(false);        
+        
 
         //Colisiones entre los jugadores y las plataformas
         this.physics.add.collider(jugador.sprite, plataforma.plataformas);
@@ -226,35 +241,53 @@ class juego extends Phaser.Scene {
             var vel = this.physics.add.overlap(jugador2.sprite, estrella, power2, null, this);
         }
 
-        /* var volumen = game.volume;
-         var music = this.sound.add('musica1', {volume: (volumen/20) ,loop: true});
-         music.play()*/
-
         //Musica
         music = this.sound.add('theme');
         game.volume = 0;
         music.play();
+        music.loop = true;
 
-        musicaON=true;
+        musicaON = true;
         //Pausa
         this.input.keyboard.on('keydown-' + 'ESC', function (event) {
+            if (music.isPaused) {
+                musicaON = true;
+            } else {
+                musicaON = false;
+            }
             music.pause();
             this.scene.pause();
-            this.scene.run('pausaScene');           
+            this.scene.run('pausaScene');
         }, this);
 
         this.input.keyboard.on('keydown-' + 'N', function (event) {
-            if(music.isPlaying){
+            if (music.isPlaying) {
                 music.pause();
-            }else{
+                musicaON = true;
+            } else {
                 music.resume();
+                musicaON = true;
             }
         }, this)
+
+        //Mostrar puntuacion
+        txt1 = this.add.text(camera.centerX, camera.centerY - 500, puntos1, { font: '64px Arial' });
+        txt1.setTint(0x20f2f5, 0x20f2f5, 0x20f2f5, 0x20f2f5);
+        txt1.depth = 70;
+        txt1.setScrollFactor(0, 0); 
+        camera2.ignore(txt1);  
+        
+        txt2 = this.add.text(camera.centerX, camera.centerY - 500, puntos2, { font: '64px Arial' });
+        txt2.setTint(0xe643f3, 0xe643f3, 0xe643f3, 0xe643f3);
+        txt2.depth = 70;
+        txt2.setScrollFactor(0, 0); 
+        camera.ignore(txt2);
+
     }
 
     update() {
 
-        if(musicaON==false){
+        if (musicaON == false) {
             music.resume();
         }
 
@@ -333,45 +366,9 @@ class juego extends Phaser.Scene {
         }
 
 
-        //CAMARA
-
-        //Seguimos a la posicion intermedia entre los jugadores
-        camera.startFollow(jugador3.sprite);
-
-        //Update de la camara
-        posx = jugador.getX() - jugador2.getX();
-        posy = jugador.getY() - jugador2.getY();
-        posC = posx / cof1;
-        posB = posx / cof2;
-        posA = posy / cof2;
-
-
-        camaraX = (jugador.getX() + jugador2.getX()) / 2;
-        camaraY = (jugador.getY() + jugador2.getY()) / 2;
-        jugador3.setX(camaraX);
-        jugador3.setY(camaraY);
-
-
-        //Funcion para el zoom
-        if (Math.abs(posx) > Math.abs(posy)) {
-            if (Math.abs(posx) < 250) {
-                camera.setZoom(1.57);
-            } else {
-                if (Math.abs(posx) > 250) {
-                    camera.setZoom((Math.abs(1 / (posB * posB)) + 1));
-                }
-            }
-        } else {
-            if (Math.abs(posy) < 250) {
-                camera.setZoom(1.57);
-            } else {
-                if (Math.abs(posy) > 250) {
-                    camera.setZoom((Math.abs(1 / (posA * posA)) + 1));
-                }
-            }
-        }
-        //FIN DE LA CAMARA
-
+        //CAMARA (Pantalla Partida)        
+        camera.setZoom(1.5);       
+        camera2.setZoom(1.5);
 
         //Funcion para reaparecer si mueres
         if (jugador.getY() > 1700) {
@@ -384,13 +381,20 @@ class juego extends Phaser.Scene {
             jugador2.setY(posicionInicial2y);
         }
 
+        //Ganador
         if ((jugador.getX() > posBanderaX - 100 && jugador.getX() < posBanderaX + 100) && (jugador.getY() > posBanderaY - 100 && jugador.getY() < posBanderaY + 100)) {
-            this.scene.start('victoria1Scene');
+            jugador.setPuntos(jugador.setPuntos()+1);
+            this.scene.start('victoriaScene');
+            puntos1++;
+            //console.log(puntos1);
+        }
+        if ((jugador2.getX() > posBanderaX - 100 && jugador2.getX() < posBanderaX + 100) && (jugador2.getY() > posBanderaY - 100 && jugador2.getY() < posBanderaY + 100)) {
+            jugador.setPuntos(jugador2.setPuntos()+1);
+            this.scene.start('victoriaj2Scene');
+            puntos2++;
+            //console.log(puntos2);
         }
 
-        if ((jugador2.getX() > posBanderaX - 100 && jugador2.getX() < posBanderaX + 100) && (jugador2.getY() > posBanderaY - 100 && jugador2.getY() < posBanderaY + 100)) {
-            this.scene.start('victoria2Scene');
-        }
     }
 }
 
