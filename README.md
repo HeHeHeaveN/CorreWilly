@@ -22,13 +22,13 @@ En cuanto a los controles el jugador podrá moverse a izquierda y derecha y salt
 # Gráficos:
 El juego es 2d, que presenta una mezcla entre animación clásica y gráficos generados por ordenador prerrenderizados. Según el nivel la estética cambia de forma aleatoria entre un mundo estilo pradera y un segundo mundo estilo mundo robótico.
 
-<img src="Imágenes prototipo/Prototipo gráficos.png">
-<img src="Imágenes prototipo/Prototipo personaje.png">
-<p><img src="Imágenes prototipo/Caracola.png" width = "300"> 
-<img src="Imágenes prototipo/Interrogación.png" width = "300">
-<img src="Imágenes prototipo/estrella.png" width = "300">
-<img src="Imágenes prototipo/muelle.png" width = "300">
-<img src="Imágenes prototipo/x.png" width = "300"><p>
+<img src="src/main/resources/staticImágenes prototipo/Prototipo gráficos.png">
+<img src="src/main/resources/staticImágenes prototipo/Prototipo personaje.png">
+<p><img src="src/main/resources/staticImágenes prototipo/Caracola.png" width = "300"> 
+<img src="src/main/resources/staticImágenes prototipo/Interrogación.png" width = "300">
+<img src="src/main/resources/staticImágenes prototipo/estrella.png" width = "300">
+<img src="src/main/resources/staticImágenes prototipo/muelle.png" width = "300">
+<img src="src/main/resources/staticImágenes prototipo/x.png" width = "300"><p>
 
 
 # Controles:
@@ -46,20 +46,20 @@ Navegador web.
 # Desarrollo:
 ## Pantalla de inicio:
 Nos aparece al cargar la página web. Desde aquí podemos iniciar el juego, ver las reglas del mismo, o ver los desarrolladores del proyecto.
-<img src="Imágenes prototipo/Inicio.PNG">
-<p><img src="Imágenes prototipo/Como_jugar.png" width = "400"> 
-<img src="Imágenes prototipo/Creditos.png" width = "400"><p>
+<img src="src/main/resources/staticImágenes prototipo/Inicio.PNG">
+<p><img src="src/main/resources/staticImágenes prototipo/Como_jugar.png" width = "400"> 
+<img src="src/main/resources/staticImágenes prototipo/Creditos.png" width = "400"><p>
 
 ## Pantalla de juego:
 Al iniciar el jugo se generan las plataformas y los power ups del nivel de forma aleatoria. Nuestro objetivo será llegar a la bandera antes que él contrario. Si nos caemos volveremos a empezar el nivel.
-<img src="Imágenes prototipo/Juego.PNG">
+<img src="src/main/resources/staticImágenes prototipo/Juego.PNG">
 
 ## Pantalla de victoria:
 Nos indica que jugador ha ganado. Pasado unos segundos nos devuelve a la pantalla de inicio.
-<img src="Imágenes prototipo/Victoria.PNG">
+<img src="src/main/resources/staticImágenes prototipo/Victoria.PNG">
 
 ## Diagrama de navegación:
-<img src="Imágenes prototipo/diagrama navegación.png">
+<img src="src/main/resources/staticImágenes prototipo/diagrama navegación.png">
 
 # Integrantes del grupo:
 - Enrique Corrochano Pardo. Correo: e.corrochano.2017@alumnos.urjc.es Github: https://github.com/enriqueyr12
