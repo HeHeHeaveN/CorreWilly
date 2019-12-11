@@ -43,6 +43,24 @@ Visual Studio code utilizando el Framework Phaser 3. Además, un tablero de Trel
 # Plataforma de destino:
 Navegador web.
 
+# Desarrollo:
+## Pantalla de inicio:
+Nos aparece al cargar la página web. Desde aquí podemos iniciar el juego, ver las reglas del mismo, o ver los desarrolladores del proyecto.
+<img src="Imágenes prototipo/Inicio.PNG">
+<p><img src="Imágenes prototipo/Como_jugar.png" width = "400"> 
+<img src="Imágenes prototipo/Creditos.png" width = "400"><p>
+
+## Pantalla de juego:
+Al iniciar el jugo se generan las plataformas y los power ups del nivel de forma aleatoria. Nuestro objetivo será llegar a la bandera antes que él contrario. Si nos caemos volveremos a empezar el nivel.
+<img src="Imágenes prototipo/Juego.PNG">
+
+## Pantalla de victoria:
+Nos indica que jugador ha ganado. Pasado unos segundos nos devuelve a la pantalla de inicio.
+<img src="Imágenes prototipo/Victoria.PNG">
+
+## Diagrama de navegación:
+<img src="Imágenes prototipo/diagrama navegación.png">
+
 # Integrantes del grupo:
 - Enrique Corrochano Pardo. Correo: e.corrochano.2017@alumnos.urjc.es Github: https://github.com/enriqueyr12
 - Andrés González Pérez. Correo: an.gonzalez.2017@alumnos.urjc.es Github: https://github.com/HeHeHeaveN
