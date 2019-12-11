@@ -46,20 +46,24 @@ Navegador web.
 # Desarrollo:
 ## Pantalla de inicio:
 Nos aparece al cargar la página web. Desde aquí podemos iniciar el juego, ver las reglas del mismo, o ver los desarrolladores del proyecto.
-<img src="src/main/resources/static/Imágenes prototipo/Inicio.PNG">
-<p><img src="src/main/resources/static/Imágenes prototipo/Como_jugar.png" width = "400"> 
-<img src="src/main/resources/static/Imágenes prototipo/Creditos.png" width = "400"><p>
+<img src="src/main/resources/static/Imágenes prototipo/captura_inicio.PNG">
+<p><img src="src/main/resources/static/Imágenes prototipo/captura_como_jugar.png" width = "400"> 
+<img src="src/main/resources/static/Imágenes prototipo/captura_creditos.png" width = "400"><p>
 
 ## Pantalla de juego:
 Al iniciar el jugo se generan las plataformas y los power ups del nivel de forma aleatoria. Nuestro objetivo será llegar a la bandera antes que él contrario. Si nos caemos vol7veremos a empezar el nivel.
-<img src="src/main/resources/static/Imágenes prototipo/Juego.PNG">
+<img src="src/main/resources/static/Imágenes prototipo/captura_juego.PNG">
 
 ## Pantalla de victoria:
 Nos indica que jugador ha ganado. Pasado unos segundos nos devuelve a la pantalla de inicio.
-<img src="src/main/resources/static/Imágenes prototipo/Victoria.PNG">
+<img src="src/main/resources/static/Imágenes prototipo/captura_ganador.PNG">
 
 ## Diagrama de navegación:
-<img src="src/main/resources/static/Imágenes prototipo/diagrama navegación.png">
+<img src="src/main/resources/static/Imágenes prototipo/diagrama3.png">
+
+## Diagrama de clases y API REST:
+
+## Cómo ejecutar el juego:
 
 # Integrantes del grupo:
 - Enrique Corrochano Pardo. Correo: e.corrochano.2017@alumnos.urjc.es Github: https://github.com/enriqueyr12
