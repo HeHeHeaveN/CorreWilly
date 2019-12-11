@@ -62,8 +62,13 @@ Nos indica que jugador ha ganado. Pasado unos segundos nos devuelve a la pantall
 <img src="src/main/resources/static/Imágenes prototipo/diagrama3.png">
 
 ## Diagrama de clases y API REST:
+<img src="src/main/resources/static/Imágenes prototipo/diagramaClases.png">
 
 ## Cómo ejecutar el juego:
+Desde la consola de comandos (cmd), dirigirnos a la ruta donde este nuestro servidor (en la carpeta del github en la carpeta llamada servidor). Una vez ubicados en el lugar correcto, ejecutar la siguiente línea de instrucción:
+java -jar CorreWilly-0.0.1-SNAPSHOT.jar
+Para ejecutarlo deberemos tener instalado java en nuestra máquina.
+ Una vez abierto el servidor, introducir en el navegador la ruta "localhost:8080" o "127.0.0.1:8080"
 
 # Integrantes del grupo:
 - Enrique Corrochano Pardo. Correo: e.corrochano.2017@alumnos.urjc.es Github: https://github.com/enriqueyr12
