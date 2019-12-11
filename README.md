@@ -46,7 +46,7 @@ Navegador web.
 # Desarrollo:
 ## Pantalla de inicio:
 Nos aparece al cargar la página web. Desde aquí podemos iniciar el juego, ver las reglas del mismo, o ver los desarrolladores del proyecto.
-<img src="src/main/resources/static/Imágenes prototipo/captura_inicio.PNG">
+<img src="src/main/resources/static/Imágenes prototipo/captura_inicio.png">
 <p><img src="src/main/resources/static/Imágenes prototipo/captura_como_jugar.png" width = "400"> 
 <img src="src/main/resources/static/Imágenes prototipo/captura_creditos.png" width = "400"><p>
 
