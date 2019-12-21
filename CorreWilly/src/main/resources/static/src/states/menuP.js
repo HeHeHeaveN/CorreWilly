@@ -24,7 +24,7 @@ class menuP extends Phaser.Scene {
 
     create() {
     	
-    	//var conexion= new WebSocket('ws://127.0.0.1:8080/prueba');    	
+    	//var conexion= new WebSocket('ws://127.0.0.1:8080/mensajesws');    	
     	
     	aux=false;
 
