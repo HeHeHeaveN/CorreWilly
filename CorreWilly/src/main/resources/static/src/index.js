@@ -17,8 +17,10 @@ var config = {
 
     autoRound: false,
 
-    scene: [boot, preload, menuP, juego,victoria, Controles, Creditos, Pausa]
+    scene: [boot, preload, menuP,lobby, juego,victoria, Controles, Creditos, Pausa]
 
 };
 
 var game = new Phaser.Game(config);
+
+

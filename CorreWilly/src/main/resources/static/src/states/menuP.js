@@ -24,7 +24,7 @@ class menuP extends Phaser.Scene {
 
     create() {
     	
-    	//var conexion= new WebSocket('ws://127.0.0.1:8080/mensajesws');    	
+    		    	    	
     	
     	aux=false;
 
@@ -52,7 +52,7 @@ class menuP extends Phaser.Scene {
     
         }, this);*/
 
-        this.jugar=this.add.text(1300,900,"Jugar",{fill: '#000000', font: '200px Arial'}).setInteractive().on('pointerdown',()=>this.scene.start('juegoScene'));
+        this.jugar=this.add.text(1300,900,"Jugar",{fill: '#000000', font: '200px Arial'}).setInteractive().on('pointerdown',()=>this.scene.start('lobbyScene'));
         this.comoJugar=this.add.text(1050,1100,"Como jugar",{fill: '#000000', font: '200px Arial'}).setInteractive().on('pointerdown',()=>this.scene.start('controlesScene'));
         this.creditos=this.add.text(1200,1300,"Creditos",{fill: '#000000', font: '200px Arial'}).setInteractive().on('pointerdown',()=>this.scene.start('creditosScene'));
         

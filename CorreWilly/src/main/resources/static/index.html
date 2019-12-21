@@ -3,7 +3,7 @@
 
 <head>
 
-    <meta charset="utf-8" />
+    <meta charset="utf-8" />    
     <script src="scripts/phaser.js"></script>
     <script src="scripts/phaser.min.js"></script>
     <title>Corre Willy, Corre</title>
@@ -17,6 +17,7 @@
     <script src="src/objects/nivel.js"></script>
     
     <script src="src/states/menuP.js"></script>
+    <script src="src/states/lobby.js"></script>
     <script src="src/states/juego.js"></script>
     <script src="src/states/controles.js"></script>
     <script src="src/states/creditos.js"></script>
@@ -36,7 +37,20 @@
 
 <body>
     <!-- div donde ubicaremos el juego -->
-    <div id="gameDiv"></div>
+    <div id="gameDiv" style="position: relative">		
+		<div id="chat" style="position:absolute;background-color: white; width:800px;height:400px;right:550px;left:550px;top:400px">
+		</div>
+		<input type="text“ name="message" id="mensajeChat"placeholder="Escribe un mensaje" maxlength="80" style="position: absolute;width: 50%;top:850px;left:500px" />
+		<button id="enviarBoton" style="position: absolute;top:850px;left:1460px">Enviar</button>
+    </div>
+    <script>
+  		//Se ocultan los elementos html que no queremos mostrar todavia
+		$('#chat').hide();
+		$('#mensajeChat').hide();
+		$('#enviarBoton').hide();
+    </script>
+    
+    
 
 </body>
 

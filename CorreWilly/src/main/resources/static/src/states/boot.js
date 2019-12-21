@@ -4,7 +4,8 @@ class boot extends Phaser.Scene {
     }
 
     init(){
-        
+    	
+    	
     }
 
     preload(){
@@ -12,6 +13,7 @@ class boot extends Phaser.Scene {
     }
 
     create() {
+    	
         this.scene.start('preloadScene');
     }
 
