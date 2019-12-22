@@ -6,6 +6,10 @@
     <meta charset="utf-8" />    
     <script src="scripts/phaser.js"></script>
     <script src="scripts/phaser.min.js"></script>
+    <script
+		src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <title>Corre Willy, Corre</title>
 
 
@@ -40,7 +44,7 @@
     <div id="gameDiv" style="position: relative">		
 		<div id="chat" style="position:absolute;background-color: white; width:800px;height:400px;right:550px;left:550px;top:400px">
 		</div>
-		<input type="text“ name="message" id="mensajeChat"placeholder="Escribe un mensaje" maxlength="80" style="position: absolute;width: 50%;top:850px;left:500px" />
+		<input type='text' id="mensajeChat"placeholder="Escribe un mensaje" maxlength="80" style="position: absolute;width: 50%;top:850px;left:500px" />
 		<button id="enviarBoton" style="position: absolute;top:850px;left:1460px">Enviar</button>
     </div>
     <script>
