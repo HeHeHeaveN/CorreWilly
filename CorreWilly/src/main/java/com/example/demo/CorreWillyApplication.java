@@ -22,7 +22,8 @@ public class CorreWillyApplication implements WebSocketMessageBrokerConfigurer{
 	
 	@Override 
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
-		registry.enableSimpleBroker("/chatLobby");
+		registry.enableSimpleBroker("/chatLobby","/posiciones");
+		//registry.enableSimpleBroker("/posiciones");
 		registry.setApplicationDestinationPrefixes("/app");
 	}
 	

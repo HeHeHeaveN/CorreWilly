@@ -305,6 +305,26 @@ class juego extends Phaser.Scene {
     }
 
     update() {
+    	
+    	if(idJugador1==1){
+    		var posXAux=jugador.getX();
+            var posYAux=jugador.getY();
+    		var mensaje = {
+                    otroUsuario: idJugador1,
+                    posX: posXAux,
+                    posY: posYAux
+                };
+        	stompClient.send("/app/pos.send", {}, JSON.stringify(mensaje));
+    	}else{
+    		var posXAux=jugador2.getX();
+            var posYAux=jugador2.getY();
+    		var mensaje = {
+                    otroUsuario: idJugador1,
+                    posX: posXAux,
+                    posY: posYAux
+                };
+        	stompClient.send("/app/pos.send", {}, JSON.stringify(mensaje));
+    	}
 
         if (musicaON == false) {
             music.resume();
@@ -339,7 +359,8 @@ class juego extends Phaser.Scene {
         	if (cursors.left.isDown) {
                 jugador.sprite.setVelocityX(-(jugador.getVelocidadHorizontal()));
 
-                jugador.sprite.anims.play('left', true);
+                jugador.sprite.anims.play('left', true);            
+                
             }
             else if (cursors.right.isDown) {
                 jugador.sprite.setVelocityX(jugador.getVelocidadHorizontal());
@@ -498,4 +519,19 @@ function loadpuntuaciones(callback) {
         console.log('puntuaciones loaded: ' + JSON.stringify(puntuaciones));
         callback(puntuaciones);
     })
+}
+
+function onPosReceived(payload){
+	var mensaje=JSON.parse(payload.body); 
+	
+	if(mensaje.otroUsuario==1 && idJugador1==2){
+		jugador.setX(mensaje.posX); 
+		jugador.setY(mensaje.posY);
+	}
+	
+	if(mensaje.otroUsuario==2 && idJugador1==1){
+		jugador2.setX(mensaje.posX);
+		jugador2.setY(mensaje.posY);
+	}
+	
 }

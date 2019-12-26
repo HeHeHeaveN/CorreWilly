@@ -46,7 +46,7 @@ function onError(error) {
 
 function onConnected(){
 	stompClient.subscribe('/chatLobby/public',onMessageReceived); 
-	stompClient.send("/app/chat.register",{},idJugador1);
+	stompClient.send("/app/chat.register",{},idJugador1);	
 	setTimeout(entradaJugador,1000);	
 }
 $(document).ready(function (){
@@ -72,11 +72,7 @@ $("#botonJugar").click(function () {
             contenido: contMensaje
         };
 	stompClient.send("/app/chat.send", {}, JSON.stringify(mensaje));
-	
-	$('#chat').hide();
-	$('#mensajeChat').hide();
-	$('#enviarBoton').hide();
-	$('#botonJugar').hide();
+
 });
 
 });
@@ -86,7 +82,15 @@ $("#botonJugar").click(function () {
 function onMessageReceived(payload){
 	var mensaje=JSON.parse(payload.body); 
 	
-	if(mensaje.contenido==574){
+	if(mensaje.contenido==574 && (idJugador1==1 || idJugador1==2)){
+		$('#chat').hide();
+		$('#mensajeChat').hide();
+		$('#enviarBoton').hide();
+		$('#botonJugar').hide();
+		if(idJugador1==1 || idJugador1==2){
+			stompClient.subscribe('/posiciones/public',onPosReceived); 
+			stompClient.send("/app/pos.register",{},idJugador1);
+		}
 		jugar=true;
 	}else{
 		$('#chat').append('<p>'+mensaje.contenido+'</p>');
