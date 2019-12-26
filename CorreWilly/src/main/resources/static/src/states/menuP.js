@@ -7,7 +7,7 @@ var puntuacion2;
 var primeraPartida;
 
 var idJugador1 = -1;
-var idJugador2 = -1;
+//var idJugador2 = -1;
 
 var aux;
 
@@ -66,21 +66,21 @@ class menuP extends Phaser.Scene {
         
 
         puntos1 = 0;
-        puntos2 = 0;
+        //puntos2 = 0;
         
         puntuacion1 = {
         		//id: 1,
                 puntos: puntos1
             }
         
-        puntuacion2 = {
+        /*puntuacion2 = {
         		//id:2,
         		puntos: puntos2
-        }
+        }*/
         
         if (primeraPartida == undefined) {
         	createPuntuacion(puntuacion1);
-        	createPuntuacion(puntuacion2);
+        	//createPuntuacion(puntuacion2);
         }
         
         setTimeout(inicializa,1000);
@@ -145,11 +145,12 @@ function inicializa(){
 	if(idJugador1 == -1){
     	loadpuntuaciones(function (puntuaciones) {
             
-        	idJugador1 = puntuaciones.length-1;
-        	idJugador2 = puntuaciones.length;
+        	//idJugador1 = puntuaciones.length-1;
+    		idJugador1 = puntuaciones.length;
+        	//idJugador2 = puntuaciones.length;
         	
         	console.log("Id J1 : "+idJugador1);
-        	console.log("Id J2 : "+idJugador2);
+        	//console.log("Id J2 : "+idJugador2);
             
         });
     }

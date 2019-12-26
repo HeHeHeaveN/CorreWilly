@@ -335,56 +335,61 @@ class juego extends Phaser.Scene {
 
         // controles jugador 1
 
-        if (cursors.left.isDown) {
-            jugador.sprite.setVelocityX(-(jugador.getVelocidadHorizontal()));
+        if(idJugador1%2 !=0){
+        	if (cursors.left.isDown) {
+                jugador.sprite.setVelocityX(-(jugador.getVelocidadHorizontal()));
 
-            jugador.sprite.anims.play('left', true);
+                jugador.sprite.anims.play('left', true);
+            }
+            else if (cursors.right.isDown) {
+                jugador.sprite.setVelocityX(jugador.getVelocidadHorizontal());
+
+                jugador.sprite.anims.play('right', true);
+                // en caso de usar sprites de un solo sentido
+                // jugador.sprite.flipX= true;
+
+            }
+            else {
+                jugador.sprite.setVelocityX(0);
+
+                jugador.sprite.anims.play('turn', true);
+            }
+
+            if (cursors.up.isDown && jugador.sprite.body.touching.down) {
+                jugador.sprite.setVelocityY(-(jugador.getVelocidadSalto()));
+
+                jugador.sprite.anims.play('salto', true); // Ajustar con los
+    														// sprites
+            }
+        }else{
+        	// contrloes jugador 2
+
+            if (cursors2.a.isDown) {
+                jugador2.sprite.setVelocityX(-(jugador2.getVelocidadHorizontal()));
+
+                jugador2.sprite.anims.play('lefta', true);
+            }
+            else if (cursors2.d.isDown) {
+                jugador2.sprite.setVelocityX(jugador2.getVelocidadHorizontal());
+
+                jugador2.sprite.anims.play('righta', true);
+            }
+            else {
+                jugador2.sprite.setVelocityX(0);
+
+                jugador2.sprite.anims.play('turna', true);
+            }
+
+            if (cursors2.w.isDown && jugador2.sprite.body.touching.down) {
+                jugador2.sprite.setVelocityY(-(jugador2.getVelocidadSalto()));
+
+                jugador2.sprite.anims.play('saltoa', true); // Ajustar con los
+    														// sprites
+            }
         }
-        else if (cursors.right.isDown) {
-            jugador.sprite.setVelocityX(jugador.getVelocidadHorizontal());
+        
 
-            jugador.sprite.anims.play('right', true);
-            // en caso de usar sprites de un solo sentido
-            // jugador.sprite.flipX= true;
-
-        }
-        else {
-            jugador.sprite.setVelocityX(0);
-
-            jugador.sprite.anims.play('turn', true);
-        }
-
-        if (cursors.up.isDown && jugador.sprite.body.touching.down) {
-            jugador.sprite.setVelocityY(-(jugador.getVelocidadSalto()));
-
-            jugador.sprite.anims.play('salto', true); // Ajustar con los
-														// sprites
-        }
-
-        // contrloes jugador 2
-
-        if (cursors2.a.isDown) {
-            jugador2.sprite.setVelocityX(-(jugador2.getVelocidadHorizontal()));
-
-            jugador2.sprite.anims.play('lefta', true);
-        }
-        else if (cursors2.d.isDown) {
-            jugador2.sprite.setVelocityX(jugador2.getVelocidadHorizontal());
-
-            jugador2.sprite.anims.play('righta', true);
-        }
-        else {
-            jugador2.sprite.setVelocityX(0);
-
-            jugador2.sprite.anims.play('turna', true);
-        }
-
-        if (cursors2.w.isDown && jugador2.sprite.body.touching.down) {
-            jugador2.sprite.setVelocityY(-(jugador2.getVelocidadSalto()));
-
-            jugador2.sprite.anims.play('saltoa', true); // Ajustar con los
-														// sprites
-        }
+        
 
 
         // CAMARA (Pantalla Partida)
@@ -430,9 +435,9 @@ class juego extends Phaser.Scene {
         if ((jugador2.getX() > posBanderaX - 100 && jugador2.getX() < posBanderaX + 100) && (jugador2.getY() > posBanderaY - 100 && jugador2.getY() < posBanderaY + 100)) {
         	if(!pararJug2){
         		loadpuntuaciones(function (puntuaciones) {            		
-            		var auxxx=puntuaciones[idJugador2-1].puntuacion + 1;
+            		var auxxx=puntuaciones[idJugador1-1].puntuacion + 1;
             		puntuacion2Updated = {
-                    		id: idJugador2,
+                    		id: idJugador1,
                     		puntuacion: auxxx
                     }
                     updatePuntuacion(puntuacion2Updated);
@@ -443,7 +448,7 @@ class juego extends Phaser.Scene {
             	console.log("puntos J2: " + puntos2);
                 
 
-                idGanador = idJugador2;
+                idGanador = idJugador1;
                 pararJug2=true;
                 this.scene.start('victoriaScene');           
                 // console.log(puntos1);

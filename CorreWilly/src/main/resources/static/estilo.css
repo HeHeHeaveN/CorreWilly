@@ -1,0 +1,36 @@
+#chat {
+	text-align: left;
+	margin: 0 auto;
+	margin-bottom: 25px;
+	padding: 10px;
+	background: #fff;
+	overflow: auto;
+	position: absolute;
+	background-color: white;
+	width: 800px;
+	height: 400px;
+	right: 550px;
+	left: 550px;
+	top: 400px
+}
+
+#botonJugar {
+	position: absolute;
+	top: 200px;
+	left: 800px;
+	width: 200px;
+	height: 100px
+}
+
+#mensajeChat {
+	position: absolute;
+	width: 50%;
+	top: 850px;
+	left: 500px
+}
+
+#enviarBoton {
+	position: absolute;
+	top: 850px;
+	left: 1460px
+}

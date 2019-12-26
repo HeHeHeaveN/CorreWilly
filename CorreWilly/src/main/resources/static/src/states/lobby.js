@@ -1,5 +1,7 @@
 var stompClient=null;
 
+var jugar=false;
+
 class lobby extends Phaser.Scene {
     constructor() {
         super("lobbyScene");
@@ -21,15 +23,6 @@ class lobby extends Phaser.Scene {
 		$('#chat').show();
 		$('#mensajeChat').show();
 		$('#enviarBoton').show();
-		/*
-		var conexion= new WebSocket('ws://127.0.0.1:8080/mensajesws'); 
-		
-		conexion.onopen=function(){
-			conexion.send('Jugador conectado');										
-		}
-		conexion.onmessage=function(msg){
-			$('#chat').append('<p>'+msg.data+'</p>');
-		}*/
         
         var socket = new SockJS('/mensajes')
         stompClient=Stomp.over(socket);
@@ -38,7 +31,9 @@ class lobby extends Phaser.Scene {
     }
     
     update(){
-    	
+    	if(jugar){
+    		this.scene.start('juegoScene');
+    	}
     }
     
     
@@ -51,9 +46,8 @@ function onError(error) {
 
 function onConnected(){
 	stompClient.subscribe('/chatLobby/public',onMessageReceived); 
-	stompClient.send("/app/chat.register",{},"1");
-	setTimeout(entradaJugador,1000);
-	
+	stompClient.send("/app/chat.register",{},idJugador1);
+	setTimeout(entradaJugador,1000);	
 }
 $(document).ready(function (){
 	
@@ -62,24 +56,53 @@ $("#enviarBoton").click(function () {
 	var input=$('#mensajeChat');
 	
 	var mensaje = {
-            otroUsuario: 1,
+            otroUsuario: idJugador1,
             contenido: input.val()
         };
 	stompClient.send("/app/chat.send", {}, JSON.stringify(mensaje));
-});});
+});
+
+$("#botonJugar").click(function () {
+	
+	//574=Codigo para empezar a jugar
+	var contMensaje=574;
+	
+	var mensaje = {
+            otroUsuario: idJugador1,
+            contenido: contMensaje
+        };
+	stompClient.send("/app/chat.send", {}, JSON.stringify(mensaje));
+	
+	$('#chat').hide();
+	$('#mensajeChat').hide();
+	$('#enviarBoton').hide();
+	$('#botonJugar').hide();
+});
+
+});
+
+
 
 function onMessageReceived(payload){
-	console.log("Llega");
 	var mensaje=JSON.parse(payload.body); 
-	$('#chat').append('<p>'+mensaje.contenido+'</p>');
+	
+	if(mensaje.contenido==574){
+		jugar=true;
+	}else{
+		$('#chat').append('<p>'+mensaje.contenido+'</p>');
+	}
+	if(mensaje.otroUsuario%2==0){
+		$('#botonJugar').show();
+	}
 }
 
 function entradaJugador(){
 	var aux; 
 	aux="Jugador Conectado!";
 	var mensaje = {
-            otroUsuario: 1,
+            otroUsuario: idJugador1,
             contenido: aux
         };
 	stompClient.send("/app/chat.send", {}, JSON.stringify(mensaje));	
 }
+
