@@ -6,6 +6,8 @@ var pararJug1;
 var pararJug2;
 
 //Buenas tardes
+//Hola que tal
+
 
 var posicionInicial1x;
 var posicionInicial1y;
