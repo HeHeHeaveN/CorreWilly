@@ -5,7 +5,7 @@ var jugador2;
 var pararJug1;
 var pararJug2;
 
-
+//Buenas tardes
 
 var posicionInicial1x;
 var posicionInicial1y;
