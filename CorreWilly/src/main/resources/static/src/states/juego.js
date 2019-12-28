@@ -2,10 +2,10 @@
 var jugador;
 var jugador2;
 
+var semilla;
+
 var pararJug1;
 var pararJug2;
-
-//vaya
 
 var posicionInicial1x;
 var posicionInicial1y;
@@ -113,28 +113,45 @@ class juego extends Phaser.Scene {
         plataforma = new Plataforma(this);
 
 
-        // Variable para que se elija el nivel de manera aleatoria
-        idN=Math.floor(Math.random() * (3 - 1) + 1); 
+        if(idJugador1==1){
+        	// Variable para que se elija el nivel de manera aleatoria
+            idN=Math.floor(Math.random() * (3 - 1) + 1); 
 
 
-        if (idN == 1) {
-            // Fondo setas
-            var fondo = this.add.image(1600, 900, 'fondo-setas');
-            fondo.setScale(1.67);
-            fondo.depth = -2;
-            // console.log("Fondo setas");
-        } else if(idN == 2) {
-            // Fondo robots
-            var fondo = this.add.image(1600, 900, 'fondo-robots');
-            fondo.setScale(1.67);
-            fondo.depth = -2;
-            // console.log("Fondo robot");
+            if (idN == 1) {
+                // Fondo setas
+                var fondo = this.add.image(1600, 900, 'fondo-setas');
+                fondo.setScale(1.67);
+                fondo.depth = -2;
+                // console.log("Fondo setas");
+            } else if(idN == 2) {
+                // Fondo robots
+                var fondo = this.add.image(1600, 900, 'fondo-robots');
+                fondo.setScale(1.67);
+                fondo.depth = -2;
+                // console.log("Fondo robot");
+            }
+
         }
-
+        
+        
+        if(idJugador1==1){
+        	semilla=//Crear semilla 
+        	var posXAux=idN;
+            var posYAux=semilla;
+    		var mensaje = {
+                    otroUsuario: idJugador1,
+                    contenido: 570;
+                    posX: posXAux,
+                    posY: posYAux
+                };
+        	stompClient.send("/app/pos.send", {}, JSON.stringify(mensaje));
+        	
+        }
         // Crear plataformas nivel
         nivel = new Nivel(this, idN);
 
-        nivel.crearNivel(this, plataforma);
+        nivel.crearNivel(this, plataforma,semilla);
 
         // Controles del jugador 1
         cursors = this.input.keyboard.createCursorKeys();
@@ -524,14 +541,21 @@ function loadpuntuaciones(callback) {
 function onPosReceived(payload){
 	var mensaje=JSON.parse(payload.body); 
 	
-	if(mensaje.otroUsuario==1 && idJugador1==2){
-		jugador.setX(mensaje.posX); 
-		jugador.setY(mensaje.posY);
+	if(mensaje.contenido==570){
+		idN=mensaje.posX; 
+		semilla=mensaje.posY;
+	}else{
+		if(mensaje.otroUsuario==1 && idJugador1==2){
+			jugador.setX(mensaje.posX); 
+			jugador.setY(mensaje.posY);
+		}
+		
+		if(mensaje.otroUsuario==2 && idJugador1==1){
+			jugador2.setX(mensaje.posX);
+			jugador2.setY(mensaje.posY);
+		}
 	}
 	
-	if(mensaje.otroUsuario==2 && idJugador1==1){
-		jugador2.setX(mensaje.posX);
-		jugador2.setY(mensaje.posY);
-	}
+	
 	
 }
