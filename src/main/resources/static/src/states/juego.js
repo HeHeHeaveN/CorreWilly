@@ -5,6 +5,7 @@ var jugador2;
 var pararJug1;
 var pararJug2;
 
+//prueba
 
 
 var posicionInicial1x;
