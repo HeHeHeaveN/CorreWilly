@@ -32,6 +32,7 @@ public class Puntuacion {
 	/*public void setChecked(boolean checked) {
 		this.checked = checked;
 	}*/
+	//
 
 	@Override
 	public String toString() {
