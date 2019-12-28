@@ -8,6 +8,7 @@ var pararJug2;
 //Buenas tardes
 //Hola que tal
 //Otra vez 
+//De nuevo
 
 var posicionInicial1x;
 var posicionInicial1y;
