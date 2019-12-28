@@ -4,8 +4,11 @@ class Nivel extends Phaser.GameObjects.Sprite {
         this.idN=idS;       
     }
 
-    crearNivel(escena,plataforma,estrella){
+    crearNivel(escena,plataforma,semilla){
         if(idN==1){
+        	
+        	Phaser.Math.RND.sow([semilla]);
+        	
             var plataformas = 6;
             var distanciaPlataformas =200;
             var distanciafinal = 2600;
@@ -14,9 +17,9 @@ class Nivel extends Phaser.GameObjects.Sprite {
 
             for (var i = 0; i < plataformas; i++) {
                 while (posicion1 < distanciafinal) {
-                    posicion1 += Phaser.Math.Between(400, 800);
+                    posicion1 += Phaser.Math.RND.integerInRange(400,800);
                     if(posicion1 < distanciafinal){
-                        if (Math.random() < 0.5) {
+                        if (Phaser.Math.RND.integerInRange(1,2) > 1) {
                             plataforma.crearPlataforma2(escena, posicion1, posicion2-50);
                         } else {
                             plataforma.crearPlataforma(escena, posicion1, posicion2);
@@ -38,6 +41,9 @@ class Nivel extends Phaser.GameObjects.Sprite {
         }
 
         if(idN==2){
+        	
+        	Phaser.Math.RND.integerInRange.sow([semilla]);
+        	
             var plataformas = 6;
             var distanciaPlataformas =200;
             var distanciafinal = 2600;
@@ -46,9 +52,9 @@ class Nivel extends Phaser.GameObjects.Sprite {
 
             for (var i = 0; i < plataformas; i++) {
                 while (posicion1 < distanciafinal) {
-                    posicion1 += Phaser.Math.Between(400, 800);
+                    posicion1 += Phaser.Math.RND.integerInRange(400,800);
                     if(posicion1 < distanciafinal){
-                        if (Math.random() < 0.5) {
+                        if (Phaser.Math.RND.integerInRange(1,2) > 1) {
                             plataforma.crearPlataformaRobot2(escena, posicion1, posicion2-50);
                         } else {
                             plataforma.crearPlataformaRobot(escena, posicion1, posicion2);

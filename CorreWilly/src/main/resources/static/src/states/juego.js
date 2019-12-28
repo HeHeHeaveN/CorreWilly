@@ -136,7 +136,7 @@ class juego extends Phaser.Scene {
         
         
         if(idJugador1==1){
-        	semilla=//Crear semilla 
+        	semilla= Phaser.Math.RND.integerInRange(400,800)
         	var posXAux=idN;
             var posYAux=semilla;
     		var mensaje = {
