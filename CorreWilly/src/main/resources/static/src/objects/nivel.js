@@ -43,7 +43,7 @@ class Nivel extends Phaser.GameObjects.Sprite {
 
         if(idN==2){
         	
-        	Phaser.Math.RND.integerInRange.sow([semilla]);
+        	Phaser.Math.RND.sow([semilla]);
         	
             var plataformas = 6;
             var distanciaPlataformas =200;

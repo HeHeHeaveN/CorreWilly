@@ -2,24 +2,32 @@ var stompClient=null;
 
 var jugar=false;
 
+var conectado=false;
+var conectado2=false;
+
+var habilitarJugar=false;
+
+var semilla; 
+var idN;
+
 class lobby extends Phaser.Scene {
     constructor() {
         super("lobbyScene");
     }
 
     preload() {
-        //fondo
+        // fondo
         this.load.image('menu', 'assets/Menu_inicio.png');
 
     }
 
     create(){
-    	 //Fondo
+    	 // Fondo
         var fondo = this.add.image(1600, 900, 'menu')
         fondo.setScale(1.67);
         fondo.depth = -2;
         
-  		//Mostramos ciertos elementos HTML
+  		// Mostramos ciertos elementos HTML
 		$('#chat').show();
 		$('#mensajeChat').show();
 		$('#enviarBoton').show();
@@ -27,12 +35,28 @@ class lobby extends Phaser.Scene {
         var socket = new SockJS('/mensajes')
         stompClient=Stomp.over(socket);
         stompClient.connect({},onConnected,onError);
-		
     }
     
     update(){
     	if(jugar){
     		this.scene.start('juegoScene');
+    	}
+    	var mensaje = {
+                otroUsuario: idJugador1,
+                codigo: 500
+            };
+    	if(conectado){
+    		stompClient.send("/app/chat.send", {}, JSON.stringify(mensaje));
+    	}    	
+    	if(conectado2){
+    		if(!habilitarJugar){
+    			var mensaje = {
+    	                otroUsuario: idJugador1,
+    	                codigo: 510
+    	            };
+    	    	stompClient.send("/app/chat.send", {}, JSON.stringify(mensaje));
+    	    	habilitarJugar=true;
+    		}
     	}
     }
     
@@ -62,17 +86,12 @@ $("#enviarBoton").click(function () {
 	stompClient.send("/app/chat.send", {}, JSON.stringify(mensaje));
 });
 
-$("#botonJugar").click(function () {
-	
-	//574=Codigo para empezar a jugar
-	var contMensaje=574;
-	
+$("#botonJugar").click(function () {	
 	var mensaje = {
             otroUsuario: idJugador1,
-            contenido: contMensaje
+            codigo: 574
         };
 	stompClient.send("/app/chat.send", {}, JSON.stringify(mensaje));
-
 });
 
 });
@@ -82,27 +101,66 @@ $("#botonJugar").click(function () {
 function onMessageReceived(payload){
 	var mensaje=JSON.parse(payload.body); 
 	
-	if(mensaje.contenido==574 && (idJugador1==1 || idJugador1==2)){
+	if(mensaje.codigo==574 && (idJugador1==1 || idJugador1==2)){		
+		if(idJugador1==1 || idJugador1==2){
+			
+			idN=Math.floor(Math.random() * (3 - 1) + 1);
+			semilla= Phaser.Math.RND.integerInRange(400,800);
+			
+			var mensaje = {
+		            otroUsuario: idJugador1,
+		            codigo: 550,
+		            aux1:idN,
+		            aux2:semilla
+		        };
+			stompClient.send("/app/chat.send", {}, JSON.stringify(mensaje));			
+		}
+	}
+	
+	if(mensaje.codigo==550){
+		idN=mensaje.aux1; 
+		semilla=mensaje.aux2;
+		var mensaje = {
+	            otroUsuario: idJugador1,
+	            codigo: 560,
+	        };
+		stompClient.send("/app/chat.send", {}, JSON.stringify(mensaje));
+	}
+	
+	
+	if(mensaje.codigo==560){
 		$('#chat').hide();
 		$('#mensajeChat').hide();
 		$('#enviarBoton').hide();
 		$('#botonJugar').hide();
-		if(idJugador1==1 || idJugador1==2){
-			stompClient.subscribe('/posiciones/public',onPosReceived); 
-			stompClient.send("/app/pos.register",{},idJugador1);
-		}
+		stompClient.subscribe('/posiciones/public',onPosReceived); 
+		stompClient.send("/app/pos.register",{},idJugador1);
 		jugar=true;
-	}else{
+	}
+	
+	if(mensaje.codigo==500){
+		if(idJugador1==1 && mensaje.otroUsuario==2){
+			conectado2=true;
+		}
+		if(idJugador1==2 && mensaje.otroUsuario==1){
+			conectado2=true;
+		}
+	}
+	
+	if(mensaje.codigo!=574 && mensaje.codigo!=560 && mensaje.codigo!=550 && mensaje.codigo!=500 && mensaje.codigo!=510){
 		$('#chat').append('<p>'+mensaje.contenido+'</p>');
 	}
-	if(mensaje.otroUsuario%2==0){
+
+	if(mensaje.codigo==510){
 		$('#botonJugar').show();
 	}
+	
 }
 
 function entradaJugador(){
 	var aux; 
 	aux="Jugador Conectado!";
+	conectado=true;
 	var mensaje = {
             otroUsuario: idJugador1,
             contenido: aux

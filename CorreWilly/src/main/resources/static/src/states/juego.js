@@ -2,7 +2,7 @@
 var jugador;
 var jugador2;
 
-var semilla;
+//var semilla;
 
 var pararJug1;
 var pararJug2;
@@ -38,7 +38,7 @@ var camaraY;
 var cof1;
 var cof2;
 
-var idN;
+//var idN;
 
 var nivel;
 
@@ -95,8 +95,8 @@ class juego extends Phaser.Scene {
         // posicion de la bandera
         posBanderaX = 3000;
         posBanderaY = 620;
-        //posBanderaX = 200;
-        //posBanderaY = 1000;
+        // posBanderaX = 200;
+        // posBanderaY = 1000;
 
         // Bandera
         var bandera = this.add.image(posBanderaX, posBanderaY, 'bandera');
@@ -112,10 +112,8 @@ class juego extends Phaser.Scene {
         // plataforma
         plataforma = new Plataforma(this);
 
-
-        if(idJugador1==1){
         	// Variable para que se elija el nivel de manera aleatoria
-            idN=Math.floor(Math.random() * (3 - 1) + 1); 
+            //idN=Math.floor(Math.random() * (3 - 1) + 1); 
 
 
             if (idN == 1) {
@@ -131,23 +129,21 @@ class juego extends Phaser.Scene {
                 fondo.depth = -2;
                 // console.log("Fondo robot");
             }
-
-        }
         
         
-        if(idJugador1==1){
+        /*if(idJugador1==1){
         	semilla= Phaser.Math.RND.integerInRange(400,800)
         	var posXAux=idN;
             var posYAux=semilla;
     		var mensaje = {
                     otroUsuario: idJugador1,
-                    contenido: 570;
+                    contenido: 570,
                     posX: posXAux,
                     posY: posYAux
                 };
         	stompClient.send("/app/pos.send", {}, JSON.stringify(mensaje));
         	
-        }
+        }*/
         // Crear plataformas nivel
         nivel = new Nivel(this, idN);
 
