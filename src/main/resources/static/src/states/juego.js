@@ -6,6 +6,7 @@ var pararJug1;
 var pararJug2;
 
 //prueba
+//prueba 2 enrique es un manco
 
 
 var posicionInicial1x;
