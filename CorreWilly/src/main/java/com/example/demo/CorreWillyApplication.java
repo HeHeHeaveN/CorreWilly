@@ -26,13 +26,7 @@ public class CorreWillyApplication implements WebSocketMessageBrokerConfigurer{
 		//registry.enableSimpleBroker("/posiciones");
 		registry.setApplicationDestinationPrefixes("/app");
 	}
-	
-	
-	/*@Bean 
-	public WebsocketTextHandler textHandler() {
-		return new WebsocketTextHandler();
-	}
-	*/
+
 	public static void main(String[] args) {
 		SpringApplication.run(CorreWillyApplication.class, args);
 

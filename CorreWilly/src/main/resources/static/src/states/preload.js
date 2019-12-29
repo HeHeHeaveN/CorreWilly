@@ -19,8 +19,7 @@ class preload extends Phaser.Scene {
         this.load.image('plataformaRobotica', 'assets/plataformas/plataforma-robot.png')
         //jugadores
         this.load.spritesheet('spriteSheetJugador', 'assets/sprite-sheet/Personaje-1.png', { frameWidth: 128, frameHeight: 113 });
-        this.load.spritesheet('spriteSheetJugador2', 'assets/sprite-sheet/Personaje-2.png', { frameWidth: 128, frameHeight: 113 });
-        //this.load.spritesheet('spriteSheetJugador3', 'assets/sprite-sheet/camara', { frameWidth: 64, frameHeight: 56 });
+        this.load.spritesheet('spriteSheetJugador2', 'assets/sprite-sheet/Personaje-2.png', { frameWidth: 128, frameHeight: 113 });       
         //Bandera 
         this.load.image('bandera', 'assets/bandera.png');
         //PowerUps 

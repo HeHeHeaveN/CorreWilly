@@ -33,12 +33,6 @@ class Nivel extends Phaser.GameObjects.Sprite {
             }
             plataforma.crearPlataforma2(escena, 100, 1300);
             plataforma.crearPlataforma2(escena, 3000, 700);
-
-            /*
-            var estrella = escena.physics.add.sprite(100,100,'estrella');
-            estrella.setScale(0.1);
-            estrella.depth=1;
-            */
         }
 
         if(idN==2){
@@ -68,12 +62,6 @@ class Nivel extends Phaser.GameObjects.Sprite {
             }
             plataforma.crearPlataformaRobot(escena, 100, 1300);
             plataforma.crearPlataformaRobot(escena, 3000, 700);
-
-            /*
-            var estrella = escena.physics.add.sprite(100,100,'estrella');
-            estrella.setScale(0.1);
-            estrella.depth=1;
-            */
         }       
     }
 

@@ -2,8 +2,6 @@
 var jugador;
 var jugador2;
 
-//var semilla;
-
 var pararJug1;
 var pararJug2;
 
@@ -37,8 +35,6 @@ var camaraY;
 
 var cof1;
 var cof2;
-
-//var idN;
 
 var nivel;
 
@@ -100,8 +96,6 @@ class juego extends Phaser.Scene {
         // posicion de la bandera
         posBanderaX = 3000;
         posBanderaY = 620;
-        // posBanderaX = 200;
-        // posBanderaY = 1000;
 
         // Bandera
         var bandera = this.add.image(posBanderaX, posBanderaY, 'bandera');
@@ -116,39 +110,20 @@ class juego extends Phaser.Scene {
 
         // plataforma
         plataforma = new Plataforma(this);
-
+        
         	// Variable para que se elija el nivel de manera aleatoria
-            //idN=Math.floor(Math.random() * (3 - 1) + 1); 
-
-
             if (idN == 1) {
                 // Fondo setas
                 var fondo = this.add.image(1600, 900, 'fondo-setas');
                 fondo.setScale(1.67);
                 fondo.depth = -2;
-                // console.log("Fondo setas");
             } else if(idN == 2) {
                 // Fondo robots
                 var fondo = this.add.image(1600, 900, 'fondo-robots');
                 fondo.setScale(1.67);
                 fondo.depth = -2;
-                // console.log("Fondo robot");
             }
-        
-        
-        /*if(idJugador1==1){
-        	semilla= Phaser.Math.RND.integerInRange(400,800)
-        	var posXAux=idN;
-            var posYAux=semilla;
-    		var mensaje = {
-                    otroUsuario: idJugador1,
-                    contenido: 570,
-                    posX: posXAux,
-                    posY: posYAux
-                };
-        	stompClient.send("/app/pos.send", {}, JSON.stringify(mensaje));
-        	
-        }*/
+       
         // Crear plataformas nivel
         nivel = new Nivel(this, idN);
 
@@ -224,10 +199,6 @@ class juego extends Phaser.Scene {
             repeat: -1
         });
 
-        // Añadimos el fondo a la escena
-        // this.add.image(1600, 900, 'fondo');
-
-
         // Creacion del Jugador 1
         jugador = new Jugador(this, posicionInicial1x, posicionInicial1y, 1);
 
@@ -245,11 +216,9 @@ class juego extends Phaser.Scene {
 
         camera.startFollow(jugador.sprite);
         camera2.startFollow(jugador2.sprite);
-
         
         this.cameras.main.setVisible(false);        
         
-
         // Colisiones entre los jugadores y las plataformas
         this.physics.add.collider(jugador.sprite, plataforma.plataformas);
         this.physics.add.collider(jugador2.sprite, plataforma.plataformas);
@@ -258,7 +227,6 @@ class juego extends Phaser.Scene {
         this.physics.add.collider(jugador.sprite, jugador2.sprite);
 
         this.physics.add.collider(estrella, plataforma.plataformas);
-        // this.physics.add.collider(jugador.)
         var vel = this.physics.add.overlap(jugador.sprite, estrella, power, null, this);
         var vel = this.physics.add.overlap(jugador2.sprite, estrella, power2, null, this);
 
@@ -324,16 +292,9 @@ class juego extends Phaser.Scene {
         txt2.setTint(0xe643f3, 0xe643f3, 0xe643f3, 0xe643f3);
         txt2.depth = 70;
         txt2.setScrollFactor(0, 0); 
-        camera.ignore(txt2);
-        
-     // Mostrar puntuacion
-        
-        
-        primeraPartida = false;
-        
-        // Id de cada jugador
-        
-
+        camera.ignore(txt2);       
+               
+        primeraPartida = false;               
     }
 
     update() {
@@ -341,9 +302,6 @@ class juego extends Phaser.Scene {
     		this.scene.start('victoriaScene');
     	}
         	
-    	
-    	
-    	
     	if(idJugador1==1){
     		var posXAux=jugador.getX();
             var posYAux=jugador.getY();
@@ -417,8 +375,7 @@ class juego extends Phaser.Scene {
             if (cursors.up.isDown && jugador.sprite.body.touching.down) {
                 jugador.sprite.setVelocityY(-(jugador.getVelocidadSalto()));
 
-                jugador.sprite.anims.play('salto', true); // Ajustar con los
-    														// sprites
+                jugador.sprite.anims.play('salto', true); 
             }
         }else{
         	// contrloes jugador 2
@@ -442,14 +399,9 @@ class juego extends Phaser.Scene {
             if (cursors2.w.isDown && jugador2.sprite.body.touching.down) {
                 jugador2.sprite.setVelocityY(-(jugador2.getVelocidadSalto()));
 
-                jugador2.sprite.anims.play('saltoa', true); // Ajustar con los
-    														// sprites
+                jugador2.sprite.anims.play('saltoa', true); 
             }
         }
-        
-
-        
-
 
         // CAMARA (Pantalla Partida)
         camera.setZoom(1.5);       
@@ -465,7 +417,6 @@ class juego extends Phaser.Scene {
             jugador2.setX(posicionInicial2x);
             jugador2.setY(posicionInicial2y);
         }
-        // console.log(puntuacion1.id)
         
         // Ganador
         if(idJugador1==1){
@@ -512,8 +463,7 @@ class juego extends Phaser.Scene {
             	
             }
         }
-        
-        
+                
     }
 }
 

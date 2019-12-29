@@ -13,33 +13,18 @@ class victoria extends Phaser.Scene {
     	
     	escena=this;
     	escenaV=true;
-    	
-    	// Cargar puntuacion del server
-        
-    	
+
         var fondo = this.add.image(1600, 900, 'ganar');
         fondo.setScale(1.67);
-        //setTimeout(recarga,3000);
 
         if(idGanador%2 == 0){
         	 var ganador = this.add.image(600, 350, 'spriteSheetJugador2');
         }else{
         	var ganador = this.add.image(600, 350, 'spriteSheetJugador');
         }
-        ganador.setScale(4);
-       
-        /*
-        var text1 = this.add.text(800, 650, '2', { font: '400px Arial' });
-        var text2 = this.add.text(1500, 650, '-', { font: '400px Arial' });
-        var text3 = this.add.text(2100, 650, '2', { font: '400px Arial' });
-        */
-
-       
-       
-       this.text2 = this.add.text(1500, 650, '-', { font: '400px Arial' });
-
-       
-       
+        ganador.setScale(4);    
+        
+        this.text2 = this.add.text(1500, 650, '-', { font: '400px Arial' });
 
         var azul = this.add.image(950, 1200, 'spriteSheetJugador')
         azul.setScale(3);
@@ -50,16 +35,11 @@ class victoria extends Phaser.Scene {
         this.text4.setInteractive();
 
         this.text4.on('pointerdown', function() {
-            /*music.stop();
-            pararJug1=false;
-        	pararJug2=false;
-        	escenaSiguiente=false;*/
         	var mensaje = {
                     otroUsuario: idJugador1,
                     codigo:780
                 };
-        	stompClient.send("/app/pos.send", {}, JSON.stringify(mensaje));
-            //setTimeout(this.scene.start("juegoScene"), 1000); 
+        	stompClient.send("/app/pos.send", {}, JSON.stringify(mensaje));            
         }, this);
 
         this.text5 = this.add.text(1800, 1500, 'Menu principal', { font: '180px Arial' });
@@ -113,7 +93,7 @@ function loadpuntuaciones(callback) {
     $.ajax({
         url: '/puntuaciones'
     }).done(function (puntuaciones) {
-        //console.log('puntuaciones loaded: ' + JSON.stringify(puntuaciones));
+        // console.log('puntuaciones loaded: ' + JSON.stringify(puntuaciones));
         callback(puntuaciones);
     })
 }

@@ -22,7 +22,7 @@ class Pausa extends Phaser.Scene {
         this.input.keyboard.on('keydown-' + 'R', function (event) {
             fondo.depth = -7;
             this.scene.stop();
-            //music.resume();
+            // music.resume();
             this.scene.resume('juegoScene');
         }, this);
 

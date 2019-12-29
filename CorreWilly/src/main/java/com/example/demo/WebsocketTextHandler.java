@@ -1,4 +1,6 @@
-package com.example.demo;
+//Esto era una prueba
+
+/*package com.example.demo;
 
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -12,3 +14,4 @@ public class WebsocketTextHandler extends TextWebSocketHandler {
 	}
 	
 }
+*/
