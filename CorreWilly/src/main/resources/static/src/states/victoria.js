@@ -1,3 +1,6 @@
+var escena;
+var escenaV=false;
+
 class victoria extends Phaser.Scene {
     constructor() {
         super("victoriaScene");
@@ -8,18 +11,11 @@ class victoria extends Phaser.Scene {
 
     create() {
     	
+    	escena=this;
+    	escenaV=true;
+    	
     	// Cargar puntuacion del server
-        loadpuntuaciones(function (puntuaciones) {
-
-            //puntos1 = 0;
-        	puntos1 = puntuaciones[idJugador1-1].puntuacion;
-        	console.log("puntuacion j1:" + puntos1);
-        	
-        	//puntos2 = 0;
-        	puntos2 = puntuaciones[idJugador2-1].puntuacion;
-        	console.log("puntuacion j2:" + puntos2);
-        	
-        });
+        
     	
         var fondo = this.add.image(1600, 900, 'ganar');
         fondo.setScale(1.67);
@@ -38,15 +34,11 @@ class victoria extends Phaser.Scene {
         var text3 = this.add.text(2100, 650, '2', { font: '400px Arial' });
         */
 
-       this.text1 = this.add.text(800, 650, puntos1, { font: '400px Arial' });
-       this.text1.setTint(0x20f2f5, 0x20f2f5, 0x20f2f5, 0x20f2f5);
-       this.text1.depth = 70;
+       
        
        this.text2 = this.add.text(1500, 650, '-', { font: '400px Arial' });
 
-       this.text3 = this.add.text(2100, 650, puntos2, { font: '400px Arial' });
-       this.text3.setTint(0xe643f3, 0xe643f3, 0xe643f3, 0xe643f3);
-       this.text2.depth = 70;
+       
        
 
         var azul = this.add.image(950, 1200, 'spriteSheetJugador')
@@ -58,8 +50,16 @@ class victoria extends Phaser.Scene {
         this.text4.setInteractive();
 
         this.text4.on('pointerdown', function() {
-            music.stop();
-            setTimeout(this.scene.start("juegoScene"), 1000); 
+            /*music.stop();
+            pararJug1=false;
+        	pararJug2=false;
+        	escenaSiguiente=false;*/
+        	var mensaje = {
+                    otroUsuario: idJugador1,
+                    codigo:780
+                };
+        	stompClient.send("/app/pos.send", {}, JSON.stringify(mensaje));
+            //setTimeout(this.scene.start("juegoScene"), 1000); 
         }, this);
 
         this.text5 = this.add.text(1800, 1500, 'Menu principal', { font: '180px Arial' });
@@ -72,6 +72,34 @@ class victoria extends Phaser.Scene {
     }
 
     update() {
+    	loadpuntuaciones(function (puntuaciones) {
+    		if(escenaV){
+    			if(idJugador1==1){
+            		puntos1 = puntuaciones[idJugador1-1].puntuacion;
+                	puntos2 = puntuaciones[idJugador1].puntuacion; 
+                	escena.text1 = escena.add.text(800, 650, puntos1, { font: '400px Arial' });
+                    escena.text1.setTint(0x20f2f5, 0x20f2f5, 0x20f2f5, 0x20f2f5);
+                    escena.text1.depth=70;
+                    escena.text3 = escena.add.text(2100, 650, puntos2, { font: '400px Arial' });
+                    escena.text3.setTint(0xe643f3, 0xe643f3, 0xe643f3, 0xe643f3);
+                    escena.text3.depth=70;
+            	}
+            	if(idJugador1==2){
+            		puntos1 = puntuaciones[idJugador1-2].puntuacion;
+                	puntos2 = puntuaciones[idJugador1-1].puntuacion; 
+                	escena.text1 = escena.add.text(800, 650, puntos1, { font: '400px Arial' });
+                    escena.text1.setTint(0x20f2f5, 0x20f2f5, 0x20f2f5, 0x20f2f5);
+                    escena.text1.depth=70;
+                    escena.text3 = escena.add.text(2100, 650, puntos2, { font: '400px Arial' });
+                    escena.text3.setTint(0xe643f3, 0xe643f3, 0xe643f3, 0xe643f3);
+                    escena.text3.depth=70;
+            	}
+    		}
+        	
+        	   	
+        });
+    	
+    	
 
     }
 
@@ -85,7 +113,36 @@ function loadpuntuaciones(callback) {
     $.ajax({
         url: '/puntuaciones'
     }).done(function (puntuaciones) {
-        console.log('puntuaciones loaded: ' + JSON.stringify(puntuaciones));
+        //console.log('puntuaciones loaded: ' + JSON.stringify(puntuaciones));
         callback(puntuaciones);
     })
 }
+
+function onPosReceived(payload){
+	var mensaje=JSON.parse(payload.body); 
+	if(mensaje.codigo==770){
+		escenaSiguiente=true;
+	}	
+	if(mensaje.codigo!=770 && mensaje.codigo!=780){
+		if(mensaje.otroUsuario==1 && idJugador1==2){
+			jugador.setX(mensaje.posX); 
+			jugador.setY(mensaje.posY);
+		}
+		
+		if(mensaje.otroUsuario==2 && idJugador1==1){
+			jugador2.setX(mensaje.posX);
+			jugador2.setY(mensaje.posY);
+		}
+	}
+	if(mensaje.codigo==780){
+		escenaV=false;
+		music.stop();
+        pararJug1=false;
+    	pararJug2=false;
+    	escenaSiguiente=false;
+    	setTimeout(escena.scene.start("juegoScene"), 1000); 
+	}
+
+}
+
+

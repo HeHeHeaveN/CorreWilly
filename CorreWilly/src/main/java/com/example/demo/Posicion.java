@@ -2,6 +2,7 @@ package com.example.demo;
 
 public class Posicion {
 	private String contenido; 
+	private String codigo;
 	private int posX;
 	private int posY;
 	private String otroUsuario;
@@ -28,6 +29,12 @@ public class Posicion {
 	}
 	public void setOtroUsuario(String otroUsuario) {
 		this.otroUsuario = otroUsuario;
+	}
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 	
 

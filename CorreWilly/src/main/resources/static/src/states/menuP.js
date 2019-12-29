@@ -1,5 +1,5 @@
-var puntos1;
-var puntos2;
+var puntos1=0;
+var puntos2=0;
 
 var puntuacion1;
 var puntuacion2;
@@ -64,13 +64,11 @@ class menuP extends Phaser.Scene {
         this.creditos.on('pointerover',()=>this.dentroC());
         
         
-
-        puntos1 = 0;
         //puntos2 = 0;
         
         puntuacion1 = {
         		//id: 1,
-                puntos: puntos1
+                puntos: 0
             }
         
         /*puntuacion2 = {

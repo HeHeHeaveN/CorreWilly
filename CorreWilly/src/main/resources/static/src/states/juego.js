@@ -61,6 +61,8 @@ var puntuacion2Updated;
 
 var idGanador;
 
+var escenaSiguiente=false;
+var escena;
 
 class juego extends Phaser.Scene {
     constructor() {
@@ -74,6 +76,9 @@ class juego extends Phaser.Scene {
 
 
     create() {
+    	
+    	escena=this;
+    	
     	pararJug1=false;
     	pararJug2=false;
         cambiar = false;
@@ -295,20 +300,34 @@ class juego extends Phaser.Scene {
                 music.resume();
                 musicaON = true;
             }
-        }, this)
+        }, this);
 
-        // Mostrar puntuacion
-        txt1 = this.add.text(camera.centerX, camera.centerY - 500, puntos1, { font: '64px Arial' });
+        loadpuntuaciones(function (puntuaciones) {
+        	if(idJugador1==1){
+        		puntos1 = puntuaciones[idJugador1-1].puntuacion;
+            	puntos2 = puntuaciones[idJugador1].puntuacion;  
+        	}
+        	if(idJugador1==2){
+        		puntos1 = puntuaciones[idJugador1-2].puntuacion;
+            	puntos2 = puntuaciones[idJugador1-1].puntuacion;  
+        	}
+        	   	
+        });
+        
+        txt1 = escena.add.text(camera.centerX, camera.centerY - 500, puntos1, { font: '64px Arial' });
         txt1.setTint(0x20f2f5, 0x20f2f5, 0x20f2f5, 0x20f2f5);
         txt1.depth = 70;
         txt1.setScrollFactor(0, 0); 
         camera2.ignore(txt1);  
         
-        txt2 = this.add.text(camera.centerX, camera.centerY - 500, puntos2, { font: '64px Arial' });
+        txt2 = escena.add.text(camera.centerX, camera.centerY - 500, puntos2, { font: '64px Arial' });
         txt2.setTint(0xe643f3, 0xe643f3, 0xe643f3, 0xe643f3);
         txt2.depth = 70;
         txt2.setScrollFactor(0, 0); 
         camera.ignore(txt2);
+        
+     // Mostrar puntuacion
+        
         
         primeraPartida = false;
         
@@ -318,6 +337,12 @@ class juego extends Phaser.Scene {
     }
 
     update() {
+    	if(escenaSiguiente){
+    		this.scene.start('victoriaScene');
+    	}
+        	
+    	
+    	
     	
     	if(idJugador1==1){
     		var posXAux=jugador.getX();
@@ -440,56 +465,55 @@ class juego extends Phaser.Scene {
             jugador2.setX(posicionInicial2x);
             jugador2.setY(posicionInicial2y);
         }
-        // console.log(puntuacion1.id);
-
+        // console.log(puntuacion1.id)
+        
         // Ganador
-        if ((jugador.getX() > posBanderaX - 100 && jugador.getX() < posBanderaX + 100) && (jugador.getY() > posBanderaY - 100 && jugador.getY() < posBanderaY + 100)) {
-        	if(!pararJug1){
-        		loadpuntuaciones(function (puntuaciones) {           		
-            		var auxx=puntuaciones[idJugador1-1].puntuacion + 1;
-            		puntuacion1Updated = {
-                    		id: idJugador1,
-                    		puntuacion: auxx
-                    }
-                    updatePuntuacion(puntuacion1Updated);
-                });
-            	
-            	// jugador.setPuntos(jugador2.getPuntos()+1); No funciona
-            	puntos1++
-            	console.log("puntos J1: " + puntos1);
-                
-
-                idGanador = idJugador1;
-                pararJug1=true;
-                this.scene.start('victoriaScene');           
-                // console.log(puntos1);
-        	}
-        	
+        if(idJugador1==1){
+        	if ((jugador.getX() > posBanderaX - 100 && jugador.getX() < posBanderaX + 100) && (jugador.getY() > posBanderaY - 100 && jugador.getY() < posBanderaY + 100)) {
+        		if(!pararJug1 && !pararJug2){
+        			pararJug2=true;
+            		loadpuntuaciones(function (puntuaciones) {           		
+                		var auxx=puntuaciones[idJugador1-1].puntuacion + 1;
+                		puntuacion1Updated = {
+                        		id: idJugador1,
+                        		puntuacion: auxx
+                        }
+                        updatePuntuacion(puntuacion1Updated);
+                    });
+                    idGanador = idJugador1;
+                    var mensaje = {
+                            otroUsuario: idJugador1,
+                            codigo:770
+                        };
+                	stompClient.send("/app/pos.send", {}, JSON.stringify(mensaje));
+        		}        		
+            }
         }
-        if ((jugador2.getX() > posBanderaX - 100 && jugador2.getX() < posBanderaX + 100) && (jugador2.getY() > posBanderaY - 100 && jugador2.getY() < posBanderaY + 100)) {
-        	if(!pararJug2){
-        		loadpuntuaciones(function (puntuaciones) {            		
-            		var auxxx=puntuaciones[idJugador1-1].puntuacion + 1;
-            		puntuacion2Updated = {
-                    		id: idJugador1,
-                    		puntuacion: auxxx
-                    }
-                    updatePuntuacion(puntuacion2Updated);
-                });
+        
+        if(idJugador1==2){
+        	if ((jugador2.getX() > posBanderaX - 100 && jugador2.getX() < posBanderaX + 100) && (jugador2.getY() > posBanderaY - 100 && jugador2.getY() < posBanderaY + 100)) {
+        		if(!pararJug2 && !pararJug1){
+        			pararJug1=true;
+            		loadpuntuaciones(function (puntuaciones) {           		
+                		var auxx=puntuaciones[idJugador1-1].puntuacion + 1;
+                		puntuacion1Updated = {
+                        		id: idJugador1,
+                        		puntuacion: auxx
+                        }
+                        updatePuntuacion(puntuacion1Updated);
+                    });
+                    idGanador = idJugador1;
+                    var mensaje = {
+                            otroUsuario: idJugador1,
+                            codigo:770
+                        };
+                	stompClient.send("/app/pos.send", {}, JSON.stringify(mensaje));
+        		}        
             	
-            	// jugador.setPuntos(jugador2.getPuntos()+1); No funciona
-            	puntos2++
-            	console.log("puntos J2: " + puntos2);
-                
-
-                idGanador = idJugador1;
-                pararJug2=true;
-                this.scene.start('victoriaScene');           
-                // console.log(puntos1);
-        	}
-        	
+            }
         }
-
+        
+        
     }
 }
 
@@ -536,11 +560,10 @@ function loadpuntuaciones(callback) {
 
 function onPosReceived(payload){
 	var mensaje=JSON.parse(payload.body); 
-	
-	if(mensaje.contenido==570){
-		idN=mensaje.posX; 
-		semilla=mensaje.posY;
-	}else{
+	if(mensaje.codigo==770){
+		escenaSiguiente=true;
+	}	
+	if(mensaje.codigo!=770 && mensaje.codigo!=780){
 		if(mensaje.otroUsuario==1 && idJugador1==2){
 			jugador.setX(mensaje.posX); 
 			jugador.setY(mensaje.posY);
@@ -551,7 +574,12 @@ function onPosReceived(payload){
 			jugador2.setY(mensaje.posY);
 		}
 	}
-	
-	
-	
+	if(mensaje.codigo==780){
+		music.stop();
+        pararJug1=false;
+    	pararJug2=false;
+    	escenaSiguiente=false;
+    	setTimeout(escena.scene.start("juegoScene"), 1000); 
+	}
+
 }
