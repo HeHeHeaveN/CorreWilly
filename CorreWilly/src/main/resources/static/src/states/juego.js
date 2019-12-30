@@ -513,7 +513,7 @@ function onPosReceived(payload){
 	if(mensaje.codigo==770){
 		escenaSiguiente=true;
 	}	
-	if(mensaje.codigo!=770 && mensaje.codigo!=780){
+	if(mensaje.codigo==null){
 		if(mensaje.otroUsuario==1 && idJugador1==2){
 			jugador.setX(mensaje.posX); 
 			jugador.setY(mensaje.posY);
@@ -525,11 +525,15 @@ function onPosReceived(payload){
 		}
 	}
 	if(mensaje.codigo==780){
+		escenaV=false;
 		music.stop();
         pararJug1=false;
     	pararJug2=false;
     	escenaSiguiente=false;
     	setTimeout(escena.scene.start("juegoScene"), 1000); 
+	}	
+	if(mensaje.codigo==750){
+		recarga();
 	}
 
 }

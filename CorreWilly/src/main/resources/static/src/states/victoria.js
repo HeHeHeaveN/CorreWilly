@@ -1,5 +1,6 @@
 var escena;
 var escenaV=false;
+var pulsable=true;
 
 class victoria extends Phaser.Scene {
     constructor() {
@@ -45,8 +46,14 @@ class victoria extends Phaser.Scene {
         this.text5 = this.add.text(1800, 1500, 'Menu principal', { font: '180px Arial' });
         this.text5.setInteractive();
         this.text5.on('pointerdown', function() {
-            music.stop();
-            setTimeout(this.scene.start("menuPScene"), 1000); 
+        	var mensaje = {
+                    otroUsuario: idJugador1,
+                    codigo:750
+                };
+        	if(pulsable){
+        		stompClient.send("/app/pos.send", {}, JSON.stringify(mensaje));     
+            	recarga();
+        	}       	
         }, this);
 
     }
@@ -75,8 +82,7 @@ class victoria extends Phaser.Scene {
                     escena.text3.depth=70;
             	}
     		}
-        	
-        	   	
+        	        	   	
         });
     	
     	
@@ -103,7 +109,7 @@ function onPosReceived(payload){
 	if(mensaje.codigo==770){
 		escenaSiguiente=true;
 	}	
-	if(mensaje.codigo!=770 && mensaje.codigo!=780){
+	if(mensaje.codigo==null){
 		if(mensaje.otroUsuario==1 && idJugador1==2){
 			jugador.setX(mensaje.posX); 
 			jugador.setY(mensaje.posY);
@@ -121,6 +127,16 @@ function onPosReceived(payload){
     	pararJug2=false;
     	escenaSiguiente=false;
     	setTimeout(escena.scene.start("juegoScene"), 1000); 
+	}	
+	if(mensaje.codigo==750){
+		if(mensaje.otroUsuario==1 && idJugador1==2){
+			pulsable=false;
+			setTimeout(recarga(), 1000); 
+		}
+		if(mensaje.otroUsuario==2 && idJugador1==1){
+			pulsable=false;
+			setTimeout(recarga(), 1000); 
+		}
 	}
 
 }

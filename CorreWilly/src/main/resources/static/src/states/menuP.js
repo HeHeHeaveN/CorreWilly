@@ -48,8 +48,7 @@ class menuP extends Phaser.Scene {
         if (primeraPartida == undefined) {
         	createPuntuacion(puntuacion1);
         }
-        
-        setTimeout(inicializa,1000);        
+             
     }
 
     update() {      
@@ -92,6 +91,9 @@ function createPuntuacion(puntuacion) {
         }
     }).done(function (puntuacion) {
         console.log("Puntuacion created: " + JSON.stringify(puntuacion));
+        idJugador1=puntuacion.id;
+        console.log("Id J1 : "+idJugador1);  
+        //inicializa();
         // callback(item);
     })
 }
@@ -100,16 +102,16 @@ function loadpuntuaciones(callback) {
     $.ajax({
         url: '/puntuaciones'
     }).done(function (puntuaciones) {
-        console.log('puntuaciones loaded: ' + JSON.stringify(puntuaciones));
+        console.log('puntuaciones loaded: ' + JSON.stringify(puntuaciones));         
         callback(puntuaciones);
     })
 }
 
-function inicializa(){
+/*function inicializa(){
 	if(idJugador1 == -1){
     	loadpuntuaciones(function (puntuaciones) {           
-    		idJugador1 = puntuaciones.length;        	
-        	console.log("Id J1 : "+idJugador1);     
+    		//idJugador1 = puntuaciones.length;        	
+        	//console.log("Id J1 : "+idJugador1);    
         });
     }
-}
+}*/

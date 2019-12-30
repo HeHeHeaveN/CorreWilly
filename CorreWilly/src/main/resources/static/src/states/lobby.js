@@ -103,23 +103,41 @@ function onMessageReceived(payload){
 	
 	if(mensaje.codigo==574 && (idJugador1==1 || idJugador1==2)){		
 		if(idJugador1==1 || idJugador1==2){
-			
-			idN=Math.floor(Math.random() * (3 - 1) + 1);
-			semilla= Phaser.Math.RND.integerInRange(400,800);
-			
-			var mensaje = {
-		            otroUsuario: idJugador1,
-		            codigo: 550,
-		            aux1:idN,
-		            aux2:semilla
-		        };
-			stompClient.send("/app/chat.send", {}, JSON.stringify(mensaje));			
+			if(mensaje.otroUsuario==1 && idJugador1==2){
+				var mensaje = {
+			            otroUsuario: idJugador1,
+			            codigo: 550,
+			        };
+				stompClient.send("/app/chat.send", {}, JSON.stringify(mensaje));	
+			}
+			if(mensaje.otroUsuario==2 && idJugador1==1){
+				var mensaje = {
+			            otroUsuario: idJugador1,
+			            codigo: 550,
+			        };
+				stompClient.send("/app/chat.send", {}, JSON.stringify(mensaje));	
+			}
+			if(mensaje.otroUsuario==idJugador1){
+				idN=Math.floor(Math.random() * (3 - 1) + 1);
+				semilla= Phaser.Math.RND.integerInRange(400,800);
+				
+				var mensaje = {
+			            otroUsuario: idJugador1,
+			            codigo: 550,
+			            aux1:idN,
+			            aux2:semilla
+			        };
+				stompClient.send("/app/chat.send", {}, JSON.stringify(mensaje));	
+			}
+					
 		}
 	}
 	
 	if(mensaje.codigo==550){
-		idN=mensaje.aux1; 
-		semilla=mensaje.aux2;
+		if((mensaje.otroUsuario==1 && idJugador1==2) || (mensaje.otroUsuario==2 && idJugador1==1)){
+			idN=mensaje.aux1; 
+			semilla=mensaje.aux2;
+		}		
 		var mensaje = {
 	            otroUsuario: idJugador1,
 	            codigo: 560,
@@ -147,7 +165,7 @@ function onMessageReceived(payload){
 		}
 	}
 	
-	if(mensaje.codigo!=574 && mensaje.codigo!=560 && mensaje.codigo!=550 && mensaje.codigo!=500 && mensaje.codigo!=510){
+	if(mensaje.codigo==null){
 		$('#chat').append('<p>'+mensaje.contenido+'</p>');
 	}
 
