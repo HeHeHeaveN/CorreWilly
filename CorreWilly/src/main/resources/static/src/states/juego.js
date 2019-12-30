@@ -60,6 +60,8 @@ var idGanador;
 var escenaSiguiente=false;
 var escena;
 
+var conectado2Aux=true;
+
 class juego extends Phaser.Scene {
     constructor() {
         super("juegoScene");
@@ -72,6 +74,8 @@ class juego extends Phaser.Scene {
 
 
     create() {
+    	//setTimeout(comprobacionConexion(),5000);
+    	//setTimeout(comprobacionConexion2(),4000);
     	
     	escena=this;
     	
@@ -303,6 +307,7 @@ class juego extends Phaser.Scene {
     		//music.stop();
     		this.scene.start('victoriaScene');
     	}
+    	
         	
     	if(idJugador1%2==1){
     		var posXAux=jugador.getX();
@@ -536,6 +541,5 @@ function onPosReceived(payload){
 	}	
 	if(mensaje.codigo==750){
 		recarga();
-	}
-
+	}	
 }

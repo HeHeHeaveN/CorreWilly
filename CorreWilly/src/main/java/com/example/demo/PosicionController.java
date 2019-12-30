@@ -1,10 +1,13 @@
 package com.example.demo;
 
+import org.springframework.context.event.EventListener;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 @Controller
 public class PosicionController {
@@ -20,6 +23,14 @@ public class PosicionController {
 	@SendTo("/posiciones1/public")
 	public Posicion mandarMensaje(@Payload Posicion pos) {
 		return pos;
+	}
+	
+	//@MessageMapping("/pos1.send")
+	//@SendTo("/posiciones1/public")
+	@EventListener	
+	public void onSocketDisconnected(SessionDisconnectEvent event) {
+	StompHeaderAccessor sha = StompHeaderAccessor.wrap(event.getMessage());
+	System.out.println("Desconectado");
 	}
 	
 	
