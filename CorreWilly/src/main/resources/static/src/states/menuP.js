@@ -10,6 +10,8 @@ var idJugador1 = -1;
 
 var aux;
 
+var creado=false;
+
 class menuP extends Phaser.Scene {
     constructor() {
         super("menuPScene");
@@ -45,8 +47,9 @@ class menuP extends Phaser.Scene {
                 puntos: 0
             }
         
-        if (primeraPartida == undefined) {
+        if (primeraPartida == undefined && !creado) {
         	createPuntuacion(puntuacion1);
+        	creado=true;
         }
              
     }
