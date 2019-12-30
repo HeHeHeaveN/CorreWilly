@@ -10,6 +10,8 @@ var habilitarJugar=false;
 var semilla; 
 var idN;
 
+var sala;
+
 class lobby extends Phaser.Scene {
     constructor() {
         super("lobbyScene");
@@ -84,6 +86,7 @@ $("#enviarBoton").click(function () {
             contenido: input.val()
         };
 	stompClient.send("/app/chat.send", {}, JSON.stringify(mensaje));
+	input.val('');
 });
 
 $("#botonJugar").click(function () {	
@@ -101,8 +104,8 @@ $("#botonJugar").click(function () {
 function onMessageReceived(payload){
 	var mensaje=JSON.parse(payload.body); 
 	
-	if(mensaje.codigo==574 && (idJugador1==1 || idJugador1==2)){		
-		if(idJugador1==1 || idJugador1==2){
+	if(mensaje.codigo==574){		
+		//if(idJugador1==1 || idJugador1==2){
 			if(mensaje.otroUsuario==idJugador1){
 				idN=Math.floor(Math.random() * (3 - 1) + 1);
 				semilla= Phaser.Math.RND.integerInRange(400,800);
@@ -116,15 +119,15 @@ function onMessageReceived(payload){
 				stompClient.send("/app/chat.send", {}, JSON.stringify(mensaje));	
 			}
 					
-		}
+		//}
 	}
 	
 	if(mensaje.codigo==550){	
-		if(mensaje.otroUsuario==1 && idJugador1==2){
+		if(mensaje.otroUsuario%2==1 && idJugador1-1 == mensaje.otroUsuario){
 			idN=mensaje.aux1; 
 			semilla=mensaje.aux2;
 		}
-		if(mensaje.otroUsuario==2 && idJugador1==1){
+		if(mensaje.otroUsuario%2==0 && idJugador1+1 == mensaje.otroUsuario){
 			idN=mensaje.aux1; 
 			semilla=mensaje.aux2;
 		}
@@ -141,16 +144,22 @@ function onMessageReceived(payload){
 		$('#mensajeChat').hide();
 		$('#enviarBoton').hide();
 		$('#botonJugar').hide();
-		stompClient.subscribe('/posiciones/public',onPosReceived); 
-		stompClient.send("/app/pos.register",{},idJugador1);
+		if(idJugador1%2==1){
+			sala=idJugador1;
+		}
+		if(idJugador1%2==0){
+			sala=idJugador1-1;
+		}
+		stompClient.subscribe('/posiciones'+sala+'/public',onPosReceived); 
+		stompClient.send("/app/pos"+sala+".register",{},idJugador1);
 		jugar=true;
 	}
 	
 	if(mensaje.codigo==500){
-		if(idJugador1==1 && mensaje.otroUsuario==2){
+		if(mensaje.otroUsuario%2==1 && idJugador1-1 == mensaje.otroUsuario){
 			conectado2=true;
 		}
-		if(idJugador1==2 && mensaje.otroUsuario==1){
+		if(mensaje.otroUsuario%2==0 && idJugador1+1 == mensaje.otroUsuario){
 			conectado2=true;
 		}
 	}

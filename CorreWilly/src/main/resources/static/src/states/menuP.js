@@ -24,6 +24,13 @@ class menuP extends Phaser.Scene {
 
     create() {    	
     	aux=false;
+    	if(!creado){
+    		music = this.sound.add('theme');
+            game.volume = 0;
+            music.play();
+            music.loop = true;
+    	}
+    	
 
         // Fondo
         var fondo = this.add.image(1600, 900, 'menu')
@@ -93,7 +100,7 @@ function createPuntuacion(puntuacion) {
             "Content-Type": "application/json"
         }
     }).done(function (puntuacion) {
-        console.log("Puntuacion created: " + JSON.stringify(puntuacion));
+        console.log("Puntuacion creada: " + JSON.stringify(puntuacion));
         idJugador1=puntuacion.id;
         console.log("Id J1 : "+idJugador1);  
         //inicializa();
@@ -105,7 +112,7 @@ function loadpuntuaciones(callback) {
     $.ajax({
         url: '/puntuaciones'
     }).done(function (puntuaciones) {
-        console.log('puntuaciones loaded: ' + JSON.stringify(puntuaciones));         
+        console.log('puntuaciones cargadas: ' + JSON.stringify(puntuaciones));         
         callback(puntuaciones);
     })
 }

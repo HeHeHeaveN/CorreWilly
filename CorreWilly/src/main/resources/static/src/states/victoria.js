@@ -42,7 +42,7 @@ class victoria extends Phaser.Scene {
                     otroUsuario: idJugador1,
                     codigo:780
                 };
-        	stompClient.send("/app/pos.send", {}, JSON.stringify(mensaje));            
+        	stompClient.send("/app/pos"+sala+".send", {}, JSON.stringify(mensaje));            
         }, this);
 
         this.text5 = this.add.text(1800, 1500, 'Menu principal', {fill: '#000000', font: '180px Arial' });
@@ -56,7 +56,7 @@ class victoria extends Phaser.Scene {
                     codigo:750
                 };
         	if(pulsable){
-        		stompClient.send("/app/pos.send", {}, JSON.stringify(mensaje));     
+        		stompClient.send("/app/pos"+sala+".send", {}, JSON.stringify(mensaje));     
             	recarga();
         	}       	
         }, this);
@@ -66,7 +66,7 @@ class victoria extends Phaser.Scene {
     update() {
     	loadpuntuaciones(function (puntuaciones) {
     		if(escenaV){
-    			if(idJugador1==1){
+    			if(idJugador1%2==1){
             		puntos1 = puntuaciones[idJugador1-1].puntuacion;
                 	puntos2 = puntuaciones[idJugador1].puntuacion; 
                 	escena.text1 = escena.add.text(800, 650, puntos1, { font: '400px Arial' });
@@ -79,7 +79,7 @@ class victoria extends Phaser.Scene {
                     
                     
             	}
-            	if(idJugador1==2){
+            	if(idJugador1%2==0){
             		puntos1 = puntuaciones[idJugador1-2].puntuacion;
                 	puntos2 = puntuaciones[idJugador1-1].puntuacion; 
                 	escena.text1 = escena.add.text(800, 650, puntos1, { font: '400px Arial' });
@@ -133,30 +133,29 @@ function onPosReceived(payload){
 		escenaSiguiente=true;
 	}	
 	if(mensaje.codigo==null){
-		if(mensaje.otroUsuario==1 && idJugador1==2){
+		if(mensaje.otroUsuario%2==1 && idJugador1%2==0){
 			jugador.setX(mensaje.posX); 
 			jugador.setY(mensaje.posY);
 		}
 		
-		if(mensaje.otroUsuario==2 && idJugador1==1){
+		if(mensaje.otroUsuario%2==0 && idJugador1%2==1){
 			jugador2.setX(mensaje.posX);
 			jugador2.setY(mensaje.posY);
 		}
 	}
 	if(mensaje.codigo==780){
 		escenaV=false;
-		music.stop();
         pararJug1=false;
     	pararJug2=false;
     	escenaSiguiente=false;
     	setTimeout(escena.scene.start("juegoScene"), 1000); 
 	}	
 	if(mensaje.codigo==750){
-		if(mensaje.otroUsuario==1 && idJugador1==2){
+		if(mensaje.otroUsuario%2==1 && idJugador1%2==0){
 			pulsable=false;
 			setTimeout(recarga(), 1000); 
 		}
-		if(mensaje.otroUsuario==2 && idJugador1==1){
+		if(mensaje.otroUsuario%2==0 && idJugador1%2==1){
 			pulsable=false;
 			setTimeout(recarga(), 1000); 
 		}

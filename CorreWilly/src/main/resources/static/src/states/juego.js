@@ -242,40 +242,40 @@ class juego extends Phaser.Scene {
         }
 
         // Musica
-        music = this.sound.add('theme');
+        /*music = this.sound.add('theme');
         game.volume = 0;
         music.play();
-        music.loop = true;
+        music.loop = true;*/
 
         musicaON = true;
         // Pausa
         this.input.keyboard.on('keydown-' + 'ESC', function (event) {
-            if (music.isPaused) {
+            /*if (music.isPaused) {
                 musicaON = true;
             } else {
                 musicaON = false;
             }
-            music.pause();
+            music.pause();*/
             this.scene.pause();
             this.scene.run('pausaScene');
         }, this);
 
         this.input.keyboard.on('keydown-' + 'N', function (event) {
-            if (music.isPlaying) {
+            /*if (music.isPlaying) {
                 music.pause();
                 musicaON = true;
             } else {
                 music.resume();
                 musicaON = true;
-            }
+            }*/
         }, this);
 
         loadpuntuaciones(function (puntuaciones) {
-        	if(idJugador1==1){
+        	if(idJugador1&2==1){
         		puntos1 = puntuaciones[idJugador1-1].puntuacion;
             	puntos2 = puntuaciones[idJugador1].puntuacion;  
         	}
-        	if(idJugador1==2){
+        	if(idJugador1%2==0){
         		puntos1 = puntuaciones[idJugador1-2].puntuacion;
             	puntos2 = puntuaciones[idJugador1-1].puntuacion;  
         	}
@@ -299,10 +299,11 @@ class juego extends Phaser.Scene {
 
     update() {
     	if(escenaSiguiente){
+    		//music.stop();
     		this.scene.start('victoriaScene');
     	}
         	
-    	if(idJugador1==1){
+    	if(idJugador1%2==1){
     		var posXAux=jugador.getX();
             var posYAux=jugador.getY();
     		var mensaje = {
@@ -310,7 +311,7 @@ class juego extends Phaser.Scene {
                     posX: posXAux,
                     posY: posYAux
                 };
-        	stompClient.send("/app/pos.send", {}, JSON.stringify(mensaje));
+        	stompClient.send("/app/pos"+sala+".send", {}, JSON.stringify(mensaje));
     	}else{
     		var posXAux=jugador2.getX();
             var posYAux=jugador2.getY();
@@ -319,12 +320,12 @@ class juego extends Phaser.Scene {
                     posX: posXAux,
                     posY: posYAux
                 };
-        	stompClient.send("/app/pos.send", {}, JSON.stringify(mensaje));
+        	stompClient.send("/app/pos"+sala+".send", {}, JSON.stringify(mensaje));
     	}
 
-        if (musicaON == false) {
+        /*if (musicaON == false) {
             music.resume();
-        }
+        }*/
 
         if (cambiar) {
             if (jug == 1) {
@@ -351,7 +352,7 @@ class juego extends Phaser.Scene {
 
         // controles jugador 1
 
-        if(idJugador1%2 !=0){
+        if(idJugador1%2==1){
         	if (cursors.left.isDown) {
                 jugador.sprite.setVelocityX(-(jugador.getVelocidadHorizontal()));
 
@@ -419,7 +420,7 @@ class juego extends Phaser.Scene {
         }
         
         // Ganador
-        if(idJugador1==1){
+        if(idJugador1%2==1){
         	if ((jugador.getX() > posBanderaX - 100 && jugador.getX() < posBanderaX + 100) && (jugador.getY() > posBanderaY - 100 && jugador.getY() < posBanderaY + 100)) {
         		if(!pararJug1 && !pararJug2){
         			pararJug2=true;
@@ -436,12 +437,12 @@ class juego extends Phaser.Scene {
                             otroUsuario: idJugador1,
                             codigo:770
                         };
-                	stompClient.send("/app/pos.send", {}, JSON.stringify(mensaje));
+                	stompClient.send("/app/pos"+sala+".send", {}, JSON.stringify(mensaje));
         		}        		
             }
         }
         
-        if(idJugador1==2){
+        if(idJugador1%2==0){
         	if ((jugador2.getX() > posBanderaX - 100 && jugador2.getX() < posBanderaX + 100) && (jugador2.getY() > posBanderaY - 100 && jugador2.getY() < posBanderaY + 100)) {
         		if(!pararJug2 && !pararJug1){
         			pararJug1=true;
@@ -458,7 +459,7 @@ class juego extends Phaser.Scene {
                             otroUsuario: idJugador1,
                             codigo:770
                         };
-                	stompClient.send("/app/pos.send", {}, JSON.stringify(mensaje));
+                	stompClient.send("/app/pos"+sala+".send", {}, JSON.stringify(mensaje));
         		}        
             	
             }
@@ -514,19 +515,19 @@ function onPosReceived(payload){
 		escenaSiguiente=true;
 	}	
 	if(mensaje.codigo==null){
-		if(mensaje.otroUsuario==1 && idJugador1==2){
+		if(mensaje.otroUsuario%2==1 && idJugador1%2==0){
 			jugador.setX(mensaje.posX); 
 			jugador.setY(mensaje.posY);
 		}
 		
-		if(mensaje.otroUsuario==2 && idJugador1==1){
+		if(mensaje.otroUsuario%2==0 && idJugador1%2==1){
 			jugador2.setX(mensaje.posX);
 			jugador2.setY(mensaje.posY);
 		}
 	}
 	if(mensaje.codigo==780){
 		escenaV=false;
-		music.stop();
+		//music.stop();
         pararJug1=false;
     	pararJug2=false;
     	escenaSiguiente=false;
