@@ -140,19 +140,39 @@ function onMessageReceived(payload){
 	
 	
 	if(mensaje.codigo==560){
-		$('#chat').hide();
-		$('#mensajeChat').hide();
-		$('#enviarBoton').hide();
-		$('#botonJugar').hide();
-		if(idJugador1%2==1){
-			sala=idJugador1;
+		if(((idJugador1%2==1) && (mensaje.otroUsuario==idJugador1+1))){
+			$('#chat').hide();
+			$('#mensajeChat').hide();
+			$('#enviarBoton').hide();
+			$('#botonJugar').hide();
+			if(idJugador1%2==1){
+				sala=idJugador1;
+			}
+			if(idJugador1%2==0){
+				sala=idJugador1-1;
+			}
+			
+			stompClient.subscribe('/posiciones'+sala+'/public',onPosReceived); 
+			stompClient.send("/app/pos"+sala+".register",{},idJugador1);
+			jugar=true;
 		}
-		if(idJugador1%2==0){
-			sala=idJugador1-1;
+		if(((idJugador1%2==0) && (mensaje.otroUsuario==idJugador1-1))){
+			$('#chat').hide();
+			$('#mensajeChat').hide();
+			$('#enviarBoton').hide();
+			$('#botonJugar').hide();
+			if(idJugador1%2==1){
+				sala=idJugador1;
+			}
+			if(idJugador1%2==0){
+				sala=idJugador1-1;
+			}
+			
+			stompClient.subscribe('/posiciones'+sala+'/public',onPosReceived); 
+			stompClient.send("/app/pos"+sala+".register",{},idJugador1);
+			jugar=true;
 		}
-		stompClient.subscribe('/posiciones'+sala+'/public',onPosReceived); 
-		stompClient.send("/app/pos"+sala+".register",{},idJugador1);
-		jugar=true;
+		
 	}
 	
 	if(mensaje.codigo==500){
