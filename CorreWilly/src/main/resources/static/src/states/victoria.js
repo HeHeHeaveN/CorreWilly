@@ -32,8 +32,10 @@ class victoria extends Phaser.Scene {
         var rosa = this.add.image(2200, 1200, 'spriteSheetJugador2')
         rosa.setScale(3);
 
-        this.text4 = this.add.text(200, 1500, 'Volver a jugar', { font: '180px Arial' });
+        this.text4 = this.add.text(200, 1500, 'Volver a jugar', {fill: '#000000', font: '180px Arial' });
         this.text4.setInteractive();
+        this.text4.on('pointerout',()=>this.fuera4());
+        this.text4.on('pointerover',()=>this.dentro4());
 
         this.text4.on('pointerdown', function() {
         	var mensaje = {
@@ -43,8 +45,11 @@ class victoria extends Phaser.Scene {
         	stompClient.send("/app/pos.send", {}, JSON.stringify(mensaje));            
         }, this);
 
-        this.text5 = this.add.text(1800, 1500, 'Menu principal', { font: '180px Arial' });
+        this.text5 = this.add.text(1800, 1500, 'Menu principal', {fill: '#000000', font: '180px Arial' });
         this.text5.setInteractive();
+        this.text5.on('pointerout',()=>this.fuera5());
+        this.text5.on('pointerover',()=>this.dentro5());
+                
         this.text5.on('pointerdown', function() {
         	var mensaje = {
                     otroUsuario: idJugador1,
@@ -70,6 +75,9 @@ class victoria extends Phaser.Scene {
                     escena.text3 = escena.add.text(2100, 650, puntos2, { font: '400px Arial' });
                     escena.text3.setTint(0xe643f3, 0xe643f3, 0xe643f3, 0xe643f3);
                     escena.text3.depth=70;
+                    
+                    
+                    
             	}
             	if(idJugador1==2){
             		puntos1 = puntuaciones[idJugador1-2].puntuacion;
@@ -84,9 +92,24 @@ class victoria extends Phaser.Scene {
     		}
         	        	   	
         });
-    	
-    	
 
+    }
+    
+    
+    fuera4(){
+        this.text4.setStyle({ fill: '#000000' });
+    }
+
+    dentro4(){
+        this.text4.setStyle({ fill: '#FFFFFF'});
+    }
+    
+    fuera5(){
+        this.text5.setStyle({ fill: '#000000' });
+    }
+
+    dentro5(){
+        this.text5.setStyle({ fill: '#FFFFFF'});
     }
 
 }
