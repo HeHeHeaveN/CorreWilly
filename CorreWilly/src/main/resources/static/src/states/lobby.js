@@ -188,7 +188,7 @@ function onMessageReceived(payload){
 	}
 	
 	if(mensaje.codigo==null){
-		$('#chat').append('<p>'+mensaje.contenido+'</p>');
+		$('#chat').append('<p>'+"Jugador "+mensaje.otroUsuario+": "+mensaje.contenido+'</p>');
 	}
 
 	if(mensaje.codigo==510){

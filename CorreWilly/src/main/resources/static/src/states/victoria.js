@@ -53,7 +53,7 @@ class victoria extends Phaser.Scene {
         this.text5.on('pointerdown', function() {
         	var mensaje = {
                     otroUsuario: idJugador1,
-                    codigo:750
+                    codigo:404
                 };
         	if(pulsable){
         		stompClient.send("/app/pos"+sala+".send", {}, JSON.stringify(mensaje));     
