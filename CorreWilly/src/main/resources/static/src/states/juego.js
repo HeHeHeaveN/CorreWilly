@@ -64,6 +64,9 @@ var conectado2Aux=true;
 
 var disparador=true;
 
+var fondoPausa; 
+var isPaused; 
+
 class juego extends Phaser.Scene {
     constructor() {
         super("juegoScene");
@@ -83,6 +86,14 @@ class juego extends Phaser.Scene {
     	setTimeout(function(){dispararTemporizador()},7000);
     	
     	escena=this;
+    	fondoPausa = this.add.image(800, 900, 'pausa');
+    	fondoPausa.setScrollFactor(0, 0); 
+        fondoPausa.setScale(2);
+        fondoPausa.depth = 7;
+        fondoPausa.setInteractive();
+        fondoPausa.setVisible(false);
+        isPaused = false;
+    	
     	
     	pararJug1=false;
     	pararJug2=false;
@@ -266,11 +277,18 @@ class juego extends Phaser.Scene {
                 musicaON = false;
             }
             music.pause();*/
-            this.scene.pause();
-            this.scene.run('pausaScene');
+            //this.scene.pause();
+            //this.scene.run('pausaScene');
+        	if(!isPaused) {
+        		fondoPausa.setVisible(true);
+        		isPaused = true;
+        	} else {
+        		fondoPausa.setVisible(false);
+        		isPaused = false;
+        	}
         }, this);
 
-        this.input.keyboard.on('keydown-' + 'N', function (event) {
+        this.input.keyboard.on('keydown-' + 'M', function (event) {
             /*if (music.isPlaying) {
                 music.pause();
                 musicaON = true;
@@ -278,6 +296,14 @@ class juego extends Phaser.Scene {
                 music.resume();
                 musicaON = true;
             }*/
+        	if(isPaused) {
+        		var mensaje = {
+                        otroUsuario: idJugador1,
+                        codigo:404
+                    };
+            		stompClient.send("/app/pos"+sala+".send", {}, JSON.stringify(mensaje));     
+            		recarga();
+            	}   
         }, this);
 
         loadpuntuaciones(function (puntuaciones) {
@@ -317,6 +343,7 @@ class juego extends Phaser.Scene {
     	if(idJugador1%2==1){
     		var posXAux=jugador.getX();
             var posYAux=jugador.getY();
+            camera2.ignore(fondoPausa);
     		var mensaje = {
                     otroUsuario: idJugador1,
                     posX: posXAux,
@@ -326,6 +353,7 @@ class juego extends Phaser.Scene {
     	}else{
     		var posXAux=jugador2.getX();
             var posYAux=jugador2.getY();
+            camera.ignore(fondoPausa);
     		var mensaje = {
                     otroUsuario: idJugador1,
                     posX: posXAux,
@@ -520,6 +548,16 @@ function loadpuntuaciones(callback) {
     })
 }
 
+function deletePuntuaciones(puntuacionId) {
+    $.ajax({
+        method: 'DELETE',
+        url: 'http://localhost:8080/puntuaciones/' + puntuacionId
+    }).done(function (item) {
+        console.log("Deleted puntuacion " + puntuacionId); 
+        setTimeout(function(){recarga()},2000);
+    })
+}
+
 function onPosReceived(payload){
 	var mensaje=JSON.parse(payload.body); 
 	if(mensaje.codigo==770){
@@ -559,7 +597,16 @@ function onPosReceived(payload){
 	}
 	
 	if(mensaje.codigo==404){
-		location.reload();
+		if(idJugador1%2==1){
+			deletePuntuaciones(idJugador1);
+			deletePuntuaciones(idJugador1+1);
+		}
+		if(idJugador1%2==0){
+			deletePuntuaciones(idJugador1);
+			deletePuntuaciones(idJugador1-1);
+		}
+		
+		//location.reload();
 	}
 }
 
