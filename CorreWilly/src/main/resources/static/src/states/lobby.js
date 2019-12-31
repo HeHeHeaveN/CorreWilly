@@ -36,6 +36,9 @@ class lobby extends Phaser.Scene {
         
         var socket = new SockJS('/mensajes')
         stompClient=Stomp.over(socket);
+        //var header={
+        		//"sender-name":idJugador1
+        //}
         stompClient.connect({},onConnected,onError);
     }
     
@@ -73,7 +76,7 @@ function onError(error) {
 function onConnected(){
 	stompClient.subscribe('/chatLobby/public',onMessageReceived); 
 	stompClient.send("/app/chat.register",{},idJugador1);	
-	setTimeout(entradaJugador,1000);	
+	setTimeout(entradaJugador,1000);
 }
 $(document).ready(function (){
 	

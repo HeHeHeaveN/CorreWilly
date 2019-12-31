@@ -126,7 +126,7 @@ function loadpuntuaciones(callback) {
         callback(puntuaciones);
     })
 }
-
+/*
 function onPosReceived(payload){
 	var mensaje=JSON.parse(payload.body); 
 	if(mensaje.codigo==770){
@@ -145,22 +145,22 @@ function onPosReceived(payload){
 	}
 	if(mensaje.codigo==780){
 		escenaV=false;
+		//music.stop();
         pararJug1=false;
     	pararJug2=false;
     	escenaSiguiente=false;
     	setTimeout(escena.scene.start("juegoScene"), 1000); 
 	}	
 	if(mensaje.codigo==750){
+		recarga();
+	}	
+	
+	if(mensaje.codigo==404){
 		if(mensaje.otroUsuario%2==1 && idJugador1%2==0){
-			pulsable=false;
-			setTimeout(recarga(), 1000); 
+			setTimeout(eco(),4000);
 		}
 		if(mensaje.otroUsuario%2==0 && idJugador1%2==1){
-			pulsable=false;
-			setTimeout(recarga(), 1000); 
+			setTimeout(eco(),4000);
 		}
 	}
-
-}
-
-
+}*/
