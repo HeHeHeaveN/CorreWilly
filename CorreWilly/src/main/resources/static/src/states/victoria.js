@@ -15,6 +15,7 @@ class victoria extends Phaser.Scene {
     	escena=this;
     	escenaV=true;
 
+    	//Fondo
         var fondo = this.add.image(1600, 900, 'ganar');
         fondo.setScale(1.67);
 
@@ -25,6 +26,7 @@ class victoria extends Phaser.Scene {
         }
         ganador.setScale(4);    
         
+        //Textos de la escena
         this.text2 = this.add.text(1500, 650, '-', { font: '400px Arial' });
 
         var azul = this.add.image(950, 1200, 'spriteSheetJugador')
@@ -64,6 +66,7 @@ class victoria extends Phaser.Scene {
     }
 
     update() {
+    	//Se cargan las puntuaciones del API rest 
     	loadpuntuaciones(function (puntuaciones) {
     		if(escenaV){
     			if(idJugador1%2==1){
@@ -126,41 +129,3 @@ function loadpuntuaciones(callback) {
         callback(puntuaciones);
     })
 }
-/*
-function onPosReceived(payload){
-	var mensaje=JSON.parse(payload.body); 
-	if(mensaje.codigo==770){
-		escenaSiguiente=true;
-	}	
-	if(mensaje.codigo==null){
-		if(mensaje.otroUsuario%2==1 && idJugador1%2==0){
-			jugador.setX(mensaje.posX); 
-			jugador.setY(mensaje.posY);
-		}
-		
-		if(mensaje.otroUsuario%2==0 && idJugador1%2==1){
-			jugador2.setX(mensaje.posX);
-			jugador2.setY(mensaje.posY);
-		}
-	}
-	if(mensaje.codigo==780){
-		escenaV=false;
-		//music.stop();
-        pararJug1=false;
-    	pararJug2=false;
-    	escenaSiguiente=false;
-    	setTimeout(escena.scene.start("juegoScene"), 1000); 
-	}	
-	if(mensaje.codigo==750){
-		recarga();
-	}	
-	
-	if(mensaje.codigo==404){
-		if(mensaje.otroUsuario%2==1 && idJugador1%2==0){
-			setTimeout(eco(),4000);
-		}
-		if(mensaje.otroUsuario%2==0 && idJugador1%2==1){
-			setTimeout(eco(),4000);
-		}
-	}
-}*/

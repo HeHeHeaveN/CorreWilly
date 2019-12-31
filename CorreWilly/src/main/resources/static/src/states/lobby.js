@@ -34,11 +34,9 @@ class lobby extends Phaser.Scene {
 		$('#mensajeChat').show();
 		$('#enviarBoton').show();
         
+		//Creacion del ws 
         var socket = new SockJS('/mensajes')
         stompClient=Stomp.over(socket);
-        //var header={
-        		//"sender-name":idJugador1
-        //}
         stompClient.connect({},onConnected,onError);
     }
     
@@ -46,6 +44,7 @@ class lobby extends Phaser.Scene {
     	if(jugar){
     		this.scene.start('juegoScene');
     	}
+    	//Gestion de conexiones
     	var mensaje = {
                 otroUsuario: idJugador1,
                 codigo: 500
@@ -79,7 +78,7 @@ function onConnected(){
 	setTimeout(entradaJugador,1000);
 }
 $(document).ready(function (){
-	
+//Envio de un mensaje al chat
 $("#enviarBoton").click(function () {
 	
 	var input=$('#mensajeChat');
@@ -92,6 +91,7 @@ $("#enviarBoton").click(function () {
 	input.val('');
 });
 
+//Click en jugar para iniciar el juego 
 $("#botonJugar").click(function () {	
 	var mensaje = {
             otroUsuario: idJugador1,
@@ -103,12 +103,12 @@ $("#botonJugar").click(function () {
 });
 
 
-
+//Gestion de mensajes 
 function onMessageReceived(payload){
-	var mensaje=JSON.parse(payload.body); 
+	var mensaje=JSON.parse(payload.body);
 	
+	//Codigo 574, creacion de semilla y mensaje inicial para iniciar juego
 	if(mensaje.codigo==574){		
-		//if(idJugador1==1 || idJugador1==2){
 			if(mensaje.otroUsuario==idJugador1){
 				idN=Math.floor(Math.random() * (3 - 1) + 1);
 				semilla= Phaser.Math.RND.integerInRange(400,800);
@@ -121,10 +121,9 @@ function onMessageReceived(payload){
 			        };
 				stompClient.send("/app/chat.send", {}, JSON.stringify(mensaje));	
 			}
-					
-		//}
 	}
 	
+	//Codigo 550, copia de la semilla generada por el otro jugador
 	if(mensaje.codigo==550){	
 		if(mensaje.otroUsuario%2==1 && idJugador1-1 == mensaje.otroUsuario){
 			idN=mensaje.aux1; 
@@ -141,7 +140,7 @@ function onMessageReceived(payload){
 		stompClient.send("/app/chat.send", {}, JSON.stringify(mensaje));
 	}
 	
-	
+	//Codigo 560, Ocultar elemento html, subscripcion a sala de juego concreta y empezar juego
 	if(mensaje.codigo==560){
 		if(((idJugador1%2==1) && (mensaje.otroUsuario==idJugador1+1))){
 			$('#chat').hide();
@@ -178,6 +177,7 @@ function onMessageReceived(payload){
 		
 	}
 	
+	//Codigo 500, Gestion de conexiones 
 	if(mensaje.codigo==500){
 		if(mensaje.otroUsuario%2==1 && idJugador1-1 == mensaje.otroUsuario){
 			conectado2=true;
@@ -187,16 +187,19 @@ function onMessageReceived(payload){
 		}
 	}
 	
+	//Codigo por defecto, mensaje al chat 
 	if(mensaje.codigo==null){
 		$('#chat').append('<p>'+"Jugador "+mensaje.otroUsuario+": "+mensaje.contenido+'</p>');
 	}
 
+	//Codigo 510, mostrar boton de jugar si hay suficientes jugadores 
 	if(mensaje.codigo==510){
 		$('#botonJugar').show();
 	}
 	
 }
 
+//Gestion de conexiones 
 function entradaJugador(){
 	var aux; 
 	aux="Jugador Conectado!";

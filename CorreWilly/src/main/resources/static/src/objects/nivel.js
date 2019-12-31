@@ -4,10 +4,9 @@ class Nivel extends Phaser.GameObjects.Sprite {
         this.idN=idS;       
     }
 
+    //Creacion del nivel apartir de la semilla
     crearNivel(escena,plataforma,semilla){
-        if(idN==1){
-        	
-        	//seleccion semilla
+        if(idN==1){       	
         	Phaser.Math.RND.sow([semilla]);
         	
             var plataformas = 6;

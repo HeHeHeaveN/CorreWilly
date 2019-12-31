@@ -24,6 +24,8 @@ class menuP extends Phaser.Scene {
 
     create() {    	
     	aux=false;
+    	
+    	//musica
     	if(!creado){
     		music = this.sound.add('theme');
             game.volume = 0;
@@ -31,7 +33,6 @@ class menuP extends Phaser.Scene {
             music.loop = true;
     	}
     	
-
         // Fondo
         var fondo = this.add.image(1600, 900, 'menu')
         fondo.setScale(1.67);
@@ -39,6 +40,7 @@ class menuP extends Phaser.Scene {
 
         cursors = this.input.keyboard.createCursorKeys();
 
+        //Textos interactuables 
         this.jugar=this.add.text(1300,900,"Jugar",{fill: '#000000', font: '200px Arial'}).setInteractive().on('pointerdown',()=>this.scene.start('lobbyScene'));
         this.comoJugar=this.add.text(1050,1100,"Como jugar",{fill: '#000000', font: '200px Arial'}).setInteractive().on('pointerdown',()=>this.scene.start('controlesScene'));
         this.creditos=this.add.text(1200,1300,"Creditos",{fill: '#000000', font: '200px Arial'}).setInteractive().on('pointerdown',()=>this.scene.start('creditosScene'));
@@ -50,10 +52,10 @@ class menuP extends Phaser.Scene {
         this.creditos.on('pointerout',()=>this.fueraC());
         this.creditos.on('pointerover',()=>this.dentroC());               
         
+        //Creacion de la puntuacion con API rest
         puntuacion1 = {
                 puntos: 0
-            }
-        
+            }       
         if (primeraPartida == undefined && !creado) {
         	createPuntuacion(puntuacion1);
         	creado=true;
@@ -103,7 +105,6 @@ function createPuntuacion(puntuacion) {
         console.log("Puntuacion creada: " + JSON.stringify(puntuacion));
         idJugador1=puntuacion.id;
         console.log("Id J1 : "+idJugador1);  
-        //inicializa();
         // callback(item);
     })
 }
@@ -116,12 +117,3 @@ function loadpuntuaciones(callback) {
         callback(puntuaciones);
     })
 }
-
-/*function inicializa(){
-	if(idJugador1 == -1){
-    	loadpuntuaciones(function (puntuaciones) {           
-    		//idJugador1 = puntuaciones.length;        	
-        	//console.log("Id J1 : "+idJugador1);    
-        });
-    }
-}*/

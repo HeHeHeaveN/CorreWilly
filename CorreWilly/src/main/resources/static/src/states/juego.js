@@ -79,26 +79,27 @@ class juego extends Phaser.Scene {
 
 
     create() {
-    	//setTimeout(comprobacionConexion(),5000);
-    	//setTimeout(comprobacionConexion2(),4000);
     	
+    	//Funciones para hacer un eco y comprobar si esta conectado el otro usuario
     	setInterval(function(){estaConectado()},5000);   
     	setTimeout(function(){dispararTemporizador()},7000);
     	
     	escena=this;
+    	
+    	//Menu de pausa
     	fondoPausa = this.add.image(800, 900, 'pausa');
     	fondoPausa.setScrollFactor(0, 0); 
         fondoPausa.setScale(2);
         fondoPausa.depth = 7;
         fondoPausa.setInteractive();
         fondoPausa.setVisible(false);
-        isPaused = false;
-    	
+        isPaused = false;    	
     	
     	pararJug1=false;
     	pararJug2=false;
         cambiar = false;
         tiempo = false;
+        
         // Coeficientes para el zoom de la camara
         cof1 = 10;
         cof2 = 190;
@@ -250,6 +251,7 @@ class juego extends Phaser.Scene {
         var vel = this.physics.add.overlap(jugador.sprite, estrella, power, null, this);
         var vel = this.physics.add.overlap(jugador2.sprite, estrella, power2, null, this);
 
+        //PowerUps apartir de la semilla
         Phaser.Math.RND.sow([semilla]);
         for (var i = 0; i < 5; i++) {
             alturaEX = Math.floor(Phaser.Math.RND.integerInRange(0,100) * (30 - 4) + 400);
@@ -262,23 +264,10 @@ class juego extends Phaser.Scene {
             var vel = this.physics.add.overlap(jugador2.sprite, estrella, power2, null, this);
         }
 
-        // Musica
-        /*music = this.sound.add('theme');
-        game.volume = 0;
-        music.play();
-        music.loop = true;*/
-
         musicaON = true;
+        
         // Pausa
         this.input.keyboard.on('keydown-' + 'ESC', function (event) {
-            /*if (music.isPaused) {
-                musicaON = true;
-            } else {
-                musicaON = false;
-            }
-            music.pause();*/
-            //this.scene.pause();
-            //this.scene.run('pausaScene');
         	if(!isPaused) {
         		fondoPausa.setVisible(true);
         		isPaused = true;
@@ -289,13 +278,6 @@ class juego extends Phaser.Scene {
         }, this);
 
         this.input.keyboard.on('keydown-' + 'M', function (event) {
-            /*if (music.isPlaying) {
-                music.pause();
-                musicaON = true;
-            } else {
-                music.resume();
-                musicaON = true;
-            }*/
         	if(isPaused) {
         		var mensaje = {
                         otroUsuario: idJugador1,
@@ -306,6 +288,7 @@ class juego extends Phaser.Scene {
             	}   
         }, this);
 
+        //Carga de las puntuaciones del API rest
         loadpuntuaciones(function (puntuaciones) {
         	if(idJugador1&2==1){
         		puntos1 = puntuaciones[idJugador1-1].puntuacion;
@@ -318,6 +301,7 @@ class juego extends Phaser.Scene {
         	   	
         });
         
+        //Puntuaciones en pantalla
         txt1 = escena.add.text(camera.centerX, camera.centerY - 500, puntos1, { font: '64px Arial' });
         txt1.setTint(0x20f2f5, 0x20f2f5, 0x20f2f5, 0x20f2f5);
         txt1.depth = 70;
@@ -334,12 +318,12 @@ class juego extends Phaser.Scene {
     }
 
     update() {
+    	
     	if(escenaSiguiente){
-    		//music.stop();
     		this.scene.start('victoriaScene');
     	}
     	
-        	
+        //Envio de la posicion mediante webSockets
     	if(idJugador1%2==1){
     		var posXAux=jugador.getX();
             var posYAux=jugador.getY();
@@ -361,10 +345,6 @@ class juego extends Phaser.Scene {
                 };
         	stompClient.send("/app/pos"+sala+".send", {}, JSON.stringify(mensaje));
     	}
-
-        /*if (musicaON == false) {
-            music.resume();
-        }*/
 
         if (cambiar) {
             if (jug == 1) {
@@ -390,7 +370,6 @@ class juego extends Phaser.Scene {
         }
 
         // controles jugador 1
-
         if(idJugador1%2==1){
         	if (cursors.left.isDown) {
                 jugador.sprite.setVelocityX(-(jugador.getVelocidadHorizontal()));
@@ -458,7 +437,7 @@ class juego extends Phaser.Scene {
             jugador2.setY(posicionInicial2y);
         }
         
-        // Ganador
+        // Ganador y update de las puntuaciones en el API Rest
         if(idJugador1%2==1){
         	if ((jugador.getX() > posBanderaX - 100 && jugador.getX() < posBanderaX + 100) && (jugador.getY() > posBanderaY - 100 && jugador.getY() < posBanderaY + 100)) {
         		if(!pararJug1 && !pararJug2){
@@ -472,6 +451,7 @@ class juego extends Phaser.Scene {
                         updatePuntuacion(puntuacion1Updated);
                     });
                     idGanador = idJugador1;
+                    //Envio de mensaje por ws para cambiar de escena
                     var mensaje = {
                             otroUsuario: idJugador1,
                             codigo:770
@@ -524,7 +504,7 @@ function parar() {
 }
 
 
-// Update item in server
+//Se actualiza la puntuacion en el API rest
 function updatePuntuacion(puntuacion) {
     $.ajax({
         method: 'PUT',
@@ -539,6 +519,7 @@ function updatePuntuacion(puntuacion) {
     })
 }
 
+//Cargar puntuaciones del API rest 
 function loadpuntuaciones(callback) {
     $.ajax({
         url: '/puntuaciones'
@@ -548,6 +529,7 @@ function loadpuntuaciones(callback) {
     })
 }
 
+//Eliminar puntuacion del API rest
 function deletePuntuaciones(puntuacionId) {
     $.ajax({
         method: 'DELETE',
@@ -558,11 +540,14 @@ function deletePuntuaciones(puntuacionId) {
     })
 }
 
+//Control de los mensajes recibidos por ws 
 function onPosReceived(payload){
 	var mensaje=JSON.parse(payload.body); 
+	//Codigo 770, cambiar de escena 
 	if(mensaje.codigo==770){
 		escenaSiguiente=true;
 	}	
+	//Mensaje por defecto sin codigo (posicion del otro jugador)
 	if(mensaje.codigo==null){
 		if(mensaje.otroUsuario%2==1 && idJugador1%2==0){
 			jugador.setX(mensaje.posX); 
@@ -574,6 +559,7 @@ function onPosReceived(payload){
 			jugador2.setY(mensaje.posY);
 		}
 	}
+	//Codigo 780, volver a jugar despues de ganar 
 	if(mensaje.codigo==780){
 		escenaV=false;
 		//music.stop();
@@ -582,10 +568,12 @@ function onPosReceived(payload){
     	escenaSiguiente=false;
     	setTimeout(escena.scene.start("juegoScene"), 1000); 
 	}	
+	//Codigo 750, recarga de la pagina 
 	if(mensaje.codigo==750){
 		recarga();
 	}	
 	
+	//Codigo 405, Comprobacion de conexion
 	if(mensaje.codigo==405){
 		if(mensaje.otroUsuario%2==1 && idJugador1%2==0){
 			conectado2Aux=true;
@@ -596,6 +584,7 @@ function onPosReceived(payload){
 		}
 	}
 	
+	//Codigo 404, el otro jugador se ha desconectado, se eliminan puntuaciones y se vuelve al menu
 	if(mensaje.codigo==404){
 		if(idJugador1%2==1){
 			deletePuntuaciones(idJugador1);
@@ -604,12 +593,11 @@ function onPosReceived(payload){
 		if(idJugador1%2==0){
 			deletePuntuaciones(idJugador1);
 			deletePuntuaciones(idJugador1-1);
-		}
-		
-		//location.reload();
+		}		
 	}
 }
 
+//Funciones para el control de la desconexion 
 function estaConectado(){
 	
 	var mensaje = {

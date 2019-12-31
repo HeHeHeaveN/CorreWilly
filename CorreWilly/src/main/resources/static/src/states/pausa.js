@@ -1,3 +1,6 @@
+//Escena que ya no se usa 
+
+
 var jg;
 
 
