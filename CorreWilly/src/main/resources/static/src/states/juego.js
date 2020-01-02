@@ -395,7 +395,7 @@ class juego extends Phaser.Scene {
                 }
             }
             setTimeout(parar, 2000);
-            cambiar = false;
+            cambiarSalto = false;
         }
         
 
