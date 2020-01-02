@@ -1,4 +1,5 @@
 //Declaracion de variables de la escena
+//
 var jugador;
 var jugador2;
 
