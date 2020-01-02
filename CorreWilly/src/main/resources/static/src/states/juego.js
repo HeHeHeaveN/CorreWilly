@@ -39,6 +39,7 @@ var cof2;
 var nivel;
 
 var estrella;
+var muelle;
 
 var cambiar;
 
@@ -127,6 +128,11 @@ class juego extends Phaser.Scene {
         var estrella = this.physics.add.sprite(4000, 4000, 'estrella');
         estrella.setScale(0.1);
         estrella.depth = 1;
+        
+        //muelle
+        var muelle = this.physics.add.sprite(4000, 4000, 'muelle');
+        muelle.setScale(0.1);
+        muelle.depth = 1;
 
 
         // plataforma
