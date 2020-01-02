@@ -42,6 +42,7 @@ var estrella;
 var muelle;
 
 var cambiar;
+var cambiarSalto;
 
 var tiempo;
 
@@ -99,6 +100,7 @@ class juego extends Phaser.Scene {
     	pararJug1=false;
     	pararJug2=false;
         cambiar = false;
+        cambiarSalto = false;
         tiempo = false;
         
         // Coeficientes para el zoom de la camara
@@ -124,6 +126,9 @@ class juego extends Phaser.Scene {
         bandera.setScale(0.5);
         bandera.depth = 1;
 
+        
+        //mejoras de prueba
+        /*
         // Estrella
         var estrella = this.physics.add.sprite(4000, 4000, 'estrella');
         estrella.setScale(0.1);
@@ -133,6 +138,7 @@ class juego extends Phaser.Scene {
         var muelle = this.physics.add.sprite(4000, 4000, 'muelle');
         muelle.setScale(0.1);
         muelle.depth = 1;
+        */
 
 
         // plataforma
@@ -253,21 +259,37 @@ class juego extends Phaser.Scene {
         // Colisiones entre los jugadores
         this.physics.add.collider(jugador.sprite, jugador2.sprite);
 
+        //mejoras de prueba
+        /*
         this.physics.add.collider(estrella, plataforma.plataformas);
         var vel = this.physics.add.overlap(jugador.sprite, estrella, power, null, this);
         var vel = this.physics.add.overlap(jugador2.sprite, estrella, power2, null, this);
+        
+        this.physics.add.collider(muelle, plataforma.plataformas);
+        var salto = this.physics.add.overlap(jugador.sprite, muelle, powersalto, null, this);
+        var salto = this.physics.add.overlap(jugador2.sprite, muelle, powersalto2, null, this);
+        */
 
-        //PowerUps apartir de la semilla
+        //PowerUps a partir de la semilla
         Phaser.Math.RND.sow([semilla]);
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < 10; i++) {
             alturaEX = Math.floor(Phaser.Math.RND.integerInRange(0,100) * (30 - 4) + 400);
             alturaEY = Math.floor(Phaser.Math.RND.integerInRange(0,100) * (15 - 4) + 400);
-            var estrella = this.physics.add.sprite(alturaEX, alturaEY, 'estrella');
-            estrella.setScale(0.1);
-            estrella.depth = 1;
-            this.physics.add.collider(estrella, plataforma.plataformas);
-            var vel = this.physics.add.overlap(jugador.sprite, estrella, power, null, this);
-            var vel = this.physics.add.overlap(jugador2.sprite, estrella, power2, null, this);
+            if(i%2 == 0){
+            	var estrella = this.physics.add.sprite(alturaEX, alturaEY, 'estrella');
+                estrella.setScale(0.1);
+                estrella.depth = 1;
+                this.physics.add.collider(estrella, plataforma.plataformas);
+                var vel = this.physics.add.overlap(jugador.sprite, estrella, power, null, this);
+                var vel = this.physics.add.overlap(jugador2.sprite, estrella, power2, null, this);
+            }else{
+            	var muelle = this.physics.add.sprite(alturaEX, alturaEY, 'muelle');
+                muelle.setScale(0.1);
+                muelle.depth = 1;
+            	this.physics.add.collider(muelle, plataforma.plataformas);
+                var salto = this.physics.add.overlap(jugador.sprite, muelle, powersalto, null, this);
+                var salto = this.physics.add.overlap(jugador2.sprite, muelle, powersalto2, null, this);
+            }
         }
 
         musicaON = true;
@@ -363,13 +385,28 @@ class juego extends Phaser.Scene {
             setTimeout(parar, 2000);
             cambiar = false;
         }
+        
+        if (cambiarSalto) {
+            if (jug == 1) {
+                jugador.setVelocidadSalto(760);
+            } else {
+                if (jug == 2) {
+                    jugador2.setVelocidadSalto(760);
+                }
+            }
+            setTimeout(parar, 2000);
+            cambiar = false;
+        }
+        
 
         if (tiempo) {
             if (jug == 1) {
                 jugador.setVelocidadHorizontal(400);
+                jugador.setVelocidadSalto(380);
             } else {
                 if (jug == 2) {
                     jugador2.setVelocidadHorizontal(400);
+                    jugador.setVelocidadSalto(380);
                 }
             }
             tiempo = false;
@@ -502,6 +539,18 @@ function power(jugador, estrella) {
 function power2(jugador, estrella) {
     estrella.disableBody(true, true);
     cambiar = true;
+    jug = 2;
+}
+
+function powersalto(jugador, muelle) {
+    muelle.disableBody(true, true);
+    cambiarSalto = true;
+    jug = 1;
+}
+
+function powersalto2(jugador, muelle) {
+    muelle.disableBody(true, true);
+    cambiarSalto = true;
     jug = 2;
 }
 
