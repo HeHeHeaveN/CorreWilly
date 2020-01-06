@@ -95,6 +95,7 @@ class juego extends Phaser.Scene {
     		setTimeout(function(){ponerNo()},1500);
     	}
     	
+    	idN=2;
     	
     	escena=this;
     	
