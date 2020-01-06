@@ -62,7 +62,7 @@ Nos indica que jugador ha ganado. Pasado unos segundos nos devuelve a la pantall
 <img src="src/main/resources/static/Imágenes prototipo/diagrama3.png">
 
 ## Diagrama de clases y API REST:
-<img src="src/main/resources/static/Imágenes prototipo/diagramaClases.png">
+<img src="src/main/resources/static/Imágenes prototipo/diagramaClases.PNG">
 
 ## Cómo ejecutar el juego:
 Desde la consola de comandos (cmd), dirigirnos a la ruta donde este nuestro servidor (en la carpeta del github en la carpeta llamada servidor). Una vez ubicados en el lugar correcto, ejecutar la siguiente línea de instrucción:
