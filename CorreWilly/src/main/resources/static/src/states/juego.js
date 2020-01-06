@@ -69,6 +69,8 @@ var disparador=true;
 var fondoPausa; 
 var isPaused; 
 
+var no=false;
+
 class juego extends Phaser.Scene {
     constructor() {
         super("juegoScene");
@@ -82,16 +84,24 @@ class juego extends Phaser.Scene {
 
     create() {
     	
-    	//Funciones para hacer un eco y comprobar si esta conectado el otro usuario
-    	setInterval(function(){estaConectado()},5000);   
-    	setTimeout(function(){dispararTemporizador()},7000);
+    	if (primeraPartida == undefined){
+    		conectado2Aux=true;
+        	//Funciones para hacer un eco y comprobar si esta conectado el otro usuario
+        	setInterval(function(){estaConectado()},5000);   
+        	setTimeout(function(){dispararTemporizador()},7500);
+    	}else{
+    		no=true;
+    		conectado2Aux=true;
+    		setTimeout(function(){ponerNo()},1500);
+    	}
+    	
     	
     	escena=this;
     	
     	//Menu de pausa
     	fondoPausa = this.add.image(800, 900, 'pausa');
     	fondoPausa.setScrollFactor(0, 0); 
-        fondoPausa.setScale(2);
+        fondoPausa.setScale(1);
         fondoPausa.depth = 7;
         fondoPausa.setInteractive();
         fondoPausa.setVisible(false);
@@ -406,7 +416,7 @@ class juego extends Phaser.Scene {
             } else {
                 if (jug == 2) {
                     jugador2.setVelocidadHorizontal(400);
-                    jugador.setVelocidadSalto(380);
+                    jugador2.setVelocidadSalto(380);
                 }
             }
             tiempo = false;
@@ -494,7 +504,13 @@ class juego extends Phaser.Scene {
                         updatePuntuacion(puntuacion1Updated);
                     });
                     idGanador = idJugador1;
+                    var mensaje = {
+                            otroUsuario: idJugador1,
+                            codigo:666
+                        };
+                	stompClient.send("/app/pos"+sala+".send", {}, JSON.stringify(mensaje));
                     //Envio de mensaje por ws para cambiar de escena
+                    
                     var mensaje = {
                             otroUsuario: idJugador1,
                             codigo:770
@@ -517,6 +533,11 @@ class juego extends Phaser.Scene {
                         updatePuntuacion(puntuacion1Updated);
                     });
                     idGanador = idJugador1;
+                    var mensaje = {
+                            otroUsuario: idJugador1,
+                            codigo:666
+                        };
+                	stompClient.send("/app/pos"+sala+".send", {}, JSON.stringify(mensaje));
                     var mensaje = {
                             otroUsuario: idJugador1,
                             codigo:770
@@ -599,7 +620,8 @@ function deletePuntuaciones(puntuacionId) {
 function onPosReceived(payload){
 	var mensaje=JSON.parse(payload.body); 
 	//Codigo 770, cambiar de escena 
-	if(mensaje.codigo==770){
+	if(mensaje.codigo==770){			
+		conectado2Aux=true;
 		escenaSiguiente=true;
 	}	
 	//Mensaje por defecto sin codigo (posicion del otro jugador)
@@ -616,11 +638,13 @@ function onPosReceived(payload){
 	}
 	//Codigo 780, volver a jugar despues de ganar 
 	if(mensaje.codigo==780){
+		no=true;
 		escenaV=false;
 		//music.stop();
         pararJug1=false;
     	pararJug2=false;
     	escenaSiguiente=false;
+    	//conectado2Aux=true;
     	setTimeout(escena.scene.start("juegoScene"), 1000); 
 	}	
 	//Codigo 750, recarga de la pagina 
@@ -639,27 +663,38 @@ function onPosReceived(payload){
 		}
 	}
 	
+	//Codigo 666, gestion de las funciones de desconexion 
+	if(mensaje.codigo==666){
+		no=true;
+	}
+	//Codigo 667, gestion de las funciones de desconexion
+	if(mensaje.codigo==667){
+		no=false;
+	}
+	
 	//Codigo 404, el otro jugador se ha desconectado, se eliminan puntuaciones y se vuelve al menu
 	if(mensaje.codigo==404){
-		if(idJugador1%2==1){
-			deletePuntuaciones(idJugador1);
-			deletePuntuaciones(idJugador1+1);
-		}
-		if(idJugador1%2==0){
-			deletePuntuaciones(idJugador1);
-			deletePuntuaciones(idJugador1-1);
-		}		
+			if(idJugador1%2==1){
+				deletePuntuaciones(idJugador1);
+				deletePuntuaciones(idJugador1+1);
+			}
+			if(idJugador1%2==0){
+				deletePuntuaciones(idJugador1);
+				deletePuntuaciones(idJugador1-1);
+			}	
+			
 	}
 }
 
 //Funciones para el control de la desconexion 
 function estaConectado(){
-	
-	var mensaje = {
-            otroUsuario: idJugador1,
-            codigo:405
-        };
-	stompClient.send("/app/pos"+sala+".send", {}, JSON.stringify(mensaje));
+	//if(!no){
+		var mensaje = {
+	            otroUsuario: idJugador1,
+	            codigo:405
+	        };
+		stompClient.send("/app/pos"+sala+".send", {}, JSON.stringify(mensaje));	
+	//}		
 }
 
 function dispararTemporizador(){
@@ -667,13 +702,25 @@ function dispararTemporizador(){
 } 
 
 function comprobarConexion(){
-	if(!conectado2Aux){
-		var mensaje = {
-	            otroUsuario: idJugador1,
-	            codigo:404
-	        };
-		stompClient.send("/app/pos"+sala+".send", {}, JSON.stringify(mensaje));
-	}else{
-		conectado2Aux=false;
+	if(!no){
+		if(!conectado2Aux){
+			var mensaje = {
+		            otroUsuario: idJugador1,
+		            codigo:404
+		        };
+			stompClient.send("/app/pos"+sala+".send", {}, JSON.stringify(mensaje));
+		}else{
+			conectado2Aux=false;
+		}
 	}
+		
 }
+
+function ponerNo(){
+	var mensaje = {
+            otroUsuario: idJugador1,
+            codigo:667
+        };
+	stompClient.send("/app/pos"+sala+".send", {}, JSON.stringify(mensaje));
+}
+
