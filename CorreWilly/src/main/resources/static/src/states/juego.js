@@ -605,17 +605,6 @@ function loadpuntuaciones(callback) {
     })
 }
 
-//Eliminar puntuacion del API rest
-function deletePuntuaciones(puntuacionId) {
-    $.ajax({
-        method: 'DELETE',
-        url: 'http://localhost:8080/puntuaciones/' + puntuacionId
-    }).done(function (item) {
-        console.log("Deleted puntuacion " + puntuacionId); 
-        setTimeout(function(){recarga()},2000);
-    })
-}
-
 //Control de los mensajes recibidos por ws 
 function onPosReceived(payload){
 	var mensaje=JSON.parse(payload.body); 
@@ -672,17 +661,9 @@ function onPosReceived(payload){
 		no=false;
 	}
 	
-	//Codigo 404, el otro jugador se ha desconectado, se eliminan puntuaciones y se vuelve al menu
+	//Codigo 404, el otro jugador se ha desconectado, se vuelve al menu
 	if(mensaje.codigo==404){
-			if(idJugador1%2==1){
-				deletePuntuaciones(idJugador1);
-				deletePuntuaciones(idJugador1+1);
-			}
-			if(idJugador1%2==0){
-				deletePuntuaciones(idJugador1);
-				deletePuntuaciones(idJugador1-1);
-			}	
-			
+		setTimeout(function(){recarga()},2000);	
 	}
 }
 
