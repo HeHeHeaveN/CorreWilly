@@ -48,7 +48,8 @@ Navegador web.
 Nos aparece al cargar la página web. Desde aquí podemos iniciar el juego, ver las reglas del mismo, o ver los desarrolladores del proyecto.
 <img src="src/main/resources/static/Imágenes prototipo/captura_inicio.png">
 <p><img src="src/main/resources/static/Imágenes prototipo/captura_como_jugar.png" width = "400"> 
-<img src="src/main/resources/static/Imágenes prototipo/captura_creditos.png" width = "400"><p>
+<img src="src/main/resources/static/Imágenes prototipo/captura_creditos.png" width = "400">
+<img src="src/main/resources/static/Imágenes prototipo/captura_lobby.png" width = "400"><p>
 
 ## Pantalla de juego:
 Al iniciar el jugo se generan las plataformas y los power ups del nivel de forma aleatoria. Nuestro objetivo será llegar a la bandera antes que él contrario. Si nos caemos vol7veremos a empezar el nivel.
@@ -59,7 +60,7 @@ Nos indica que jugador ha ganado. Pasado unos segundos nos devuelve a la pantall
 <img src="src/main/resources/static/Imágenes prototipo/captura_ganador.png">
 
 ## Diagrama de navegación:
-<img src="src/main/resources/static/Imágenes prototipo/diagrama3.png">
+<img src="src/main/resources/static/Imágenes prototipo/diagrama4.png">
 
 ## Diagrama de clases y API REST:
 <img src="src/main/resources/static/Imágenes prototipo/diagramaClases.png">
