@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<script src="scripts/phaser.js"></script>
+<script src="scripts/phaser.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<title>Corre Willy, Corre</title>
+
+
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="src/states/boot.js"></script>
+<script src="src/states/preload.js"></script>
+<script src="src/objects/jugador.js"></script>
+<script src="src/objects/plataforma.js"></script>
+<script src="src/objects/nivel.js"></script>
+
+<script src="src/states/menuP.js"></script>
+<script src="src/states/lobby.js"></script>
+<script src="src/states/juego.js"></script>
+<script src="src/states/controles.js"></script>
+<script src="src/states/creditos.js"></script>
+<script src="src/states/victoria.js"></script>
+<script src="src/states/pausa.js"></script>
+
+
+
+<!-- <script src="src/states/options.js"></script> -->
+<!-- <script src="src/states/matching.js"></script> -->
+<!--<script src="src/states/ending.js"></script> -->
+<script src="src/index.js"></script>
+
+<link type="text/css" rel="stylesheet" href="estilo.css" />
+
+</head>
+
+<body>
+	<!-- div donde ubicaremos el juego -->
+	<div id="gameDiv" style="position: relative">
+		<div>
+			<button id="botonJugar">JUGAR</button>
+		</div>
+		<div id="chat"></div>
+		<input type='text' id="mensajeChat" placeholder="Escribe un mensaje"
+			maxlength="80" />
+		<button id="enviarBoton">Enviar</button>
+	</div>
+	<script>
+		//Se ocultan los elementos html que no queremos mostrar todavia
+		$('#chat').hide();
+		$('#mensajeChat').hide();
+		$('#enviarBoton').hide();
+		$('#botonJugar').hide();
+	</script>
+
+
+
+</body>
+
+</html>

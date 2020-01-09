@@ -29,6 +29,7 @@ public class Puntuacion {
 		return checked;
 	}*/
 
+	//
 	/*public void setChecked(boolean checked) {
 		this.checked = checked;
 	}*/
