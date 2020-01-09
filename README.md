@@ -1,4 +1,4 @@
-[![CorreWilly](https://img.youtube.com/vi/wkKg8Hd2yv0/0.jpg)](https://www.youtube.com/playlist?list=PLViNbzdNIbHCnlLPp3gz1s_ow3c5wKBfD)
+[![CorreWilly](https://img.youtube.com/vi/wkKg8Hd2yv0/0.jpg)](https://youtu.be/wkKg8Hd2yv0)
 
 # Corre Willy, corre
 Introducción:
