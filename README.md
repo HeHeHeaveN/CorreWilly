@@ -1,3 +1,5 @@
+[![CorreWilly](https://img.youtube.com/vi/wkKg8Hd2yv0/0.jpg)](https://www.youtube.com/playlist?list=PLViNbzdNIbHCnlLPp3gz1s_ow3c5wKBfD)
+
 # Corre Willy, corre
 Introducción:
 Este documento especifica el diseño y mecánicas del videojuego “Corre Willy, corre”. En él están recogidos todos sus requisitos y especificaciones, así como su funcionamiento. El documento está orientado para servir de guía a los desarrolladores del videojuego.
