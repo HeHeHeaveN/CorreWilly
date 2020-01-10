@@ -90,9 +90,13 @@ Otro cambio ha sido el añadir un “power up” o mejora más, la del muelle, s
 
 Para la fase 5, hemos realizado unas pruebas del juego y hemos comprobado que el funcionamiento es correcto, la comunicación entre ambos usuarios se realiza de manera adecuada, la posición de ambos jugadores se comunica perfectamente a través de los websockets sin ningún tipo de retardo, aunque si no se deja tiempo suficiente para que se realice la conexión entre los dos jugadores, esto podría dar un error y sería necesario volver a buscar partida.
 La estética del juego es apropiada para el tipo de juego desarrollado. Sin embargo, sí que hay problemas con las animaciones, ya que como están hechas, estas se activan al pulsar los controles, no se almacena en ningún estado, con lo que no tiene fácil arreglo.
+
 La jugabilidad es fluida y adecuada a un juego de plataformas con distintos power-ups, aunque se echa en falta que hubiera alguno más. Aunque hay que decir que, sí que se ha incluido uno más en la anterior fase de desarrollo, pero no llega al objetivo inicial. Los dos escenarios mantienen una estética similar y aportan algo de variedad al juego, lo que se agradece, y que si se pudiera seria perfecto añadir nuevos diseños que aumentaran esta heterogeneidad. No hemos apreciado ningún glitch que pueda afectar a la jugabilidad de forma catastrófica.
+
 Se ha observado que el rendimiento del juego no es el mejor y llega a ralentizarse en algunos momentos. Parece que los problemas los pueden estar causando algunas funciones poco optimizadas, pero sobre todo la comunicación, ya que se mandan una cantidad de mensajes muy elevada, lo que parece estar consumiendo muchos recursos.
+
 En cuanto a la jugabilidad hay que decir que, aunque es efectiva y en un principio puedes divertirte con sus mecánicas al cabo de una rato resulta repetitiva. La generación aleatoria de los niveles ayuda a disimular esta falta de variedad, pero hay que decir que al final todos estos no son lo suficientemente diferentes como para resultar únicos, haciendo que el cambio sea escaso.
+
 Respecto a las mejoras que se podrían realizar tras este análisis más a fondo de nuestro, se podrían agregar más variedad power-ups, que se podrían implementar sin mayores complicaciones y también sería posible aumentar el número de escenarios, y de esta forma hacer que sea menos monótono el gameplay. Además de mejorar el rendimiento y arreglar los problemas con las animaciones.
 
 # Integrantes del grupo:
