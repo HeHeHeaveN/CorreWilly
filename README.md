@@ -1,5 +1,14 @@
 [![CorreWilly](https://img.youtube.com/vi/wkKg8Hd2yv0/0.jpg)](https://youtu.be/wkKg8Hd2yv0)
 
+# Links a paginas donde esta subido el juego 
+https://grupojred12.itch.io/correwilly 
+
+https://www.kongregate.com/games/grupoj/correwilly
+
+https://www.newgrounds.com/portal/view/745933
+
+https://www.outpan.com/app/075e08f516/correwilly
+
 # Corre Willy, corre
 Introducción:
 Este documento especifica el diseño y mecánicas del videojuego “Corre Willy, corre”. En él están recogidos todos sus requisitos y especificaciones, así como su funcionamiento. El documento está orientado para servir de guía a los desarrolladores del videojuego.
