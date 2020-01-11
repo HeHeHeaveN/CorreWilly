@@ -39,8 +39,10 @@ var idN;
 var nivel;
 
 var estrella;
+var muelle;
 
 var cambiar;
+var cambiarMuelle;
 
 var tiempo;
 
@@ -66,6 +68,7 @@ class juego extends Phaser.Scene {
 
     create() {
         cambiar = false;
+        cambiarMuelle=false;
         tiempo = false;
         //Coeficientes para el zoom de la camara
         cof1 = 10;
@@ -90,10 +93,14 @@ class juego extends Phaser.Scene {
         bandera.setScale(0.5);
         bandera.depth = 1;
 
-        //Estrella 
+        //Estrella y muelle
         var estrella = this.physics.add.sprite(4000, 4000, 'estrella');
         estrella.setScale(0.1);
         estrella.depth = 1;
+
+        var muelle = this.physics.add.sprite(4000, 4000, 'muelle');
+        muelle.setScale(0.1);
+        muelle.depth = 1;
 
 
         //plataforma
@@ -242,6 +249,22 @@ class juego extends Phaser.Scene {
             var vel = this.physics.add.overlap(jugador2.sprite, estrella, power2, null, this);
         }
 
+        this.physics.add.collider(muelle, plataforma.plataformas);
+        //this.physics.add.collider(jugador.)
+        var vel = this.physics.add.overlap(jugador.sprite, muelle, powerMuelle, null, this);
+        var vel = this.physics.add.overlap(jugador2.sprite, muelle, powerMuelle2, null, this);
+
+        for (var i = 0; i < 5; i++) {
+            alturaEX = Math.floor(Math.random() * (3000 - 400) + 400);
+            alturaEY = Math.floor(Math.random() * (1500 - 400) + 400);
+            var muelle = this.physics.add.sprite(alturaEX, alturaEY, 'muelle');
+            muelle.setScale(0.1);
+            muelle.depth = 1;
+            this.physics.add.collider(muelle, plataforma.plataformas);
+            var vel = this.physics.add.overlap(jugador.sprite, muelle, powerMuelle, null, this);
+            var vel = this.physics.add.overlap(jugador2.sprite, muelle, powerMuelle2, null, this);
+        }
+
         //Musica
         music = this.sound.add('theme');
         game.volume = 0;
@@ -304,12 +327,26 @@ class juego extends Phaser.Scene {
             cambiar = false;
         }
 
+        if (cambiarMuelle) {
+            if (jug == 1) {
+                jugador.setVelocidadSalto(760);
+            } else {
+                if (jug == 2) {
+                    jugador2.setVelocidadSalto(760);
+                }
+            }
+            setTimeout(parar, 2000);
+            cambiarMuelle = false;
+        }
+
         if (tiempo) {
             if (jug == 1) {
                 jugador.setVelocidadHorizontal(400);
+                jugador.setVelocidadSalto(380);
             } else {
                 if (jug == 2) {
                     jugador2.setVelocidadHorizontal(400);
+                    jugador2.setVelocidadSalto(380);
                 }
             }
             tiempo = false;
@@ -408,6 +445,18 @@ function power(jugador, estrella) {
 function power2(jugador, estrella) {
     estrella.disableBody(true, true);
     cambiar = true;
+    jug = 2;
+}
+
+function powerMuelle(jugador, muelle) {
+    muelle.disableBody(true, true);
+    cambiarMuelle = true;
+    jug = 1;
+}
+
+function powerMuelle2(jugador, muelle) {
+    muelle.disableBody(true, true);
+    cambiarMuelle = true;
     jug = 2;
 }
 

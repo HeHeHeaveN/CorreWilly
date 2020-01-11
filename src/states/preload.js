@@ -25,6 +25,7 @@ class preload extends Phaser.Scene {
         this.load.image('bandera', 'assets/bandera.png');
         //PowerUps 
         this.load.image('estrella', 'assets/power-ups/estrella.png');
+        this.load.image('muelle', 'assets/power-ups/muelle.png');
         //Musica
         this.load.audio('theme', [
             'assets/corre.mp3'
